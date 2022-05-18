@@ -21,7 +21,7 @@ the `github.com/go-openapi/strfmt` module is being used:
 go mod edit -replace github.com/go-openapi/strfmt=github.com/kubewarden/strfmt@v0.1.0
 ```
 
-Now create a `main.go` with the following contents:
+Now create a `main.go` file with the following contents:
 
 ```go
 package main
@@ -86,7 +86,7 @@ wasmtime run demo.wasm
 ```
 
 If you pipe the output through something like the `jq` utility, you will
-obtain some like that:
+obtain something like that:
 
 ```json
 {
@@ -145,7 +145,7 @@ the `github.com/go-openapi/strfmt` module is being used:
 go mod edit -replace github.com/go-openapi/strfmt=github.com/kubewarden/strfmt@v0.1.0
 ```
 
-Now create a `main.go` with the following contents:
+Now create a `main.go` file with the following contents:
 
 ```go
 package main
@@ -257,7 +257,7 @@ wasmtime run \
   demo.wasm /demo/ingress.json
 ```
 
-The code maps the current directory on the host (`pwd`) into the guest
+The command maps the current directory on the host (`pwd`) into the guest
 under the `/demo` path. Because of that, the guest code will find the
 `ingress.json` file at the `/demo/ingress.json` location.
 
@@ -265,7 +265,7 @@ under the `/demo` path. Because of that, the guest code will find the
 > the host system and a container.
 
 If you pipe the output through something like the `jq` utility, you will
-obtain some like that:
+obtain something like that:
 
 ```json
 {
