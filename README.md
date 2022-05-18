@@ -4,7 +4,7 @@ modules meant to be run outside of the browser.
 > These files are generated automatically via
 > [`k8s-objects-generator`](https://github.com/kubewarden/k8s-objects-generator).
 
-## Marshal a Kubernetes object to JSON
+## Marshall a Kubernetes object to JSON
 
 Create a new Go project using Go modules:
 
