@@ -4,6 +4,24 @@ modules meant to be run outside of the browser.
 > These files are generated automatically via
 > [`k8s-objects-generator`](https://github.com/kubewarden/k8s-objects-generator).
 
+## Repository structure
+
+This repository provides Kubernetes Go types for different Kubernetes releases.
+
+The code is organized in this way:
+
+ * Git branches: each Kubernetes release has its own `release-<kube major>.<kube-minor>` branch
+ * Git Tags: each Kubernetes release has its own `v<kube major>.<kube minor>.<kube patch>+kw<rev number>`
+
+For example:
+
+| Kubernetes version | Branch | Tag | Notes |
+|--------------------|--------|-----|-------|
+| `1.14.0`             | `release-1.14` | `v1.14.0+kw1` | First version of the Kubernetes `1.14.0` objects for TinyGo |
+| `1.14.1`             | `release-1.14` | `v1.14.1+kw1` | First version of the Kubernetes `1.14.1` objects for TinyGo |
+| `1.23.1`             | `release-1.23` | `v1.23.1+kw1` | First version of the Kubernetes `1.23.1` objects for TinyGo |
+| `1.23.1`             | `release-1.23` | `v1.23.1+kw2` | Second version of the Kubernetes `1.23.1` objects for TinyGo, hypothetically there was a bug in the automatically generated code of `1.23.1+kw1` |
+
 ## Marshall a Kubernetes object to JSON
 
 Create a new Go project using Go modules:
@@ -70,6 +88,15 @@ Next, run `go mod tidy` and, if you want, vendor all the dependencies:
 ```console
 go mod tidy
 go mod vendor
+```
+
+The latest version of the Kubernetes objects available is going to be used.
+If you want to pick a different version of the library, you can run the
+something like the following command:
+
+```console
+# Download the v1.14.0+kw1 release
+go get github.com/kubewarden/k8s-objects@v1.14.0+kw1
 ```
 
 Finally, build the code using TinyGo to a WebAssembly module targeting the
