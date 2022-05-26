@@ -11,16 +11,27 @@ This repository provides Kubernetes Go types for different Kubernetes releases.
 The code is organized in this way:
 
  * Git branches: each Kubernetes release has its own `release-<kube major>.<kube-minor>` branch
- * Git Tags: each Kubernetes release has its own `v<kube major>.<kube minor>.<kube patch>+kw<rev number>`
+ * Git Tags: each Kubernetes release has its own `v<kube major>.<kube minor>.<kube patch>-kw<rev number>`
 
 For example:
 
 | Kubernetes version | Branch | Tag | Notes |
 |--------------------|--------|-----|-------|
-| `1.14.0`             | `release-1.14` | `v1.14.0+kw1` | First version of the Kubernetes `1.14.0` objects for TinyGo |
-| `1.14.1`             | `release-1.14` | `v1.14.1+kw1` | First version of the Kubernetes `1.14.1` objects for TinyGo |
-| `1.23.1`             | `release-1.23` | `v1.23.1+kw1` | First version of the Kubernetes `1.23.1` objects for TinyGo |
-| `1.23.1`             | `release-1.23` | `v1.23.1+kw2` | Second version of the Kubernetes `1.23.1` objects for TinyGo, hypothetically there was a bug in the automatically generated code of `1.23.1+kw1` |
+| `1.14.0`             | `release-1.14` | `v1.14.0-kw1` | First version of the Kubernetes `1.14.0` objects for TinyGo |
+| `1.14.1`             | `release-1.14` | `v1.14.1-kw1` | First version of the Kubernetes `1.14.1` objects for TinyGo |
+| `1.23.1`             | `release-1.23` | `v1.23.1-kw1` | First version of the Kubernetes `1.23.1` objects for TinyGo |
+| `1.23.1`             | `release-1.23` | `v1.23.1-kw2` | Second version of the Kubernetes `1.23.1` objects for TinyGo, hypothetically there was a bug in the automatically generated code of `1.23.1+kw1` |
+
+> **Note:** Go [module versioning](https://go.dev/doc/modules/version-numbers)
+doesn't fully implement [semver](https://semver.org/) rules.
+>
+> Go module are not aware of "build" metadata. For example, the `v1.23.1+kw1`
+> version is not recognized by Go and is automatically translated to `v1.23.1`.
+>
+> Because of that, all our tags have to use the "pre-release" notation, hence
+> instead of having `v1.23.1+kw1` we must have `v1.23.1-kw1`.
+>
+> Unfortunately, this is still happing with Go 1.18.
 
 ## Marshall a Kubernetes object to JSON
 
