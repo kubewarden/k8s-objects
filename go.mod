@@ -5,7 +5,7 @@ go 1.17
 replace github.com/go-openapi/strfmt => github.com/kubewarden/strfmt v0.1.0
 
 require (
-	github.com/go-openapi/strfmt v0.0.0-00010101000000-000000000000
+	github.com/go-openapi/strfmt v0.21.2
 	github.com/mailru/easyjson v0.7.7
 )
 
