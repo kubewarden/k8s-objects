@@ -39,13 +39,7 @@ func easyjson2ed617caDecodeGithubComKubewardenK8sObjectsApiAppsV1beta1(in *jlexe
 		case "apiVersion":
 			out.APIVersion = string(in.String())
 		case "data":
-			if m, ok := out.Data.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Data.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Data = in.Interface()
-			}
+			(out.Data).UnmarshalEasyJSON(in)
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
@@ -80,7 +74,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 		out.RawString(prefix[1:])
 		out.String(string(in.APIVersion))
 	}
-	if in.Data != nil {
+	if (in.Data).IsDefined() {
 		const prefix string = ",\"data\":"
 		if first {
 			first = false
@@ -88,13 +82,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Data.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Data.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Data))
-		}
+		(in.Data).MarshalEasyJSON(out)
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"
