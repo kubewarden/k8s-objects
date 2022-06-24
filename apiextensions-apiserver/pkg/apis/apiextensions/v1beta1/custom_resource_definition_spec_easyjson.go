@@ -1335,13 +1335,7 @@ func easyjson60898210DecodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 				easyjson60898210DecodeGithubComKubewardenK8sObjectsApiextensionsApiserverPkgApisApiextensionsV1beta16(in, out.Scale)
 			}
 		case "status":
-			if m, ok := out.Status.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Status.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Status = in.Interface()
-			}
+			(out.Status).UnmarshalEasyJSON(in)
 		default:
 			in.SkipRecursive()
 		}
@@ -1362,7 +1356,7 @@ func easyjson60898210EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 		out.RawString(prefix[1:])
 		easyjson60898210EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPkgApisApiextensionsV1beta16(out, *in.Scale)
 	}
-	if in.Status != nil {
+	if (in.Status).IsDefined() {
 		const prefix string = ",\"status\":"
 		if first {
 			first = false
@@ -1370,13 +1364,7 @@ func easyjson60898210EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Status.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Status.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Status))
-		}
+		(in.Status).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
