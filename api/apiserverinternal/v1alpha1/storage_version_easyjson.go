@@ -43,12 +43,14 @@ func easyjsonEacd27c4DecodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		case "metadata":
 			(out.Metadata).UnmarshalEasyJSON(in)
 		case "spec":
-			if m, ok := out.Spec.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Spec.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
+			if in.IsNull() {
+				in.Skip()
+				out.Spec = nil
 			} else {
-				out.Spec = in.Interface()
+				if out.Spec == nil {
+					out.Spec = new(easyjson.RawMessage)
+				}
+				(*out.Spec).UnmarshalEasyJSON(in)
 			}
 		case "status":
 			if in.IsNull() {
@@ -108,12 +110,10 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Spec.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Spec.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
+		if in.Spec == nil {
+			out.RawString("null")
 		} else {
-			out.Raw(json.Marshal(in.Spec))
+			(*in.Spec).MarshalEasyJSON(out)
 		}
 	}
 	{
