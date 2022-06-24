@@ -1,6 +1,6 @@
 github.com/josharian/intern v1.0.0 h1:vlS4z54oSdjm0bgjRigI+G1HpF+tI+9rE5LLzOg8HmY=
 github.com/josharian/intern v1.0.0/go.mod h1:5DoeVV0s6jJacbCEi61lwdGj/aVlrQvzHFFd8Hwg//Y=
-github.com/kubewarden/strfmt v0.1.0 h1:rMYG+48QSckzdVhFMikgGDUJODvvMHpudraWfw0jgvc=
-github.com/kubewarden/strfmt v0.1.0/go.mod h1:G83H1PTqI8ewtrTonL/uMbx1pJooaKSbAoIpoKqT5KA=
+github.com/kubewarden/strfmt v0.1.1 h1:DsgILnn2sTtcAdWoEAyX9qyqC/95wuB5H5Rn/qBZIpc=
+github.com/kubewarden/strfmt v0.1.1/go.mod h1:sqLlis8qlm4A4pnZsRyRjNxyH86fiM+7Ee7bO+uJk94=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
 github.com/mailru/easyjson v0.7.7/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
