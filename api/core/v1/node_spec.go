@@ -23,7 +23,7 @@ type NodeSpec struct {
 	ProviderID string `json:"providerID,omitempty"`
 
 	// If specified, the node's taints.
-	Taints []*Taint `json:"taints"`
+	Taints []*Taint `json:"taints,omitempty"`
 
 	// Unschedulable controls node schedulability of new pods. By default, node is schedulable. More info: https://kubernetes.io/docs/concepts/nodes/node/#manual-node-administration
 	Unschedulable bool `json:"unschedulable,omitempty"`

@@ -4,6 +4,7 @@ package v1beta2
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -37,12 +38,28 @@ func easyjson7ddec57fDecodeGithubComKubewardenK8sObjectsApiAppsV1beta2(in *jlexe
 		}
 		switch key {
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "lastUpdateTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastUpdateTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastUpdateTime = nil
+			} else {
+				if out.LastUpdateTime == nil {
+					out.LastUpdateTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastUpdateTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -82,13 +99,13 @@ func easyjson7ddec57fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
-	if true {
+	if in.LastUpdateTime != nil {
 		const prefix string = ",\"lastUpdateTime\":"
 		if first {
 			first = false
@@ -96,7 +113,7 @@ func easyjson7ddec57fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.LastUpdateTime).MarshalJSON())
+		out.Raw((*in.LastUpdateTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"

@@ -4,6 +4,8 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
+	runtime "github.com/kubewarden/k8s-objects/apimachinery/pkg/runtime"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -39,11 +41,27 @@ func easyjson2ed617caDecodeGithubComKubewardenK8sObjectsApiAppsV1(in *jlexer.Lex
 		case "apiVersion":
 			out.APIVersion = string(in.String())
 		case "data":
-			(out.Data).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Data = nil
+			} else {
+				if out.Data == nil {
+					out.Data = new(runtime.RawExtension)
+				}
+				(*out.Data).UnmarshalEasyJSON(in)
+			}
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "revision":
 			if in.IsNull() {
 				in.Skip()
@@ -74,7 +92,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		out.RawString(prefix[1:])
 		out.String(string(in.APIVersion))
 	}
-	if true {
+	if in.Data != nil {
 		const prefix string = ",\"data\":"
 		if first {
 			first = false
@@ -82,7 +100,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Data).MarshalEasyJSON(out)
+		(*in.Data).MarshalEasyJSON(out)
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"
@@ -94,7 +112,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -102,7 +120,7 @@ func easyjson2ed617caEncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"revision\":"

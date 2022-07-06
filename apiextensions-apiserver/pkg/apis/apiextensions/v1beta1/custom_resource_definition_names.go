@@ -11,7 +11,7 @@ package v1beta1
 type CustomResourceDefinitionNames struct {
 
 	// Categories is a list of grouped resources custom resources belong to (e.g. 'all')
-	Categories []string `json:"categories"`
+	Categories []string `json:"categories,omitempty"`
 
 	// Kind is the serialized kind of the resource.  It is normally CamelCase and singular.
 	// Required: true
@@ -25,7 +25,7 @@ type CustomResourceDefinitionNames struct {
 	Plural *string `json:"plural"`
 
 	// ShortNames are short names for the resource.  It must be all lowercase.
-	ShortNames []string `json:"shortNames"`
+	ShortNames []string `json:"shortNames,omitempty"`
 
 	// Singular is the singular name of the resource.  It must be all lowercase  Defaults to lowercased <kind>
 	Singular string `json:"singular,omitempty"`

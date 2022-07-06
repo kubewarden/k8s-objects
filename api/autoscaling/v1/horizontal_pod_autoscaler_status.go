@@ -26,7 +26,7 @@ type HorizontalPodAutoscalerStatus struct {
 	DesiredReplicas *int32 `json:"desiredReplicas"`
 
 	// last time the HorizontalPodAutoscaler scaled the number of pods; used by the autoscaler to control how often the number of pods is changed.
-	LastScaleTime apimachinery_pkg_apis_meta_v1.Time `json:"lastScaleTime,omitempty"`
+	LastScaleTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastScaleTime,omitempty"`
 
 	// most recent generation observed by this autoscaler.
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`

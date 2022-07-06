@@ -63,16 +63,24 @@ func easyjsonAe15a9caDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(in *jle
 			} else {
 				in.Delim('{')
 				if !in.IsDelim('}') {
-					out.DisruptedPods = make(map[string]_v1.Time)
+					out.DisruptedPods = make(map[string]*_v1.Time)
 				} else {
 					out.DisruptedPods = nil
 				}
 				for !in.IsDelim('}') {
 					key := string(in.String())
 					in.WantColon()
-					var v1 _v1.Time
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v1).UnmarshalJSON(data))
+					var v1 *_v1.Time
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(_v1.Time)
+						}
+						if data := in.Raw(); in.Ok() {
+							in.AddError((*v1).UnmarshalJSON(data))
+						}
 					}
 					(out.DisruptedPods)[key] = v1
 					in.WantComma()
@@ -147,7 +155,11 @@ func easyjsonAe15a9caEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jw
 				}
 				out.String(string(v2Name))
 				out.RawByte(':')
-				out.Raw((v2Value).MarshalJSON())
+				if v2Value == nil {
+					out.RawString("null")
+				} else {
+					out.Raw((*v2Value).MarshalJSON())
+				}
 			}
 			out.RawByte('}')
 		}

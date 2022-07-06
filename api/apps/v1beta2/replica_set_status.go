@@ -14,7 +14,7 @@ type ReplicaSetStatus struct {
 	AvailableReplicas int32 `json:"availableReplicas,omitempty"`
 
 	// Represents the latest available observations of a replica set's current state.
-	Conditions []*ReplicaSetCondition `json:"conditions"`
+	Conditions []*ReplicaSetCondition `json:"conditions,omitempty"`
 
 	// The number of pods that have labels matching the labels of the pod template of the replicaset.
 	FullyLabeledReplicas int32 `json:"fullyLabeledReplicas,omitempty"`

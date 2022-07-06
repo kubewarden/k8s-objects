@@ -21,7 +21,7 @@ type CertificateSigningRequest struct {
 	Kind string `json:"kind,omitempty"`
 
 	// metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// The certificate request itself and any additional information.
 	Spec *CertificateSigningRequestSpec `json:"spec,omitempty"`

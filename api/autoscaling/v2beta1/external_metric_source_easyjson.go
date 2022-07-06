@@ -5,6 +5,7 @@ package v2beta1
 import (
 	json "encoding/json"
 	resource "github.com/kubewarden/k8s-objects/apimachinery/pkg/api/resource"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -48,11 +49,35 @@ func easyjsonD4f92d9cDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(in
 				*out.MetricName = string(in.String())
 			}
 		case "metricSelector":
-			(out.MetricSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.MetricSelector = nil
+			} else {
+				if out.MetricSelector == nil {
+					out.MetricSelector = new(_v1.LabelSelector)
+				}
+				(*out.MetricSelector).UnmarshalEasyJSON(in)
+			}
 		case "targetAverageValue":
-			out.TargetAverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.TargetAverageValue = nil
+			} else {
+				if out.TargetAverageValue == nil {
+					out.TargetAverageValue = new(resource.Quantity)
+				}
+				*out.TargetAverageValue = resource.Quantity(in.String())
+			}
 		case "targetValue":
-			out.TargetValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.TargetValue = nil
+			} else {
+				if out.TargetValue == nil {
+					out.TargetValue = new(resource.Quantity)
+				}
+				*out.TargetValue = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -76,20 +101,20 @@ func easyjsonD4f92d9cEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(ou
 			out.String(string(*in.MetricName))
 		}
 	}
-	if true {
+	if in.MetricSelector != nil {
 		const prefix string = ",\"metricSelector\":"
 		out.RawString(prefix)
-		(in.MetricSelector).MarshalEasyJSON(out)
+		(*in.MetricSelector).MarshalEasyJSON(out)
 	}
-	if in.TargetAverageValue != "" {
+	if in.TargetAverageValue != nil {
 		const prefix string = ",\"targetAverageValue\":"
 		out.RawString(prefix)
-		out.String(string(in.TargetAverageValue))
+		out.String(string(*in.TargetAverageValue))
 	}
-	if in.TargetValue != "" {
+	if in.TargetValue != nil {
 		const prefix string = ",\"targetValue\":"
 		out.RawString(prefix)
-		out.String(string(in.TargetValue))
+		out.String(string(*in.TargetValue))
 	}
 	out.RawByte('}')
 }

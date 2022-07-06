@@ -4,6 +4,7 @@ package v1beta2
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
 	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -52,7 +53,15 @@ func easyjsonE559dd25DecodeGithubComKubewardenK8sObjectsApiAppsV1beta2(in *jlexe
 				(*out.Selector).UnmarshalEasyJSON(in)
 			}
 		case "template":
-			(out.Template).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Template = nil
+			} else {
+				if out.Template == nil {
+					out.Template = new(_v11.PodTemplateSpec)
+				}
+				(*out.Template).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -97,10 +106,10 @@ func easyjsonE559dd25EncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 			(*in.Selector).MarshalEasyJSON(out)
 		}
 	}
-	if true {
+	if in.Template != nil {
 		const prefix string = ",\"template\":"
 		out.RawString(prefix)
-		(in.Template).MarshalEasyJSON(out)
+		(*in.Template).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -21,7 +21,7 @@ type Deployment struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Specification of the desired behavior of the Deployment.
 	Spec *DeploymentSpec `json:"spec,omitempty"`

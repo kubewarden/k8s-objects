@@ -16,8 +16,8 @@ import (
 type CronJobStatus struct {
 
 	// A list of pointers to currently running jobs.
-	Active []api_core_v1.ObjectReference `json:"active"`
+	Active []*api_core_v1.ObjectReference `json:"active,omitempty"`
 
 	// Information when was the last time the job was successfully scheduled.
-	LastScheduleTime apimachinery_pkg_apis_meta_v1.Time `json:"lastScheduleTime,omitempty"`
+	LastScheduleTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastScheduleTime,omitempty"`
 }

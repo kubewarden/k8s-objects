@@ -14,7 +14,7 @@ type DaemonSetStatus struct {
 	CollisionCount int32 `json:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a DaemonSet's current state.
-	Conditions []*DaemonSetCondition `json:"conditions"`
+	Conditions []*DaemonSetCondition `json:"conditions,omitempty"`
 
 	// The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 	// Required: true

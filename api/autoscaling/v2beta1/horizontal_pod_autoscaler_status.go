@@ -19,7 +19,7 @@ type HorizontalPodAutoscalerStatus struct {
 	Conditions []*HorizontalPodAutoscalerCondition `json:"conditions"`
 
 	// currentMetrics is the last read state of the metrics used by this autoscaler.
-	CurrentMetrics []*MetricStatus `json:"currentMetrics"`
+	CurrentMetrics []*MetricStatus `json:"currentMetrics,omitempty"`
 
 	// currentReplicas is current number of replicas of pods managed by this autoscaler, as last seen by the autoscaler.
 	// Required: true
@@ -30,7 +30,7 @@ type HorizontalPodAutoscalerStatus struct {
 	DesiredReplicas *int32 `json:"desiredReplicas"`
 
 	// lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods, used by the autoscaler to control how often the number of pods is changed.
-	LastScaleTime apimachinery_pkg_apis_meta_v1.Time `json:"lastScaleTime,omitempty"`
+	LastScaleTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastScaleTime,omitempty"`
 
 	// observedGeneration is the most recent generation observed by this autoscaler.
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`

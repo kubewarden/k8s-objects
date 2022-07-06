@@ -32,7 +32,7 @@ type ObjectMeta struct {
 	DeletionTimestamp Time `json:"deletionTimestamp,omitempty"`
 
 	// Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.
-	Finalizers []string `json:"finalizers"`
+	Finalizers []string `json:"finalizers,omitempty"`
 
 	// GenerateName is an optional prefix, used by the server, to generate a unique name ONLY IF the Name field has not been provided. If this field is used, the name returned to the client will be different than the name passed. This value will also be combined with a unique suffix. The provided value has the same validation rules as the Name field, and may be truncated by the length of the suffix required to make the value unique on the server.
 	//
@@ -57,7 +57,7 @@ type ObjectMeta struct {
 	// ManagedFields maps workflow-id and version to the set of fields that are managed by that workflow. This is mostly for internal housekeeping, and users typically shouldn't need to set or understand this field. A workflow can be the user's name, a controller's name, or the name of a specific apply path like "ci-cd". The set of fields is always in the version that the workflow used when modifying the object.
 	//
 	// This field is alpha and can be changed or removed without notice.
-	ManagedFields []*ManagedFieldsEntry `json:"managedFields"`
+	ManagedFields []*ManagedFieldsEntry `json:"managedFields,omitempty"`
 
 	// Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names
 	Name string `json:"name,omitempty"`
@@ -68,7 +68,7 @@ type ObjectMeta struct {
 	Namespace string `json:"namespace,omitempty"`
 
 	// List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.
-	OwnerReferences []*OwnerReference `json:"ownerReferences"`
+	OwnerReferences []*OwnerReference `json:"ownerReferences,omitempty"`
 
 	// An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources.
 	//

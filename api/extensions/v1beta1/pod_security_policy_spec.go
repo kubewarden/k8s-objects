@@ -14,27 +14,27 @@ type PodSecurityPolicySpec struct {
 	AllowPrivilegeEscalation bool `json:"allowPrivilegeEscalation,omitempty"`
 
 	// AllowedCSIDrivers is a whitelist of inline CSI drivers that must be explicitly set to be embedded within a pod spec. An empty value indicates that any CSI driver can be used for inline ephemeral volumes. This is an alpha field, and is only honored if the API server enables the CSIInlineVolume feature gate.
-	AllowedCSIDrivers []*AllowedCSIDriver `json:"allowedCSIDrivers"`
+	AllowedCSIDrivers []*AllowedCSIDriver `json:"allowedCSIDrivers,omitempty"`
 
 	// allowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both allowedCapabilities and requiredDropCapabilities.
-	AllowedCapabilities []string `json:"allowedCapabilities"`
+	AllowedCapabilities []string `json:"allowedCapabilities,omitempty"`
 
 	// allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
-	AllowedFlexVolumes []*AllowedFlexVolume `json:"allowedFlexVolumes"`
+	AllowedFlexVolumes []*AllowedFlexVolume `json:"allowedFlexVolumes,omitempty"`
 
 	// allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths may be used.
-	AllowedHostPaths []*AllowedHostPath `json:"allowedHostPaths"`
+	AllowedHostPaths []*AllowedHostPath `json:"allowedHostPaths,omitempty"`
 
 	// AllowedProcMountTypes is a whitelist of allowed ProcMountTypes. Empty or nil indicates that only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to be enabled.
-	AllowedProcMountTypes []string `json:"allowedProcMountTypes"`
+	AllowedProcMountTypes []string `json:"allowedProcMountTypes,omitempty"`
 
 	// allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "*" in which case it is considered as a prefix of allowed sysctls. Single * means all unsafe sysctls are allowed. Kubelet has to whitelist all allowed unsafe sysctls explicitly to avoid rejection.
 	//
 	// Examples: e.g. "foo/*" allows "foo/bar", "foo/baz", etc. e.g. "foo.*" allows "foo.bar", "foo.baz", etc.
-	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls"`
+	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls,omitempty"`
 
 	// defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.
-	DefaultAddCapabilities []string `json:"defaultAddCapabilities"`
+	DefaultAddCapabilities []string `json:"defaultAddCapabilities,omitempty"`
 
 	// defaultAllowPrivilegeEscalation controls the default setting for whether a process can gain more privileges than its parent process.
 	DefaultAllowPrivilegeEscalation bool `json:"defaultAllowPrivilegeEscalation,omitempty"`
@@ -42,7 +42,7 @@ type PodSecurityPolicySpec struct {
 	// forbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "*" in which case it is considered as a prefix of forbidden sysctls. Single * means all sysctls are forbidden.
 	//
 	// Examples: e.g. "foo/*" forbids "foo/bar", "foo/baz", etc. e.g. "foo.*" forbids "foo.bar", "foo.baz", etc.
-	ForbiddenSysctls []string `json:"forbiddenSysctls"`
+	ForbiddenSysctls []string `json:"forbiddenSysctls,omitempty"`
 
 	// fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
 	// Required: true
@@ -58,7 +58,7 @@ type PodSecurityPolicySpec struct {
 	HostPID bool `json:"hostPID,omitempty"`
 
 	// hostPorts determines which host port ranges are allowed to be exposed.
-	HostPorts []*HostPortRange `json:"hostPorts"`
+	HostPorts []*HostPortRange `json:"hostPorts,omitempty"`
 
 	// privileged determines if a pod can request to be run as privileged.
 	Privileged bool `json:"privileged,omitempty"`
@@ -67,7 +67,7 @@ type PodSecurityPolicySpec struct {
 	ReadOnlyRootFilesystem bool `json:"readOnlyRootFilesystem,omitempty"`
 
 	// requiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
-	RequiredDropCapabilities []string `json:"requiredDropCapabilities"`
+	RequiredDropCapabilities []string `json:"requiredDropCapabilities,omitempty"`
 
 	// RunAsGroup is the strategy that will dictate the allowable RunAsGroup values that may be set. If this field is omitted, the pod's RunAsGroup can take any value. This field requires the RunAsGroup feature gate to be enabled.
 	RunAsGroup *RunAsGroupStrategyOptions `json:"runAsGroup,omitempty"`
@@ -88,5 +88,5 @@ type PodSecurityPolicySpec struct {
 	SupplementalGroups *SupplementalGroupsStrategyOptions `json:"supplementalGroups"`
 
 	// volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '*'.
-	Volumes []string `json:"volumes"`
+	Volumes []string `json:"volumes,omitempty"`
 }

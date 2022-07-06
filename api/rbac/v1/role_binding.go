@@ -21,12 +21,12 @@ type RoleBinding struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// RoleRef can reference a Role in the current namespace or a ClusterRole in the global namespace. If the RoleRef cannot be resolved, the Authorizer must return an error.
 	// Required: true
 	RoleRef *RoleRef `json:"roleRef"`
 
 	// Subjects holds references to the objects the role applies to.
-	Subjects []*Subject `json:"subjects"`
+	Subjects []*Subject `json:"subjects,omitempty"`
 }

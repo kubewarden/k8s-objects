@@ -38,7 +38,15 @@ func easyjsonDf1cc841DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 		}
 		switch key {
 		case "port":
-			out.Port = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Port = nil
+			} else {
+				if out.Port == nil {
+					out.Port = new(intstr.IntOrString)
+				}
+				*out.Port = intstr.IntOrString(in.String())
+			}
 		case "protocol":
 			out.Protocol = string(in.String())
 		default:
@@ -55,11 +63,11 @@ func easyjsonDf1cc841EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Port != "" {
+	if in.Port != nil {
 		const prefix string = ",\"port\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.Port))
+		out.String(string(*in.Port))
 	}
 	if in.Protocol != "" {
 		const prefix string = ",\"protocol\":"

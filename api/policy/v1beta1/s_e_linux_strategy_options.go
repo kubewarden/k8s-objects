@@ -19,5 +19,5 @@ type SELinuxStrategyOptions struct {
 	Rule *string `json:"rule"`
 
 	// seLinuxOptions required to run as; required for MustRunAs More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-	SeLinuxOptions api_core_v1.SELinuxOptions `json:"seLinuxOptions,omitempty"`
+	SeLinuxOptions *api_core_v1.SELinuxOptions `json:"seLinuxOptions,omitempty"`
 }

@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -135,7 +136,7 @@ func easyjson1b6783e4EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		}
 		out.String(string(in.ProviderID))
 	}
-	{
+	if len(in.Taints) != 0 {
 		const prefix string = ",\"taints\":"
 		if first {
 			first = false
@@ -143,9 +144,7 @@ func easyjson1b6783e4EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Taints == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Taints {
 				if v2 > 0 {
@@ -162,7 +161,12 @@ func easyjson1b6783e4EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.Unschedulable {
 		const prefix string = ",\"unschedulable\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Bool(bool(in.Unschedulable))
 	}
 	out.RawByte('}')
@@ -231,8 +235,16 @@ func easyjson1b6783e4DecodeGithubComKubewardenK8sObjectsApiCoreV11(in *jlexer.Le
 				*out.Key = string(in.String())
 			}
 		case "timeAdded":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.TimeAdded).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.TimeAdded = nil
+			} else {
+				if out.TimeAdded == nil {
+					out.TimeAdded = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.TimeAdded).UnmarshalJSON(data))
+				}
 			}
 		case "value":
 			out.Value = string(in.String())
@@ -268,10 +280,10 @@ func easyjson1b6783e4EncodeGithubComKubewardenK8sObjectsApiCoreV11(out *jwriter.
 			out.String(string(*in.Key))
 		}
 	}
-	if true {
+	if in.TimeAdded != nil {
 		const prefix string = ",\"timeAdded\":"
 		out.RawString(prefix)
-		out.Raw((in.TimeAdded).MarshalJSON())
+		out.Raw((*in.TimeAdded).MarshalJSON())
 	}
 	if in.Value != "" {
 		const prefix string = ",\"value\":"

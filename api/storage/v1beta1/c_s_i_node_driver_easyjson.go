@@ -111,12 +111,10 @@ func easyjson27007753EncodeGithubComKubewardenK8sObjectsApiStorageV1beta1(out *j
 			out.String(string(*in.NodeID))
 		}
 	}
-	{
+	if len(in.TopologyKeys) != 0 {
 		const prefix string = ",\"topologyKeys\":"
 		out.RawString(prefix)
-		if in.TopologyKeys == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.TopologyKeys {
 				if v2 > 0 {

@@ -19,13 +19,13 @@ type ControllerRevision struct {
 	APIVersion string `json:"apiVersion,omitempty"`
 
 	// Data is the serialized representation of the state.
-	Data apimachinery_pkg_runtime.RawExtension `json:"data,omitempty"`
+	Data *apimachinery_pkg_runtime.RawExtension `json:"data,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Revision indicates the revision of the state represented by Data.
 	// Required: true
