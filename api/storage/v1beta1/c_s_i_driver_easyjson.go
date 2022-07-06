@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjson86ba675aDecodeGithubComKubewardenK8sObjectsApiStorageV1beta1(in *jl
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -82,7 +91,7 @@ func easyjson86ba675aEncodeGithubComKubewardenK8sObjectsApiStorageV1beta1(out *j
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -90,7 +99,7 @@ func easyjson86ba675aEncodeGithubComKubewardenK8sObjectsApiStorageV1beta1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -232,7 +241,7 @@ func easyjson86ba675aEncodeGithubComKubewardenK8sObjectsApiStorageV1beta11(out *
 		}
 		out.Bool(bool(in.StorageCapacity))
 	}
-	{
+	if len(in.VolumeLifecycleModes) != 0 {
 		const prefix string = ",\"volumeLifecycleModes\":"
 		if first {
 			first = false
@@ -240,9 +249,7 @@ func easyjson86ba675aEncodeGithubComKubewardenK8sObjectsApiStorageV1beta11(out *
 		} else {
 			out.RawString(prefix)
 		}
-		if in.VolumeLifecycleModes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.VolumeLifecycleModes {
 				if v2 > 0 {

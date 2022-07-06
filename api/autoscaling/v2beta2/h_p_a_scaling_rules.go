@@ -11,7 +11,7 @@ package v2beta2
 type HPAScalingRules struct {
 
 	// policies is a list of potential scaling polices which can be used during scaling. At least one policy must be specified, otherwise the HPAScalingRules will be discarded as invalid
-	Policies []*HPAScalingPolicy `json:"policies"`
+	Policies []*HPAScalingPolicy `json:"policies,omitempty"`
 
 	// selectPolicy is used to specify which policy should be used. If not set, the default value MaxPolicySelect is used.
 	SelectPolicy string `json:"selectPolicy,omitempty"`

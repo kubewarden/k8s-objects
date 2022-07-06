@@ -15,7 +15,7 @@ import (
 type LeaseSpec struct {
 
 	// acquireTime is a time when the current lease was acquired.
-	AcquireTime apimachinery_pkg_apis_meta_v1.MicroTime `json:"acquireTime,omitempty"`
+	AcquireTime *apimachinery_pkg_apis_meta_v1.MicroTime `json:"acquireTime,omitempty"`
 
 	// holderIdentity contains the identity of the holder of a current lease.
 	HolderIdentity string `json:"holderIdentity,omitempty"`
@@ -27,5 +27,5 @@ type LeaseSpec struct {
 	LeaseTransitions int32 `json:"leaseTransitions,omitempty"`
 
 	// renewTime is a time when the current holder of a lease has last updated the lease.
-	RenewTime apimachinery_pkg_apis_meta_v1.MicroTime `json:"renewTime,omitempty"`
+	RenewTime *apimachinery_pkg_apis_meta_v1.MicroTime `json:"renewTime,omitempty"`
 }

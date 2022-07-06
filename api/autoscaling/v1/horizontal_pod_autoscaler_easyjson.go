@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV1(in *jle
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -92,7 +101,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV1(out *jw
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -100,7 +109,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV1(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -190,8 +199,16 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV12(in *jl
 				*out.DesiredReplicas = int32(in.Int32())
 			}
 		case "lastScaleTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastScaleTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastScaleTime = nil
+			} else {
+				if out.LastScaleTime == nil {
+					out.LastScaleTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastScaleTime).UnmarshalJSON(data))
+				}
 			}
 		case "observedGeneration":
 			out.ObservedGeneration = int64(in.Int64())
@@ -238,10 +255,10 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV12(out *j
 			out.Int32(int32(*in.DesiredReplicas))
 		}
 	}
-	if true {
+	if in.LastScaleTime != nil {
 		const prefix string = ",\"lastScaleTime\":"
 		out.RawString(prefix)
-		out.Raw((in.LastScaleTime).MarshalJSON())
+		out.Raw((*in.LastScaleTime).MarshalJSON())
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"

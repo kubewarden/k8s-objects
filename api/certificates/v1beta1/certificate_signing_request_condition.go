@@ -15,10 +15,10 @@ import (
 type CertificateSigningRequestCondition struct {
 
 	// lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.
-	LastTransitionTime apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
 
 	// timestamp for the last update to this condition
-	LastUpdateTime apimachinery_pkg_apis_meta_v1.Time `json:"lastUpdateTime,omitempty"`
+	LastUpdateTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastUpdateTime,omitempty"`
 
 	// human readable message with details about the request state
 	Message string `json:"message,omitempty"`

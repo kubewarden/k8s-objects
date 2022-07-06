@@ -25,13 +25,13 @@ type Event struct {
 	DeprecatedCount int32 `json:"deprecatedCount,omitempty"`
 
 	// deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
-	DeprecatedFirstTimestamp apimachinery_pkg_apis_meta_v1.Time `json:"deprecatedFirstTimestamp,omitempty"`
+	DeprecatedFirstTimestamp *apimachinery_pkg_apis_meta_v1.Time `json:"deprecatedFirstTimestamp,omitempty"`
 
 	// deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.
-	DeprecatedLastTimestamp apimachinery_pkg_apis_meta_v1.Time `json:"deprecatedLastTimestamp,omitempty"`
+	DeprecatedLastTimestamp *apimachinery_pkg_apis_meta_v1.Time `json:"deprecatedLastTimestamp,omitempty"`
 
 	// deprecatedSource is the deprecated field assuring backward compatibility with core.v1 Event type.
-	DeprecatedSource api_core_v1.EventSource `json:"deprecatedSource,omitempty"`
+	DeprecatedSource *api_core_v1.EventSource `json:"deprecatedSource,omitempty"`
 
 	// eventTime is the time when this Event was first observed. It is required.
 	// Required: true
@@ -41,7 +41,7 @@ type Event struct {
 	Kind string `json:"kind,omitempty"`
 
 	// metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// note is a human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB.
 	Note string `json:"note,omitempty"`
@@ -50,10 +50,10 @@ type Event struct {
 	Reason string `json:"reason,omitempty"`
 
 	// regarding contains the object this Event is about. In most cases it's an Object reporting controller implements, e.g. ReplicaSetController implements ReplicaSets and this event is emitted because it acts on some changes in a ReplicaSet object.
-	Regarding api_core_v1.ObjectReference `json:"regarding,omitempty"`
+	Regarding *api_core_v1.ObjectReference `json:"regarding,omitempty"`
 
 	// related is the optional secondary object for more complex actions. E.g. when regarding object triggers a creation or deletion of related object.
-	Related api_core_v1.ObjectReference `json:"related,omitempty"`
+	Related *api_core_v1.ObjectReference `json:"related,omitempty"`
 
 	// reportingController is the name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`. This field cannot be empty for new Events.
 	ReportingController string `json:"reportingController,omitempty"`

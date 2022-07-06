@@ -32,5 +32,5 @@ type CSIDriverSpec struct {
 	StorageCapacity bool `json:"storageCapacity,omitempty"`
 
 	// VolumeLifecycleModes defines what kind of volumes this CSI volume driver supports. The default if the list is empty is "Persistent", which is the usage defined by the CSI specification and implemented in Kubernetes via the usual PV/PVC mechanism. The other mode is "Ephemeral". In this mode, volumes are defined inline inside the pod spec with CSIVolumeSource and their lifecycle is tied to the lifecycle of that pod. A driver has to be aware of this because it is only going to get a NodePublishVolume call for such a volume. For more information about implementing this mode, see https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A driver can support one or more of these modes and more modes may be added in the future.
-	VolumeLifecycleModes []string `json:"volumeLifecycleModes"`
+	VolumeLifecycleModes []string `json:"volumeLifecycleModes,omitempty"`
 }

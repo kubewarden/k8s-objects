@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjson1e94f1dcDecodeGithubComKubewardenK8sObjectsApiCoordinationV1(in *jl
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -82,7 +91,7 @@ func easyjson1e94f1dcEncodeGithubComKubewardenK8sObjectsApiCoordinationV1(out *j
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -90,7 +99,7 @@ func easyjson1e94f1dcEncodeGithubComKubewardenK8sObjectsApiCoordinationV1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -148,8 +157,16 @@ func easyjson1e94f1dcDecodeGithubComKubewardenK8sObjectsApiCoordinationV11(in *j
 		}
 		switch key {
 		case "acquireTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.AcquireTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.AcquireTime = nil
+			} else {
+				if out.AcquireTime == nil {
+					out.AcquireTime = new(_v1.MicroTime)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.AcquireTime).UnmarshalJSON(data))
+				}
 			}
 		case "holderIdentity":
 			out.HolderIdentity = string(in.String())
@@ -158,8 +175,16 @@ func easyjson1e94f1dcDecodeGithubComKubewardenK8sObjectsApiCoordinationV11(in *j
 		case "leaseTransitions":
 			out.LeaseTransitions = int32(in.Int32())
 		case "renewTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.RenewTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.RenewTime = nil
+			} else {
+				if out.RenewTime == nil {
+					out.RenewTime = new(_v1.MicroTime)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.RenewTime).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -175,11 +200,11 @@ func easyjson1e94f1dcEncodeGithubComKubewardenK8sObjectsApiCoordinationV11(out *
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.AcquireTime != nil {
 		const prefix string = ",\"acquireTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.AcquireTime).MarshalJSON())
+		out.Raw((*in.AcquireTime).MarshalJSON())
 	}
 	if in.HolderIdentity != "" {
 		const prefix string = ",\"holderIdentity\":"
@@ -211,7 +236,7 @@ func easyjson1e94f1dcEncodeGithubComKubewardenK8sObjectsApiCoordinationV11(out *
 		}
 		out.Int32(int32(in.LeaseTransitions))
 	}
-	if true {
+	if in.RenewTime != nil {
 		const prefix string = ",\"renewTime\":"
 		if first {
 			first = false
@@ -219,7 +244,7 @@ func easyjson1e94f1dcEncodeGithubComKubewardenK8sObjectsApiCoordinationV11(out *
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.RenewTime).MarshalJSON())
+		out.Raw((*in.RenewTime).MarshalJSON())
 	}
 	out.RawByte('}')
 }

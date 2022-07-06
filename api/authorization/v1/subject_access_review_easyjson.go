@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjson7e4998aDecodeGithubComKubewardenK8sObjectsApiAuthorizationV1(in *jl
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -92,7 +101,7 @@ func easyjson7e4998aEncodeGithubComKubewardenK8sObjectsApiAuthorizationV1(out *j
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -100,7 +109,7 @@ func easyjson7e4998aEncodeGithubComKubewardenK8sObjectsApiAuthorizationV1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -374,7 +383,7 @@ func easyjson7e4998aEncodeGithubComKubewardenK8sObjectsApiAuthorizationV11(out *
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -382,9 +391,7 @@ func easyjson7e4998aEncodeGithubComKubewardenK8sObjectsApiAuthorizationV11(out *
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.Groups {
 				if v7 > 0 {
@@ -397,22 +404,42 @@ func easyjson7e4998aEncodeGithubComKubewardenK8sObjectsApiAuthorizationV11(out *
 	}
 	if in.NonResourceAttributes != nil {
 		const prefix string = ",\"nonResourceAttributes\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		(*in.NonResourceAttributes).MarshalEasyJSON(out)
 	}
 	if in.ResourceAttributes != nil {
 		const prefix string = ",\"resourceAttributes\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		(*in.ResourceAttributes).MarshalEasyJSON(out)
 	}
 	if in.UID != "" {
 		const prefix string = ",\"uid\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.UID))
 	}
 	if in.User != "" {
 		const prefix string = ",\"user\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.User))
 	}
 	out.RawByte('}')

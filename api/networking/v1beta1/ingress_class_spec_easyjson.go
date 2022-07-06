@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -39,7 +40,15 @@ func easyjson91ef0c6eDecodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(in 
 		case "controller":
 			out.Controller = string(in.String())
 		case "parameters":
-			(out.Parameters).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Parameters = nil
+			} else {
+				if out.Parameters == nil {
+					out.Parameters = new(_v1.TypedLocalObjectReference)
+				}
+				(*out.Parameters).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -60,7 +69,7 @@ func easyjson91ef0c6eEncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		out.RawString(prefix[1:])
 		out.String(string(in.Controller))
 	}
-	if true {
+	if in.Parameters != nil {
 		const prefix string = ",\"parameters\":"
 		if first {
 			first = false
@@ -68,7 +77,7 @@ func easyjson91ef0c6eEncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Parameters).MarshalEasyJSON(out)
+		(*in.Parameters).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

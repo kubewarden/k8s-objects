@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -51,7 +52,15 @@ func easyjson3aa86ec1DecodeGithubComKubewardenK8sObjectsApiRbacV1beta1(in *jlexe
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "rules":
 			if in.IsNull() {
 				in.Skip()
@@ -123,7 +132,7 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -131,9 +140,9 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		if first {
 			first = false
@@ -141,9 +150,7 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Rules {
 				if v2 > 0 {
@@ -332,12 +339,11 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta11(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.APIGroups) != 0 {
 		const prefix string = ",\"apiGroups\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.APIGroups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v9, v10 := range in.APIGroups {
 				if v9 > 0 {
@@ -348,12 +354,15 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta11(out *jwr
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.NonResourceURLs) != 0 {
 		const prefix string = ",\"nonResourceURLs\":"
-		out.RawString(prefix)
-		if in.NonResourceURLs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v11, v12 := range in.NonResourceURLs {
 				if v11 > 0 {
@@ -364,12 +373,15 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta11(out *jwr
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.ResourceNames) != 0 {
 		const prefix string = ",\"resourceNames\":"
-		out.RawString(prefix)
-		if in.ResourceNames == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v13, v14 := range in.ResourceNames {
 				if v13 > 0 {
@@ -380,12 +392,15 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta11(out *jwr
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Resources) != 0 {
 		const prefix string = ",\"resources\":"
-		out.RawString(prefix)
-		if in.Resources == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v15, v16 := range in.Resources {
 				if v15 > 0 {
@@ -398,7 +413,12 @@ func easyjson3aa86ec1EncodeGithubComKubewardenK8sObjectsApiRbacV1beta11(out *jwr
 	}
 	{
 		const prefix string = ",\"verbs\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Verbs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 			out.RawString("null")
 		} else {

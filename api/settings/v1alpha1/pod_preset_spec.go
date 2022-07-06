@@ -16,17 +16,17 @@ import (
 type PodPresetSpec struct {
 
 	// Env defines the collection of EnvVar to inject into containers.
-	Env []api_core_v1.EnvVar `json:"env"`
+	Env []*api_core_v1.EnvVar `json:"env,omitempty"`
 
 	// EnvFrom defines the collection of EnvFromSource to inject into containers.
-	EnvFrom []api_core_v1.EnvFromSource `json:"envFrom"`
+	EnvFrom []*api_core_v1.EnvFromSource `json:"envFrom,omitempty"`
 
 	// Selector is a label query over a set of resources, in this case pods. Required.
-	Selector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
+	Selector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
 
 	// VolumeMounts defines the collection of VolumeMount to inject into containers.
-	VolumeMounts []api_core_v1.VolumeMount `json:"volumeMounts"`
+	VolumeMounts []*api_core_v1.VolumeMount `json:"volumeMounts,omitempty"`
 
 	// Volumes defines the collection of Volume to inject into the pod.
-	Volumes []api_core_v1.Volume `json:"volumes"`
+	Volumes []*api_core_v1.Volume `json:"volumes,omitempty"`
 }

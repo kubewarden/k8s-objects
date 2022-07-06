@@ -40,5 +40,5 @@ type StatefulSetSpec struct {
 	UpdateStrategy *StatefulSetUpdateStrategy `json:"updateStrategy,omitempty"`
 
 	// volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.
-	VolumeClaimTemplates []api_core_v1.PersistentVolumeClaim `json:"volumeClaimTemplates"`
+	VolumeClaimTemplates []*api_core_v1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty"`
 }

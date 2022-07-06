@@ -96,12 +96,11 @@ func easyjson4e1f2ffEncodeGithubComKubewardenK8sObjectsApiAuthorizationV1beta1(o
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.NonResourceURLs) != 0 {
 		const prefix string = ",\"nonResourceURLs\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.NonResourceURLs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.NonResourceURLs {
 				if v3 > 0 {
@@ -114,7 +113,12 @@ func easyjson4e1f2ffEncodeGithubComKubewardenK8sObjectsApiAuthorizationV1beta1(o
 	}
 	{
 		const prefix string = ",\"verbs\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Verbs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 			out.RawString("null")
 		} else {
