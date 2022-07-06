@@ -44,7 +44,15 @@ func easyjson21f59f41DecodeGithubComKubewardenK8sObjectsApiAppsV1(in *jlexer.Lex
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -95,7 +103,7 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -103,7 +111,7 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -271,7 +279,7 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV12(out *jwriter.
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.CollisionCount))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -279,9 +287,7 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV12(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Conditions {
 				if v2 > 0 {
@@ -298,7 +304,12 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV12(out *jwriter.
 	}
 	{
 		const prefix string = ",\"currentNumberScheduled\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.CurrentNumberScheduled == nil {
 			out.RawString("null")
 		} else {
@@ -374,8 +385,16 @@ func easyjson21f59f41DecodeGithubComKubewardenK8sObjectsApiAppsV13(in *jlexer.Le
 		}
 		switch key {
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -415,11 +434,11 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV13(out *jwriter.
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"
@@ -662,9 +681,25 @@ func easyjson21f59f41DecodeGithubComKubewardenK8sObjectsApiAppsV15(in *jlexer.Le
 		}
 		switch key {
 		case "maxSurge":
-			out.MaxSurge = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxSurge = nil
+			} else {
+				if out.MaxSurge == nil {
+					out.MaxSurge = new(intstr.IntOrString)
+				}
+				*out.MaxSurge = intstr.IntOrString(in.String())
+			}
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -679,13 +714,13 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV15(out *jwriter.
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxSurge != "" {
+	if in.MaxSurge != nil {
 		const prefix string = ",\"maxSurge\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxSurge))
+		out.String(string(*in.MaxSurge))
 	}
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		if first {
 			first = false
@@ -693,7 +728,7 @@ func easyjson21f59f41EncodeGithubComKubewardenK8sObjectsApiAppsV15(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	out.RawByte('}')
 }

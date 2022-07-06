@@ -21,16 +21,16 @@ type JobStatus struct {
 	CompletedIndexes string `json:"completedIndexes,omitempty"`
 
 	// Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. The completion time is only set when the job finishes successfully.
-	CompletionTime apimachinery_pkg_apis_meta_v1.Time `json:"completionTime,omitempty"`
+	CompletionTime *apimachinery_pkg_apis_meta_v1.Time `json:"completionTime,omitempty"`
 
 	// The latest available observations of an object's current state. When a Job fails, one of the conditions will have type "Failed" and status true. When a Job is suspended, one of the conditions will have type "Suspended" and status true; when the Job is resumed, the status of this condition will become false. When a Job is completed, one of the conditions will have type "Complete" and status true. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
-	Conditions []*JobCondition `json:"conditions"`
+	Conditions []*JobCondition `json:"conditions,omitempty"`
 
 	// The number of pods which reached phase Failed.
 	Failed int32 `json:"failed,omitempty"`
 
 	// Represents time when the job controller started processing a job. When a Job is created in the suspended state, this field is not set until the first time it is resumed. This field is reset every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC.
-	StartTime apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
+	StartTime *apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
 
 	// The number of pods which reached phase Succeeded.
 	Succeeded int32 `json:"succeeded,omitempty"`

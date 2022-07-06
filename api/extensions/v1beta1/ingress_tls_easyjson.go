@@ -75,12 +75,11 @@ func easyjson4b11041dEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Hosts) != 0 {
 		const prefix string = ",\"hosts\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Hosts == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Hosts {
 				if v2 > 0 {
@@ -93,7 +92,12 @@ func easyjson4b11041dEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	}
 	if in.SecretName != "" {
 		const prefix string = ",\"secretName\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.SecretName))
 	}
 	out.RawByte('}')

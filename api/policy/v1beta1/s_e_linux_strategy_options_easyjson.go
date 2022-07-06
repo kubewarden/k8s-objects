@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -47,7 +48,15 @@ func easyjson7f4cd7fbDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(in *jle
 				*out.Rule = string(in.String())
 			}
 		case "seLinuxOptions":
-			(out.SeLinuxOptions).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.SeLinuxOptions = nil
+			} else {
+				if out.SeLinuxOptions == nil {
+					out.SeLinuxOptions = new(_v1.SELinuxOptions)
+				}
+				(*out.SeLinuxOptions).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -71,10 +80,10 @@ func easyjson7f4cd7fbEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jw
 			out.String(string(*in.Rule))
 		}
 	}
-	if true {
+	if in.SeLinuxOptions != nil {
 		const prefix string = ",\"seLinuxOptions\":"
 		out.RawString(prefix)
-		(in.SeLinuxOptions).MarshalEasyJSON(out)
+		(*in.SeLinuxOptions).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

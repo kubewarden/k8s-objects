@@ -60,7 +60,15 @@ func easyjson1d7c9f89DecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(in
 		case "targetAverageUtilization":
 			out.TargetAverageUtilization = int32(in.Int32())
 		case "targetAverageValue":
-			out.TargetAverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.TargetAverageValue = nil
+			} else {
+				if out.TargetAverageValue == nil {
+					out.TargetAverageValue = new(resource.Quantity)
+				}
+				*out.TargetAverageValue = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -98,10 +106,10 @@ func easyjson1d7c9f89EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(ou
 		out.RawString(prefix)
 		out.Int32(int32(in.TargetAverageUtilization))
 	}
-	if in.TargetAverageValue != "" {
+	if in.TargetAverageValue != nil {
 		const prefix string = ",\"targetAverageValue\":"
 		out.RawString(prefix)
-		out.String(string(in.TargetAverageValue))
+		out.String(string(*in.TargetAverageValue))
 	}
 	out.RawByte('}')
 }

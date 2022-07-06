@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	json "encoding/json"
 	resource "github.com/kubewarden/k8s-objects/apimachinery/pkg/api/resource"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -40,15 +41,47 @@ func easyjsonB5893baDecodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(in *jl
 		case "apiVersion":
 			out.APIVersion = string(in.String())
 		case "capacity":
-			out.Capacity = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Capacity = nil
+			} else {
+				if out.Capacity == nil {
+					out.Capacity = new(resource.Quantity)
+				}
+				*out.Capacity = resource.Quantity(in.String())
+			}
 		case "kind":
 			out.Kind = string(in.String())
 		case "maximumVolumeSize":
-			out.MaximumVolumeSize = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaximumVolumeSize = nil
+			} else {
+				if out.MaximumVolumeSize == nil {
+					out.MaximumVolumeSize = new(resource.Quantity)
+				}
+				*out.MaximumVolumeSize = resource.Quantity(in.String())
+			}
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "nodeTopology":
-			(out.NodeTopology).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.NodeTopology = nil
+			} else {
+				if out.NodeTopology == nil {
+					out.NodeTopology = new(_v1.LabelSelector)
+				}
+				(*out.NodeTopology).UnmarshalEasyJSON(in)
+			}
 		case "storageClassName":
 			if in.IsNull() {
 				in.Skip()
@@ -79,7 +112,7 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		out.RawString(prefix[1:])
 		out.String(string(in.APIVersion))
 	}
-	if in.Capacity != "" {
+	if in.Capacity != nil {
 		const prefix string = ",\"capacity\":"
 		if first {
 			first = false
@@ -87,7 +120,7 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Capacity))
+		out.String(string(*in.Capacity))
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"
@@ -99,7 +132,7 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		}
 		out.String(string(in.Kind))
 	}
-	if in.MaximumVolumeSize != "" {
+	if in.MaximumVolumeSize != nil {
 		const prefix string = ",\"maximumVolumeSize\":"
 		if first {
 			first = false
@@ -107,9 +140,9 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MaximumVolumeSize))
+		out.String(string(*in.MaximumVolumeSize))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -117,9 +150,9 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.NodeTopology != nil {
 		const prefix string = ",\"nodeTopology\":"
 		if first {
 			first = false
@@ -127,7 +160,7 @@ func easyjsonB5893baEncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.NodeTopology).MarshalEasyJSON(out)
+		(*in.NodeTopology).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"storageClassName\":"

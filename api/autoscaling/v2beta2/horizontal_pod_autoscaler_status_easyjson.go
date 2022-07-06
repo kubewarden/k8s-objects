@@ -5,6 +5,7 @@ package v2beta2
 import (
 	json "encoding/json"
 	resource "github.com/kubewarden/k8s-objects/apimachinery/pkg/api/resource"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -120,8 +121,16 @@ func easyjson4e8edfcfDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta2(in
 				*out.DesiredReplicas = int32(in.Int32())
 			}
 		case "lastScaleTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastScaleTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastScaleTime = nil
+			} else {
+				if out.LastScaleTime == nil {
+					out.LastScaleTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastScaleTime).UnmarshalJSON(data))
+				}
 			}
 		case "observedGeneration":
 			out.ObservedGeneration = int64(in.Int64())
@@ -159,12 +168,10 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta2(ou
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.CurrentMetrics) != 0 {
 		const prefix string = ",\"currentMetrics\":"
 		out.RawString(prefix)
-		if in.CurrentMetrics == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.CurrentMetrics {
 				if v5 > 0 {
@@ -197,10 +204,10 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta2(ou
 			out.Int32(int32(*in.DesiredReplicas))
 		}
 	}
-	if true {
+	if in.LastScaleTime != nil {
 		const prefix string = ",\"lastScaleTime\":"
 		out.RawString(prefix)
-		out.Raw((in.LastScaleTime).MarshalJSON())
+		out.Raw((*in.LastScaleTime).MarshalJSON())
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"
@@ -483,9 +490,25 @@ func easyjson4e8edfcfDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta25(i
 		case "averageUtilization":
 			out.AverageUtilization = int32(in.Int32())
 		case "averageValue":
-			out.AverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.AverageValue = nil
+			} else {
+				if out.AverageValue == nil {
+					out.AverageValue = new(resource.Quantity)
+				}
+				*out.AverageValue = resource.Quantity(in.String())
+			}
 		case "value":
-			out.Value = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(resource.Quantity)
+				}
+				*out.Value = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -506,7 +529,7 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta25(o
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.AverageUtilization))
 	}
-	if in.AverageValue != "" {
+	if in.AverageValue != nil {
 		const prefix string = ",\"averageValue\":"
 		if first {
 			first = false
@@ -514,9 +537,9 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta25(o
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AverageValue))
+		out.String(string(*in.AverageValue))
 	}
-	if in.Value != "" {
+	if in.Value != nil {
 		const prefix string = ",\"value\":"
 		if first {
 			first = false
@@ -524,7 +547,7 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta25(o
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Value))
+		out.String(string(*in.Value))
 	}
 	out.RawByte('}')
 }
@@ -631,7 +654,15 @@ func easyjson4e8edfcfDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta26(i
 				*out.Name = string(in.String())
 			}
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -655,10 +686,10 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta26(o
 			out.String(string(*in.Name))
 		}
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		out.RawString(prefix)
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

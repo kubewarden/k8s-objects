@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjsonEfd2f10eDecodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -92,7 +101,7 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -100,7 +109,7 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -217,12 +226,11 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Audiences) != 0 {
 		const prefix string = ",\"audiences\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Audiences == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Audiences {
 				if v2 > 0 {
@@ -235,17 +243,32 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	}
 	if in.Authenticated {
 		const prefix string = ",\"authenticated\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Bool(bool(in.Authenticated))
 	}
 	if in.Error != "" {
 		const prefix string = ",\"error\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Error))
 	}
 	if in.User != nil {
 		const prefix string = ",\"user\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta13(out, *in.User)
 	}
 	out.RawByte('}')
@@ -382,7 +405,7 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -390,9 +413,7 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v10, v11 := range in.Groups {
 				if v10 > 0 {
@@ -405,12 +426,22 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	}
 	if in.UID != "" {
 		const prefix string = ",\"uid\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.UID))
 	}
 	if in.Username != "" {
 		const prefix string = ",\"username\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Username))
 	}
 	out.RawByte('}')
@@ -473,12 +504,11 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Audiences) != 0 {
 		const prefix string = ",\"audiences\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Audiences == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v13, v14 := range in.Audiences {
 				if v13 > 0 {
@@ -491,7 +521,12 @@ func easyjsonEfd2f10eEncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	}
 	if in.Token != "" {
 		const prefix string = ",\"token\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Token))
 	}
 	out.RawByte('}')

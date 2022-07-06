@@ -15,5 +15,5 @@ import (
 type Overhead struct {
 
 	// PodFixed represents the fixed resource overhead associated with running a pod.
-	PodFixed map[string]apimachinery_pkg_api_resource.Quantity `json:"podFixed,omitempty"`
+	PodFixed map[string]*apimachinery_pkg_api_resource.Quantity `json:"podFixed,omitempty"`
 }

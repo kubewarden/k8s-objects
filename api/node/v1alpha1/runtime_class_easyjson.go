@@ -4,7 +4,8 @@ package v1alpha1
 
 import (
 	json "encoding/json"
-	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -42,7 +43,15 @@ func easyjson46aff27bDecodeGithubComKubewardenK8sObjectsApiNodeV1alpha1(in *jlex
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -83,7 +92,7 @@ func easyjson46aff27bEncodeGithubComKubewardenK8sObjectsApiNodeV1alpha1(out *jwr
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -91,7 +100,7 @@ func easyjson46aff27bEncodeGithubComKubewardenK8sObjectsApiNodeV1alpha1(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -270,16 +279,24 @@ func easyjson46aff27bDecodeGithubComKubewardenK8sObjectsApiNodeV1alpha12(in *jle
 				in.Delim('[')
 				if out.Tolerations == nil {
 					if !in.IsDelim(']') {
-						out.Tolerations = make([]_v1.Toleration, 0, 0)
+						out.Tolerations = make([]*_v11.Toleration, 0, 8)
 					} else {
-						out.Tolerations = []_v1.Toleration{}
+						out.Tolerations = []*_v11.Toleration{}
 					}
 				} else {
 					out.Tolerations = (out.Tolerations)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v2 _v1.Toleration
-					(v2).UnmarshalEasyJSON(in)
+					var v2 *_v11.Toleration
+					if in.IsNull() {
+						in.Skip()
+						v2 = nil
+					} else {
+						if v2 == nil {
+							v2 = new(_v11.Toleration)
+						}
+						(*v2).UnmarshalEasyJSON(in)
+					}
 					out.Tolerations = append(out.Tolerations, v2)
 					in.WantComma()
 				}
@@ -319,7 +336,7 @@ func easyjson46aff27bEncodeGithubComKubewardenK8sObjectsApiNodeV1alpha12(out *jw
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Tolerations) != 0 {
 		const prefix string = ",\"tolerations\":"
 		if first {
 			first = false
@@ -327,15 +344,17 @@ func easyjson46aff27bEncodeGithubComKubewardenK8sObjectsApiNodeV1alpha12(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Tolerations == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v4, v5 := range in.Tolerations {
 				if v4 > 0 {
 					out.RawByte(',')
 				}
-				(v5).MarshalEasyJSON(out)
+				if v5 == nil {
+					out.RawString("null")
+				} else {
+					(*v5).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}

@@ -18,7 +18,7 @@ type CertificateSigningRequestSpec struct {
 	Extra map[string][]string `json:"extra,omitempty"`
 
 	// groups contains group membership of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups,omitempty"`
 
 	// request contains an x509 certificate signing request encoded in a "CERTIFICATE REQUEST" PEM block. When serialized as JSON or YAML, the data is additionally base64-encoded.
 	// Required: true
@@ -66,7 +66,7 @@ type CertificateSigningRequestSpec struct {
 	//  "code signing", "email protection", "s/mime",
 	//  "ipsec end system", "ipsec tunnel", "ipsec user",
 	//  "timestamping", "ocsp signing", "microsoft sgc", "netscape sgc"
-	Usages []string `json:"usages"`
+	Usages []string `json:"usages,omitempty"`
 
 	// username contains the name of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
 	Username string `json:"username,omitempty"`

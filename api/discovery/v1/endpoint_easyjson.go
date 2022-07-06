@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -104,7 +105,15 @@ func easyjson3a9ed663DecodeGithubComKubewardenK8sObjectsApiDiscoveryV1(in *jlexe
 		case "nodeName":
 			out.NodeName = string(in.String())
 		case "targetRef":
-			(out.TargetRef).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.TargetRef = nil
+			} else {
+				if out.TargetRef == nil {
+					out.TargetRef = new(_v1.ObjectReference)
+				}
+				(*out.TargetRef).UnmarshalEasyJSON(in)
+			}
 		case "zone":
 			out.Zone = string(in.String())
 		default:
@@ -176,10 +185,10 @@ func easyjson3a9ed663EncodeGithubComKubewardenK8sObjectsApiDiscoveryV1(out *jwri
 		out.RawString(prefix)
 		out.String(string(in.NodeName))
 	}
-	if true {
+	if in.TargetRef != nil {
 		const prefix string = ",\"targetRef\":"
 		out.RawString(prefix)
-		(in.TargetRef).MarshalEasyJSON(out)
+		(*in.TargetRef).MarshalEasyJSON(out)
 	}
 	if in.Zone != "" {
 		const prefix string = ",\"zone\":"
@@ -276,12 +285,11 @@ func easyjson3a9ed663EncodeGithubComKubewardenK8sObjectsApiDiscoveryV12(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.ForZones) != 0 {
 		const prefix string = ",\"forZones\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.ForZones == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.ForZones {
 				if v7 > 0 {

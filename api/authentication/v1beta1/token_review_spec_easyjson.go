@@ -75,12 +75,11 @@ func easyjson8cb08f22EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Audiences) != 0 {
 		const prefix string = ",\"audiences\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Audiences == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Audiences {
 				if v2 > 0 {
@@ -93,7 +92,12 @@ func easyjson8cb08f22EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	}
 	if in.Token != "" {
 		const prefix string = ",\"token\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Token))
 	}
 	out.RawByte('}')

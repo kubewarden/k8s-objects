@@ -43,15 +43,23 @@ func easyjsonF3509f8cDecodeGithubComKubewardenK8sObjectsApiNodeV1(in *jlexer.Lex
 			} else {
 				in.Delim('{')
 				if !in.IsDelim('}') {
-					out.PodFixed = make(map[string]resource.Quantity)
+					out.PodFixed = make(map[string]*resource.Quantity)
 				} else {
 					out.PodFixed = nil
 				}
 				for !in.IsDelim('}') {
 					key := string(in.String())
 					in.WantColon()
-					var v1 resource.Quantity
-					v1 = resource.Quantity(in.String())
+					var v1 *resource.Quantity
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(resource.Quantity)
+						}
+						*v1 = resource.Quantity(in.String())
+					}
 					(out.PodFixed)[key] = v1
 					in.WantComma()
 				}
@@ -86,7 +94,11 @@ func easyjsonF3509f8cEncodeGithubComKubewardenK8sObjectsApiNodeV1(out *jwriter.W
 				}
 				out.String(string(v2Name))
 				out.RawByte(':')
-				out.String(string(v2Value))
+				if v2Value == nil {
+					out.RawString("null")
+				} else {
+					out.String(string(*v2Value))
+				}
 			}
 			out.RawByte('}')
 		}

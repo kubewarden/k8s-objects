@@ -34,7 +34,7 @@ type Endpoint struct {
 	NodeName string `json:"nodeName,omitempty"`
 
 	// targetRef is a reference to a Kubernetes object that represents this endpoint.
-	TargetRef api_core_v1.ObjectReference `json:"targetRef,omitempty"`
+	TargetRef *api_core_v1.ObjectReference `json:"targetRef,omitempty"`
 
 	// zone is the name of the Zone this endpoint exists in.
 	Zone string `json:"zone,omitempty"`

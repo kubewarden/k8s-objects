@@ -18,12 +18,12 @@ type MetricTarget struct {
 	AverageUtilization int32 `json:"averageUtilization,omitempty"`
 
 	// averageValue is the target value of the average of the metric across all relevant pods (as a quantity)
-	AverageValue apimachinery_pkg_api_resource.Quantity `json:"averageValue,omitempty"`
+	AverageValue *apimachinery_pkg_api_resource.Quantity `json:"averageValue,omitempty"`
 
 	// type represents whether the metric type is Utilization, Value, or AverageValue
 	// Required: true
 	Type *string `json:"type"`
 
 	// value is the target value of the metric (as a quantity).
-	Value apimachinery_pkg_api_resource.Quantity `json:"value,omitempty"`
+	Value *apimachinery_pkg_api_resource.Quantity `json:"value,omitempty"`
 }
