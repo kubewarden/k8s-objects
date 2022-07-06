@@ -18,5 +18,5 @@ type Scheduling struct {
 	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
 
 	// tolerations are appended (excluding duplicates) to pods running with this RuntimeClass during admission, effectively unioning the set of nodes tolerated by the pod and the RuntimeClass.
-	Tolerations []api_core_v1.Toleration `json:"tolerations"`
+	Tolerations []*api_core_v1.Toleration `json:"tolerations,omitempty"`
 }

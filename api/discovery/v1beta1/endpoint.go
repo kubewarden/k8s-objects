@@ -25,7 +25,7 @@ type Endpoint struct {
 	Hostname string `json:"hostname,omitempty"`
 
 	// targetRef is a reference to a Kubernetes object that represents this endpoint.
-	TargetRef api_core_v1.ObjectReference `json:"targetRef,omitempty"`
+	TargetRef *api_core_v1.ObjectReference `json:"targetRef,omitempty"`
 
 	// topology contains arbitrary topology information associated with the endpoint. These key/value pairs must conform with the label format. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Topology may include a maximum of 16 key/value pairs. This includes, but is not limited to the following well known keys: * kubernetes.io/hostname: the value indicates the hostname of the node
 	//   where the endpoint is located. This should match the corresponding

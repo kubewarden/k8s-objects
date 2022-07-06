@@ -18,11 +18,11 @@ type Eviction struct {
 	APIVersion string `json:"apiVersion,omitempty"`
 
 	// DeleteOptions may be provided
-	DeleteOptions apimachinery_pkg_apis_meta_v1.DeleteOptions `json:"deleteOptions,omitempty"`
+	DeleteOptions *apimachinery_pkg_apis_meta_v1.DeleteOptions `json:"deleteOptions,omitempty"`
 
 	// Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	Kind string `json:"kind,omitempty"`
 
 	// ObjectMeta describes the pod that is being evicted.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 }

@@ -11,10 +11,10 @@ package v1alpha1
 type PolicyRulesWithSubjects struct {
 
 	// `nonResourceRules` is a list of NonResourcePolicyRules that identify matching requests according to their verb and the target non-resource URL.
-	NonResourceRules []*NonResourcePolicyRule `json:"nonResourceRules"`
+	NonResourceRules []*NonResourcePolicyRule `json:"nonResourceRules,omitempty"`
 
 	// `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according to their verb and the target resource. At least one of `resourceRules` and `nonResourceRules` has to be non-empty.
-	ResourceRules []*ResourcePolicyRule `json:"resourceRules"`
+	ResourceRules []*ResourcePolicyRule `json:"resourceRules,omitempty"`
 
 	// subjects is the list of normal user, serviceaccount, or group that this rule cares about. There must be at least one member in this slice. A slice that includes both the system:authenticated and system:unauthenticated user groups matches every request. Required.
 	// Required: true

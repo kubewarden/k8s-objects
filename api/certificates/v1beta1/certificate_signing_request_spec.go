@@ -18,7 +18,7 @@ type CertificateSigningRequestSpec struct {
 	Extra map[string][]string `json:"extra,omitempty"`
 
 	// Group information about the requesting user. See user.Info interface for details.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups,omitempty"`
 
 	// Base64-encoded PKCS#10 CSR data
 	// Required: true
@@ -39,7 +39,7 @@ type CertificateSigningRequestSpec struct {
 
 	// allowedUsages specifies a set of usage contexts the key will be valid for. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3
 	//      https://tools.ietf.org/html/rfc5280#section-4.2.1.12
-	Usages []string `json:"usages"`
+	Usages []string `json:"usages,omitempty"`
 
 	// Information about the requesting user. See user.Info interface for details.
 	Username string `json:"username,omitempty"`

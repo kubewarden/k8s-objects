@@ -25,5 +25,5 @@ type FlowSchemaList struct {
 	Kind string `json:"kind,omitempty"`
 
 	// `metadata` is the standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
 }

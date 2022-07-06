@@ -93,7 +93,7 @@ func easyjsonEdb00d66EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		}
 		out.Bool(bool(in.PodInfoOnMount))
 	}
-	{
+	if len(in.VolumeLifecycleModes) != 0 {
 		const prefix string = ",\"volumeLifecycleModes\":"
 		if first {
 			first = false
@@ -101,9 +101,7 @@ func easyjsonEdb00d66EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		} else {
 			out.RawString(prefix)
 		}
-		if in.VolumeLifecycleModes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.VolumeLifecycleModes {
 				if v2 > 0 {

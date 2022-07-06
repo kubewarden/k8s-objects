@@ -4,6 +4,7 @@ package v1alpha1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -37,7 +38,15 @@ func easyjson15f4f3f6DecodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(in *j
 		}
 		switch key {
 		case "inlineVolumeSpec":
-			(out.InlineVolumeSpec).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.InlineVolumeSpec = nil
+			} else {
+				if out.InlineVolumeSpec == nil {
+					out.InlineVolumeSpec = new(_v1.PersistentVolumeSpec)
+				}
+				(*out.InlineVolumeSpec).UnmarshalEasyJSON(in)
+			}
 		case "persistentVolumeName":
 			out.PersistentVolumeName = string(in.String())
 		default:
@@ -54,11 +63,11 @@ func easyjson15f4f3f6EncodeGithubComKubewardenK8sObjectsApiStorageV1alpha1(out *
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.InlineVolumeSpec != nil {
 		const prefix string = ",\"inlineVolumeSpec\":"
 		first = false
 		out.RawString(prefix[1:])
-		(in.InlineVolumeSpec).MarshalEasyJSON(out)
+		(*in.InlineVolumeSpec).MarshalEasyJSON(out)
 	}
 	if in.PersistentVolumeName != "" {
 		const prefix string = ",\"persistentVolumeName\":"

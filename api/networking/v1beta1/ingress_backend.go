@@ -16,11 +16,11 @@ import (
 type IngressBackend struct {
 
 	// Resource is an ObjectRef to another Kubernetes resource in the namespace of the Ingress object. If resource is specified, serviceName and servicePort must not be specified.
-	Resource api_core_v1.TypedLocalObjectReference `json:"resource,omitempty"`
+	Resource *api_core_v1.TypedLocalObjectReference `json:"resource,omitempty"`
 
 	// Specifies the name of the referenced service.
 	ServiceName string `json:"serviceName,omitempty"`
 
 	// Specifies the port of the referenced service.
-	ServicePort apimachinery_pkg_util_intstr.IntOrString `json:"servicePort,omitempty"`
+	ServicePort *apimachinery_pkg_util_intstr.IntOrString `json:"servicePort,omitempty"`
 }

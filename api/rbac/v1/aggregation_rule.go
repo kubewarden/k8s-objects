@@ -15,5 +15,5 @@ import (
 type AggregationRule struct {
 
 	// ClusterRoleSelectors holds a list of selectors which will be used to find ClusterRoles and create the rules. If any of the selectors match, then the ClusterRole's permissions will be added
-	ClusterRoleSelectors []apimachinery_pkg_apis_meta_v1.LabelSelector `json:"clusterRoleSelectors"`
+	ClusterRoleSelectors []*apimachinery_pkg_apis_meta_v1.LabelSelector `json:"clusterRoleSelectors,omitempty"`
 }

@@ -92,12 +92,10 @@ func easyjson545ee795EncodeGithubComKubewardenK8sObjectsApiNetworkingV1(out *jwr
 			out.String(string(*in.Cidr))
 		}
 	}
-	{
+	if len(in.Except) != 0 {
 		const prefix string = ",\"except\":"
 		out.RawString(prefix)
-		if in.Except == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Except {
 				if v2 > 0 {

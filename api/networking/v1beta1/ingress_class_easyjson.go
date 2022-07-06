@@ -4,6 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +43,15 @@ func easyjsonBe26a562DecodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(in 
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -82,7 +92,7 @@ func easyjsonBe26a562EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -90,7 +100,7 @@ func easyjsonBe26a562EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -150,7 +160,15 @@ func easyjsonBe26a562DecodeGithubComKubewardenK8sObjectsApiNetworkingV1beta11(in
 		case "controller":
 			out.Controller = string(in.String())
 		case "parameters":
-			(out.Parameters).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Parameters = nil
+			} else {
+				if out.Parameters == nil {
+					out.Parameters = new(_v11.TypedLocalObjectReference)
+				}
+				(*out.Parameters).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -171,7 +189,7 @@ func easyjsonBe26a562EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta11(ou
 		out.RawString(prefix[1:])
 		out.String(string(in.Controller))
 	}
-	if true {
+	if in.Parameters != nil {
 		const prefix string = ",\"parameters\":"
 		if first {
 			first = false
@@ -179,7 +197,7 @@ func easyjsonBe26a562EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta11(ou
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Parameters).MarshalEasyJSON(out)
+		(*in.Parameters).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -92,12 +92,10 @@ func easyjsonC60a78c2EncodeGithubComKubewardenK8sObjectsApiAuditregistrationV1al
 			out.String(string(*in.Level))
 		}
 	}
-	{
+	if len(in.Stages) != 0 {
 		const prefix string = ",\"stages\":"
 		out.RawString(prefix)
-		if in.Stages == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Stages {
 				if v2 > 0 {

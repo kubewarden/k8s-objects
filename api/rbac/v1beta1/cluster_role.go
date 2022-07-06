@@ -24,8 +24,8 @@ type ClusterRole struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Rules holds all the PolicyRules for this ClusterRole
-	Rules []*PolicyRule `json:"rules"`
+	Rules []*PolicyRule `json:"rules,omitempty"`
 }

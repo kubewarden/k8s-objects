@@ -15,7 +15,7 @@ import (
 type ValidatingWebhook struct {
 
 	// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview` versions the Webhook expects. API server will try to use first version in the list which it supports. If none of the versions specified in this list supported by API server, validation will fail for this object. If a persisted webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail and be subject to the failure policy. Default to `['v1beta1']`.
-	AdmissionReviewVersions []string `json:"admissionReviewVersions"`
+	AdmissionReviewVersions []string `json:"admissionReviewVersions,omitempty"`
 
 	// ClientConfig defines how to communicate with the hook. Required
 	// Required: true
@@ -68,13 +68,13 @@ type ValidatingWebhook struct {
 	// See https://kubernetes.io/docs/concepts/overview/working-with-objects/labels for more examples of label selectors.
 	//
 	// Default to the empty LabelSelector, which matches everything.
-	NamespaceSelector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"namespaceSelector,omitempty"`
+	NamespaceSelector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"namespaceSelector,omitempty"`
 
 	// ObjectSelector decides whether to run the webhook based on if the object has matching labels. objectSelector is evaluated against both the oldObject and newObject that would be sent to the webhook, and is considered to match if either object matches the selector. A null object (oldObject in the case of create, or newObject in the case of delete) or an object that cannot have labels (like a DeploymentRollback or a PodProxyOptions object) is not considered to match. Use the object selector only if the webhook is opt-in, because end users may skip the admission webhook by setting the labels. Default to the empty LabelSelector, which matches everything.
-	ObjectSelector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"objectSelector,omitempty"`
+	ObjectSelector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"objectSelector,omitempty"`
 
 	// Rules describes what operations on what resources/subresources the webhook cares about. The webhook cares about an operation if it matches _any_ Rule. However, in order to prevent ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks from putting the cluster in a state which cannot be recovered from without completely disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
-	Rules []*RuleWithOperations `json:"rules"`
+	Rules []*RuleWithOperations `json:"rules,omitempty"`
 
 	// SideEffects states whether this webhook has side effects. Acceptable values are: Unknown, None, Some, NoneOnDryRun Webhooks with side effects MUST implement a reconciliation system, since a request may be rejected by a future step in the admission change and the side effects therefore need to be undone. Requests with the dryRun attribute will be auto-rejected if they match a webhook with sideEffects == Unknown or Some. Defaults to Unknown.
 	SideEffects string `json:"sideEffects,omitempty"`

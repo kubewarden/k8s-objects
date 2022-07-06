@@ -15,5 +15,5 @@ type Policy struct {
 	Level *string `json:"level"`
 
 	// Stages is a list of stages for which events are created.
-	Stages []string `json:"stages"`
+	Stages []string `json:"stages,omitempty"`
 }
