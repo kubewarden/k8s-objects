@@ -111,7 +111,7 @@ func easyjson30c5d56cEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.CollisionCount))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -119,9 +119,7 @@ func easyjson30c5d56cEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Conditions {
 				if v2 > 0 {
@@ -138,27 +136,52 @@ func easyjson30c5d56cEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 	}
 	if in.CurrentReplicas != 0 {
 		const prefix string = ",\"currentReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.CurrentReplicas))
 	}
 	if in.CurrentRevision != "" {
 		const prefix string = ",\"currentRevision\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.CurrentRevision))
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int64(int64(in.ObservedGeneration))
 	}
 	if in.ReadyReplicas != 0 {
 		const prefix string = ",\"readyReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.ReadyReplicas))
 	}
 	{
 		const prefix string = ",\"replicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Replicas == nil {
 			out.RawString("null")
 		} else {

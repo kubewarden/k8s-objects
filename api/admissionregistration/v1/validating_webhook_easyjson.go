@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -84,9 +85,25 @@ func easyjson8684def1DecodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 				*out.Name = string(in.String())
 			}
 		case "namespaceSelector":
-			(out.NamespaceSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.NamespaceSelector = nil
+			} else {
+				if out.NamespaceSelector == nil {
+					out.NamespaceSelector = new(_v1.LabelSelector)
+				}
+				(*out.NamespaceSelector).UnmarshalEasyJSON(in)
+			}
 		case "objectSelector":
-			(out.ObjectSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.ObjectSelector = nil
+			} else {
+				if out.ObjectSelector == nil {
+					out.ObjectSelector = new(_v1.LabelSelector)
+				}
+				(*out.ObjectSelector).UnmarshalEasyJSON(in)
+			}
 		case "rules":
 			if in.IsNull() {
 				in.Skip()
@@ -188,22 +205,20 @@ func easyjson8684def1EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 			out.String(string(*in.Name))
 		}
 	}
-	if true {
+	if in.NamespaceSelector != nil {
 		const prefix string = ",\"namespaceSelector\":"
 		out.RawString(prefix)
-		(in.NamespaceSelector).MarshalEasyJSON(out)
+		(*in.NamespaceSelector).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.ObjectSelector != nil {
 		const prefix string = ",\"objectSelector\":"
 		out.RawString(prefix)
-		(in.ObjectSelector).MarshalEasyJSON(out)
+		(*in.ObjectSelector).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		out.RawString(prefix)
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Rules {
 				if v5 > 0 {

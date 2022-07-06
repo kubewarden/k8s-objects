@@ -25,5 +25,5 @@ type DeploymentList struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard list metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
 }

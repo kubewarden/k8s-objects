@@ -11,7 +11,7 @@ package v1
 type CustomResourceDefinitionNames struct {
 
 	// categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.
-	Categories []string `json:"categories"`
+	Categories []string `json:"categories,omitempty"`
 
 	// kind is the serialized kind of the resource. It is normally CamelCase and singular. Custom resource instances will use this value as the `kind` attribute in API calls.
 	// Required: true
@@ -25,7 +25,7 @@ type CustomResourceDefinitionNames struct {
 	Plural *string `json:"plural"`
 
 	// shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`. It must be all lowercase.
-	ShortNames []string `json:"shortNames"`
+	ShortNames []string `json:"shortNames,omitempty"`
 
 	// singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.
 	Singular string `json:"singular,omitempty"`

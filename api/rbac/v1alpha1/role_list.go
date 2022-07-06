@@ -25,5 +25,5 @@ type RoleList struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ListMeta `json:"metadata,omitempty"`
 }

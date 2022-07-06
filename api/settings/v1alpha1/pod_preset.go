@@ -21,7 +21,7 @@ type PodPreset struct {
 	Kind string `json:"kind,omitempty"`
 
 	// metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// spec
 	Spec *PodPresetSpec `json:"spec,omitempty"`

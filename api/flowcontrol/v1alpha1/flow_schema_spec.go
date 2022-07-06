@@ -21,5 +21,5 @@ type FlowSchemaSpec struct {
 	PriorityLevelConfiguration *PriorityLevelConfigurationReference `json:"priorityLevelConfiguration"`
 
 	// `rules` describes which requests will match this flow schema. This FlowSchema matches a request if and only if at least one member of rules matches the request. if it is an empty slice, there will be no requests matching the FlowSchema.
-	Rules []*PolicyRulesWithSubjects `json:"rules"`
+	Rules []*PolicyRulesWithSubjects `json:"rules,omitempty"`
 }

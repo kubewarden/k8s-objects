@@ -38,7 +38,15 @@ func easyjsonEdf3b953DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 		}
 		switch key {
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -53,11 +61,11 @@ func easyjsonEdf3b953EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	out.RawByte('}')
 }

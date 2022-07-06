@@ -15,7 +15,7 @@ import (
 type VolumeAttachmentSource struct {
 
 	// inlineVolumeSpec contains all the information necessary to attach a persistent volume defined by a pod's inline VolumeSource. This field is populated only for the CSIMigration feature. It contains translated fields from a pod's inline VolumeSource to a PersistentVolumeSpec. This field is alpha-level and is only honored by servers that enabled the CSIMigration feature.
-	InlineVolumeSpec api_core_v1.PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty"`
+	InlineVolumeSpec *api_core_v1.PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty"`
 
 	// Name of the persistent volume to attach.
 	PersistentVolumeName string `json:"persistentVolumeName,omitempty"`

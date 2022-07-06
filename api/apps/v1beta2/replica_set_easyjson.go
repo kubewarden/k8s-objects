@@ -4,6 +4,7 @@ package v1beta2
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
 	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -42,7 +43,15 @@ func easyjson1601854fDecodeGithubComKubewardenK8sObjectsApiAppsV1beta2(in *jlexe
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -93,7 +102,7 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -101,7 +110,7 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -237,7 +246,7 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta22(out *jwr
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.AvailableReplicas))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -245,9 +254,7 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta22(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Conditions {
 				if v2 > 0 {
@@ -264,22 +271,42 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta22(out *jwr
 	}
 	if in.FullyLabeledReplicas != 0 {
 		const prefix string = ",\"fullyLabeledReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.FullyLabeledReplicas))
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int64(int64(in.ObservedGeneration))
 	}
 	if in.ReadyReplicas != 0 {
 		const prefix string = ",\"readyReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.ReadyReplicas))
 	}
 	{
 		const prefix string = ",\"replicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Replicas == nil {
 			out.RawString("null")
 		} else {
@@ -308,8 +335,16 @@ func easyjson1601854fDecodeGithubComKubewardenK8sObjectsApiAppsV1beta23(in *jlex
 		}
 		switch key {
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -349,11 +384,11 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta23(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"
@@ -434,7 +469,15 @@ func easyjson1601854fDecodeGithubComKubewardenK8sObjectsApiAppsV1beta21(in *jlex
 				(*out.Selector).UnmarshalEasyJSON(in)
 			}
 		case "template":
-			(out.Template).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Template = nil
+			} else {
+				if out.Template == nil {
+					out.Template = new(_v11.PodTemplateSpec)
+				}
+				(*out.Template).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -479,10 +522,10 @@ func easyjson1601854fEncodeGithubComKubewardenK8sObjectsApiAppsV1beta21(out *jwr
 			(*in.Selector).MarshalEasyJSON(out)
 		}
 	}
-	if true {
+	if in.Template != nil {
 		const prefix string = ",\"template\":"
 		out.RawString(prefix)
-		(in.Template).MarshalEasyJSON(out)
+		(*in.Template).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -144,12 +144,11 @@ func easyjson4d3b5152EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.APIGroups) != 0 {
 		const prefix string = ",\"apiGroups\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.APIGroups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.APIGroups {
 				if v5 > 0 {
@@ -160,12 +159,15 @@ func easyjson4d3b5152EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.APIVersions) != 0 {
 		const prefix string = ",\"apiVersions\":"
-		out.RawString(prefix)
-		if in.APIVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.APIVersions {
 				if v7 > 0 {
@@ -176,12 +178,15 @@ func easyjson4d3b5152EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Operations) != 0 {
 		const prefix string = ",\"operations\":"
-		out.RawString(prefix)
-		if in.Operations == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v9, v10 := range in.Operations {
 				if v9 > 0 {
@@ -192,12 +197,15 @@ func easyjson4d3b5152EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Resources) != 0 {
 		const prefix string = ",\"resources\":"
-		out.RawString(prefix)
-		if in.Resources == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v11, v12 := range in.Resources {
 				if v11 > 0 {
@@ -210,7 +218,12 @@ func easyjson4d3b5152EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 	}
 	if in.Scope != "" {
 		const prefix string = ",\"scope\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Scope))
 	}
 	out.RawByte('}')

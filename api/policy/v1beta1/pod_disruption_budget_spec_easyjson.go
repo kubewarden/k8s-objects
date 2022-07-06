@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	intstr "github.com/kubewarden/k8s-objects/apimachinery/pkg/util/intstr"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -38,11 +39,35 @@ func easyjson7cef7b9DecodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(in *jlex
 		}
 		switch key {
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		case "minAvailable":
-			out.MinAvailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MinAvailable = nil
+			} else {
+				if out.MinAvailable == nil {
+					out.MinAvailable = new(intstr.IntOrString)
+				}
+				*out.MinAvailable = intstr.IntOrString(in.String())
+			}
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -57,13 +82,13 @@ func easyjson7cef7b9EncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
-	if in.MinAvailable != "" {
+	if in.MinAvailable != nil {
 		const prefix string = ",\"minAvailable\":"
 		if first {
 			first = false
@@ -71,9 +96,9 @@ func easyjson7cef7b9EncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MinAvailable))
+		out.String(string(*in.MinAvailable))
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -81,7 +106,7 @@ func easyjson7cef7b9EncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

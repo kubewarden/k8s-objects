@@ -14,7 +14,7 @@ type SubjectAccessReviewSpec struct {
 	Extra map[string][]string `json:"extra,omitempty"`
 
 	// Groups is the groups you're testing for.
-	Groups []string `json:"groups"`
+	Groups []string `json:"groups,omitempty"`
 
 	// NonResourceAttributes describes information for a non-resource access request
 	NonResourceAttributes *NonResourceAttributes `json:"nonResourceAttributes,omitempty"`

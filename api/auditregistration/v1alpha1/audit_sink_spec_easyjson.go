@@ -480,12 +480,10 @@ func easyjsonE8ec9053EncodeGithubComKubewardenK8sObjectsApiAuditregistrationV1al
 			out.String(string(*in.Level))
 		}
 	}
-	{
+	if len(in.Stages) != 0 {
 		const prefix string = ",\"stages\":"
 		out.RawString(prefix)
-		if in.Stages == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Stages {
 				if v5 > 0 {
