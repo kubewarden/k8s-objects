@@ -4,6 +4,7 @@ package v1alpha1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjsonEacd27c4DecodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -92,7 +101,7 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -100,7 +109,7 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -254,7 +263,7 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		out.RawString(prefix[1:])
 		out.String(string(in.CommonEncodingVersion))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -262,9 +271,7 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Conditions {
 				if v3 > 0 {
@@ -279,12 +286,15 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.StorageVersions) != 0 {
 		const prefix string = ",\"storageVersions\":"
-		out.RawString(prefix)
-		if in.StorageVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.StorageVersions {
 				if v5 > 0 {
@@ -321,8 +331,16 @@ func easyjsonEacd27c4DecodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		}
 		switch key {
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -372,11 +390,11 @@ func easyjsonEacd27c4EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"

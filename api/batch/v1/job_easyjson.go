@@ -4,7 +4,8 @@ package v1
 
 import (
 	json "encoding/json"
-	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -42,7 +43,15 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV1(in *jlexer.Le
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -93,7 +102,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -101,7 +110,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -173,8 +182,16 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV12(in *jlexer.L
 		case "completedIndexes":
 			out.CompletedIndexes = string(in.String())
 		case "completionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.CompletionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.CompletionTime = nil
+			} else {
+				if out.CompletionTime == nil {
+					out.CompletionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.CompletionTime).UnmarshalJSON(data))
+				}
 			}
 		case "conditions":
 			if in.IsNull() {
@@ -210,8 +227,16 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV12(in *jlexer.L
 		case "failed":
 			out.Failed = int32(in.Int32())
 		case "startTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.StartTime = nil
+			} else {
+				if out.StartTime == nil {
+					out.StartTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.StartTime).UnmarshalJSON(data))
+				}
 			}
 		case "succeeded":
 			out.Succeeded = int32(in.Int32())
@@ -255,7 +280,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV12(out *jwriter
 		}
 		out.String(string(in.CompletedIndexes))
 	}
-	if true {
+	if in.CompletionTime != nil {
 		const prefix string = ",\"completionTime\":"
 		if first {
 			first = false
@@ -263,9 +288,9 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV12(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.CompletionTime).MarshalJSON())
+		out.Raw((*in.CompletionTime).MarshalJSON())
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -273,9 +298,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV12(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Conditions {
 				if v2 > 0 {
@@ -292,22 +315,42 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV12(out *jwriter
 	}
 	if in.Failed != 0 {
 		const prefix string = ",\"failed\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.Failed))
 	}
-	if true {
+	if in.StartTime != nil {
 		const prefix string = ",\"startTime\":"
-		out.RawString(prefix)
-		out.Raw((in.StartTime).MarshalJSON())
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((*in.StartTime).MarshalJSON())
 	}
 	if in.Succeeded != 0 {
 		const prefix string = ",\"succeeded\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.Succeeded))
 	}
 	if in.UncountedTerminatedPods != nil {
 		const prefix string = ",\"uncountedTerminatedPods\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV14(out, *in.UncountedTerminatedPods)
 	}
 	out.RawByte('}')
@@ -391,12 +434,11 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV14(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Failed) != 0 {
 		const prefix string = ",\"failed\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Failed == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v6, v7 := range in.Failed {
 				if v6 > 0 {
@@ -407,12 +449,15 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV14(out *jwriter
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Succeeded) != 0 {
 		const prefix string = ",\"succeeded\":"
-		out.RawString(prefix)
-		if in.Succeeded == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.Succeeded {
 				if v8 > 0 {
@@ -445,12 +490,28 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV13(in *jlexer.L
 		}
 		switch key {
 		case "lastProbeTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastProbeTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastProbeTime = nil
+			} else {
+				if out.LastProbeTime == nil {
+					out.LastProbeTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastProbeTime).UnmarshalJSON(data))
+				}
 			}
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -490,13 +551,13 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV13(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastProbeTime != nil {
 		const prefix string = ",\"lastProbeTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastProbeTime).MarshalJSON())
+		out.Raw((*in.LastProbeTime).MarshalJSON())
 	}
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		if first {
 			first = false
@@ -504,7 +565,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV13(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"
@@ -583,7 +644,15 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV11(in *jlexer.L
 		case "parallelism":
 			out.Parallelism = int32(in.Int32())
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		case "suspend":
 			out.Suspend = bool(in.Bool())
 		case "template":
@@ -592,7 +661,7 @@ func easyjson8a33d6c7DecodeGithubComKubewardenK8sObjectsApiBatchV11(in *jlexer.L
 				out.Template = nil
 			} else {
 				if out.Template == nil {
-					out.Template = new(_v1.PodTemplateSpec)
+					out.Template = new(_v11.PodTemplateSpec)
 				}
 				(*out.Template).UnmarshalEasyJSON(in)
 			}
@@ -668,7 +737,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV11(out *jwriter
 		}
 		out.Int32(int32(in.Parallelism))
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -676,7 +745,7 @@ func easyjson8a33d6c7EncodeGithubComKubewardenK8sObjectsApiBatchV11(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	if in.Suspend {
 		const prefix string = ",\"suspend\":"

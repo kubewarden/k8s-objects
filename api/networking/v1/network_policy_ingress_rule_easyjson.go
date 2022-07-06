@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	intstr "github.com/kubewarden/k8s-objects/apimachinery/pkg/util/intstr"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -113,12 +114,11 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV1(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.From) != 0 {
 		const prefix string = ",\"from\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.From == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.From {
 				if v3 > 0 {
@@ -133,12 +133,15 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV1(out *jwr
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Ports) != 0 {
 		const prefix string = ",\"ports\":"
-		out.RawString(prefix)
-		if in.Ports == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Ports {
 				if v5 > 0 {
@@ -201,7 +204,15 @@ func easyjsonEbc94a4aDecodeGithubComKubewardenK8sObjectsApiNetworkingV12(in *jle
 		case "endPort":
 			out.EndPort = int32(in.Int32())
 		case "port":
-			out.Port = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Port = nil
+			} else {
+				if out.Port == nil {
+					out.Port = new(intstr.IntOrString)
+				}
+				*out.Port = intstr.IntOrString(in.String())
+			}
 		case "protocol":
 			out.Protocol = string(in.String())
 		default:
@@ -224,7 +235,7 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV12(out *jw
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.EndPort))
 	}
-	if in.Port != "" {
+	if in.Port != nil {
 		const prefix string = ",\"port\":"
 		if first {
 			first = false
@@ -232,7 +243,7 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV12(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Port))
+		out.String(string(*in.Port))
 	}
 	if in.Protocol != "" {
 		const prefix string = ",\"protocol\":"
@@ -276,9 +287,25 @@ func easyjsonEbc94a4aDecodeGithubComKubewardenK8sObjectsApiNetworkingV11(in *jle
 				(*out.IPBlock).UnmarshalEasyJSON(in)
 			}
 		case "namespaceSelector":
-			(out.NamespaceSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.NamespaceSelector = nil
+			} else {
+				if out.NamespaceSelector == nil {
+					out.NamespaceSelector = new(_v1.LabelSelector)
+				}
+				(*out.NamespaceSelector).UnmarshalEasyJSON(in)
+			}
 		case "podSelector":
-			(out.PodSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.PodSelector = nil
+			} else {
+				if out.PodSelector == nil {
+					out.PodSelector = new(_v1.LabelSelector)
+				}
+				(*out.PodSelector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -299,7 +326,7 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV11(out *jw
 		out.RawString(prefix[1:])
 		(*in.IPBlock).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.NamespaceSelector != nil {
 		const prefix string = ",\"namespaceSelector\":"
 		if first {
 			first = false
@@ -307,9 +334,9 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV11(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.NamespaceSelector).MarshalEasyJSON(out)
+		(*in.NamespaceSelector).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.PodSelector != nil {
 		const prefix string = ",\"podSelector\":"
 		if first {
 			first = false
@@ -317,7 +344,7 @@ func easyjsonEbc94a4aEncodeGithubComKubewardenK8sObjectsApiNetworkingV11(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.PodSelector).MarshalEasyJSON(out)
+		(*in.PodSelector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

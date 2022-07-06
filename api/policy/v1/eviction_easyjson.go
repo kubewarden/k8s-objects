@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -39,11 +40,27 @@ func easyjsonA0c3999bDecodeGithubComKubewardenK8sObjectsApiPolicyV1(in *jlexer.L
 		case "apiVersion":
 			out.APIVersion = string(in.String())
 		case "deleteOptions":
-			(out.DeleteOptions).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.DeleteOptions = nil
+			} else {
+				if out.DeleteOptions == nil {
+					out.DeleteOptions = new(_v1.DeleteOptions)
+				}
+				(*out.DeleteOptions).UnmarshalEasyJSON(in)
+			}
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -64,7 +81,7 @@ func easyjsonA0c3999bEncodeGithubComKubewardenK8sObjectsApiPolicyV1(out *jwriter
 		out.RawString(prefix[1:])
 		out.String(string(in.APIVersion))
 	}
-	if true {
+	if in.DeleteOptions != nil {
 		const prefix string = ",\"deleteOptions\":"
 		if first {
 			first = false
@@ -72,7 +89,7 @@ func easyjsonA0c3999bEncodeGithubComKubewardenK8sObjectsApiPolicyV1(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(in.DeleteOptions).MarshalEasyJSON(out)
+		(*in.DeleteOptions).MarshalEasyJSON(out)
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"
@@ -84,7 +101,7 @@ func easyjsonA0c3999bEncodeGithubComKubewardenK8sObjectsApiPolicyV1(out *jwriter
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -92,7 +109,7 @@ func easyjsonA0c3999bEncodeGithubComKubewardenK8sObjectsApiPolicyV1(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
