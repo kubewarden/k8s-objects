@@ -14,8 +14,8 @@ type StorageVersionStatus struct {
 	CommonEncodingVersion string `json:"commonEncodingVersion,omitempty"`
 
 	// The latest available observations of the storageVersion's state.
-	Conditions []*StorageVersionCondition `json:"conditions"`
+	Conditions []*StorageVersionCondition `json:"conditions,omitempty"`
 
 	// The reported versions per API server instance.
-	StorageVersions []*ServerStorageVersion `json:"storageVersions"`
+	StorageVersions []*ServerStorageVersion `json:"storageVersions,omitempty"`
 }

@@ -11,5 +11,5 @@ package v1beta2
 type FlowSchemaStatus struct {
 
 	// `conditions` is a list of the current states of FlowSchema.
-	Conditions []*FlowSchemaCondition `json:"conditions"`
+	Conditions []*FlowSchemaCondition `json:"conditions,omitempty"`
 }

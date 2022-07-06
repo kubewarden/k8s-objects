@@ -31,8 +31,8 @@ type EndpointSlice struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// ports specifies the list of network ports exposed by each endpoint in this slice. Each port must have a unique name. When ports is empty, it indicates that there are no defined ports. When a port is defined with a nil port value, it indicates "all ports". Each slice may include a maximum of 100 ports.
-	Ports []*EndpointPort `json:"ports"`
+	Ports []*EndpointPort `json:"ports,omitempty"`
 }

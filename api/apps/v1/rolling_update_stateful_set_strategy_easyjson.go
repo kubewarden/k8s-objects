@@ -38,7 +38,15 @@ func easyjson923deb3fDecodeGithubComKubewardenK8sObjectsApiAppsV1(in *jlexer.Lex
 		}
 		switch key {
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		case "partition":
 			out.Partition = int32(in.Int32())
 		default:
@@ -55,11 +63,11 @@ func easyjson923deb3fEncodeGithubComKubewardenK8sObjectsApiAppsV1(out *jwriter.W
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	if in.Partition != 0 {
 		const prefix string = ",\"partition\":"

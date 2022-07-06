@@ -22,7 +22,7 @@ type StorageVersion struct {
 	Kind string `json:"kind,omitempty"`
 
 	// The name is <group>.<resource>.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Spec is an empty spec. It is here to comply with Kubernetes API style.
 	// Required: true

@@ -11,8 +11,8 @@ package v1
 type UncountedTerminatedPods struct {
 
 	// Failed holds UIDs of failed Pods.
-	Failed []string `json:"failed"`
+	Failed []string `json:"failed,omitempty"`
 
 	// Succeeded holds UIDs of succeeded Pods.
-	Succeeded []string `json:"succeeded"`
+	Succeeded []string `json:"succeeded,omitempty"`
 }

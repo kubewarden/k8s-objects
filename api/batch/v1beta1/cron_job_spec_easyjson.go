@@ -4,6 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/batch/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -187,9 +189,25 @@ func easyjson88b473b4DecodeGithubComKubewardenK8sObjectsApiBatchV1beta11(in *jle
 		}
 		switch key {
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
-			(out.Spec).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Spec = nil
+			} else {
+				if out.Spec == nil {
+					out.Spec = new(_v11.JobSpec)
+				}
+				(*out.Spec).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -204,13 +222,13 @@ func easyjson88b473b4EncodeGithubComKubewardenK8sObjectsApiBatchV1beta11(out *jw
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		first = false
 		out.RawString(prefix[1:])
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
 		if first {
 			first = false
@@ -218,7 +236,7 @@ func easyjson88b473b4EncodeGithubComKubewardenK8sObjectsApiBatchV1beta11(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Spec).MarshalEasyJSON(out)
+		(*in.Spec).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

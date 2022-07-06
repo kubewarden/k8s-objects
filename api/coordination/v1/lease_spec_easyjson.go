@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -37,8 +38,16 @@ func easyjsonDdb58c80DecodeGithubComKubewardenK8sObjectsApiCoordinationV1(in *jl
 		}
 		switch key {
 		case "acquireTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.AcquireTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.AcquireTime = nil
+			} else {
+				if out.AcquireTime == nil {
+					out.AcquireTime = new(_v1.MicroTime)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.AcquireTime).UnmarshalJSON(data))
+				}
 			}
 		case "holderIdentity":
 			out.HolderIdentity = string(in.String())
@@ -47,8 +56,16 @@ func easyjsonDdb58c80DecodeGithubComKubewardenK8sObjectsApiCoordinationV1(in *jl
 		case "leaseTransitions":
 			out.LeaseTransitions = int32(in.Int32())
 		case "renewTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.RenewTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.RenewTime = nil
+			} else {
+				if out.RenewTime == nil {
+					out.RenewTime = new(_v1.MicroTime)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.RenewTime).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -64,11 +81,11 @@ func easyjsonDdb58c80EncodeGithubComKubewardenK8sObjectsApiCoordinationV1(out *j
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.AcquireTime != nil {
 		const prefix string = ",\"acquireTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.AcquireTime).MarshalJSON())
+		out.Raw((*in.AcquireTime).MarshalJSON())
 	}
 	if in.HolderIdentity != "" {
 		const prefix string = ",\"holderIdentity\":"
@@ -100,7 +117,7 @@ func easyjsonDdb58c80EncodeGithubComKubewardenK8sObjectsApiCoordinationV1(out *j
 		}
 		out.Int32(int32(in.LeaseTransitions))
 	}
-	if true {
+	if in.RenewTime != nil {
 		const prefix string = ",\"renewTime\":"
 		if first {
 			first = false
@@ -108,7 +125,7 @@ func easyjsonDdb58c80EncodeGithubComKubewardenK8sObjectsApiCoordinationV1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.RenewTime).MarshalJSON())
+		out.Raw((*in.RenewTime).MarshalJSON())
 	}
 	out.RawByte('}')
 }

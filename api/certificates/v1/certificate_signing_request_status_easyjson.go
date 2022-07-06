@@ -94,7 +94,7 @@ func easyjson6572c698EncodeGithubComKubewardenK8sObjectsApiCertificatesV1(out *j
 		out.RawString(prefix[1:])
 		out.Base64Bytes(in.Certificate)
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -102,9 +102,7 @@ func easyjson6572c698EncodeGithubComKubewardenK8sObjectsApiCertificatesV1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Conditions {
 				if v5 > 0 {

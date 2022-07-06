@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -39,8 +40,16 @@ func easyjsonA6bbf7e5DecodeGithubComKubewardenK8sObjectsApiStorageV1(in *jlexer.
 		case "message":
 			out.Message = string(in.String())
 		case "time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Time).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.Time = nil
+			} else {
+				if out.Time == nil {
+					out.Time = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.Time).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -62,7 +71,7 @@ func easyjsonA6bbf7e5EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		out.RawString(prefix[1:])
 		out.String(string(in.Message))
 	}
-	if true {
+	if in.Time != nil {
 		const prefix string = ",\"time\":"
 		if first {
 			first = false
@@ -70,7 +79,7 @@ func easyjsonA6bbf7e5EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Time).MarshalJSON())
+		out.Raw((*in.Time).MarshalJSON())
 	}
 	out.RawByte('}')
 }

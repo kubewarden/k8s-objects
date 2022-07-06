@@ -18,5 +18,5 @@ type VolumeError struct {
 	Message string `json:"message,omitempty"`
 
 	// Time the error was encountered.
-	Time apimachinery_pkg_apis_meta_v1.Time `json:"time,omitempty"`
+	Time *apimachinery_pkg_apis_meta_v1.Time `json:"time,omitempty"`
 }

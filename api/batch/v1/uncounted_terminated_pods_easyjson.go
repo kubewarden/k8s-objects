@@ -96,12 +96,11 @@ func easyjsonBc4b1a64EncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Failed) != 0 {
 		const prefix string = ",\"failed\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Failed == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Failed {
 				if v3 > 0 {
@@ -112,12 +111,15 @@ func easyjsonBc4b1a64EncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Succeeded) != 0 {
 		const prefix string = ",\"succeeded\":"
-		out.RawString(prefix)
-		if in.Succeeded == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Succeeded {
 				if v5 > 0 {

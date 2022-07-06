@@ -15,5 +15,5 @@ import (
 type NetworkPolicyStatus struct {
 
 	// Conditions holds an array of metav1.Condition that describe the state of the NetworkPolicy. Current service state
-	Conditions []apimachinery_pkg_apis_meta_v1.Condition `json:"conditions"`
+	Conditions []*apimachinery_pkg_apis_meta_v1.Condition `json:"conditions,omitempty"`
 }

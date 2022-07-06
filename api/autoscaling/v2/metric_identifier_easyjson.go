@@ -4,6 +4,7 @@ package v2
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -47,7 +48,15 @@ func easyjson62fcf510DecodeGithubComKubewardenK8sObjectsApiAutoscalingV2(in *jle
 				*out.Name = string(in.String())
 			}
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -71,10 +80,10 @@ func easyjson62fcf510EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2(out *jw
 			out.String(string(*in.Name))
 		}
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		out.RawString(prefix)
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -11,5 +11,5 @@ package v1beta1
 type EndpointHints struct {
 
 	// forZones indicates the zone(s) this endpoint should be consumed by to enable topology aware routing. May contain a maximum of 8 entries.
-	ForZones []*ForZone `json:"forZones"`
+	ForZones []*ForZone `json:"forZones,omitempty"`
 }

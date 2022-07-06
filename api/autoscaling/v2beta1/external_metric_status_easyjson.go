@@ -5,6 +5,7 @@ package v2beta1
 import (
 	json "encoding/json"
 	resource "github.com/kubewarden/k8s-objects/apimachinery/pkg/api/resource"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -38,7 +39,15 @@ func easyjsonA168a7c1DecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(in
 		}
 		switch key {
 		case "currentAverageValue":
-			out.CurrentAverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.CurrentAverageValue = nil
+			} else {
+				if out.CurrentAverageValue == nil {
+					out.CurrentAverageValue = new(resource.Quantity)
+				}
+				*out.CurrentAverageValue = resource.Quantity(in.String())
+			}
 		case "currentValue":
 			if in.IsNull() {
 				in.Skip()
@@ -60,7 +69,15 @@ func easyjsonA168a7c1DecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(in
 				*out.MetricName = string(in.String())
 			}
 		case "metricSelector":
-			(out.MetricSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.MetricSelector = nil
+			} else {
+				if out.MetricSelector == nil {
+					out.MetricSelector = new(_v1.LabelSelector)
+				}
+				(*out.MetricSelector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -75,11 +92,11 @@ func easyjsonA168a7c1EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.CurrentAverageValue != "" {
+	if in.CurrentAverageValue != nil {
 		const prefix string = ",\"currentAverageValue\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.CurrentAverageValue))
+		out.String(string(*in.CurrentAverageValue))
 	}
 	{
 		const prefix string = ",\"currentValue\":"
@@ -104,10 +121,10 @@ func easyjsonA168a7c1EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta1(ou
 			out.String(string(*in.MetricName))
 		}
 	}
-	if true {
+	if in.MetricSelector != nil {
 		const prefix string = ",\"metricSelector\":"
 		out.RawString(prefix)
-		(in.MetricSelector).MarshalEasyJSON(out)
+		(*in.MetricSelector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

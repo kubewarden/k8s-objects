@@ -133,12 +133,10 @@ func easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta1(ou
 			easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta11(out, *in.PriorityLevelConfiguration)
 		}
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		out.RawString(prefix)
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Rules {
 				if v2 > 0 {
@@ -305,12 +303,11 @@ func easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta12(o
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.NonResourceRules) != 0 {
 		const prefix string = ",\"nonResourceRules\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.NonResourceRules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.NonResourceRules {
 				if v7 > 0 {
@@ -325,12 +322,15 @@ func easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta12(o
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.ResourceRules) != 0 {
 		const prefix string = ",\"resourceRules\":"
-		out.RawString(prefix)
-		if in.ResourceRules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v9, v10 := range in.ResourceRules {
 				if v9 > 0 {
@@ -347,7 +347,12 @@ func easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta12(o
 	}
 	{
 		const prefix string = ",\"subjects\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Subjects == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 			out.RawString("null")
 		} else {
@@ -801,12 +806,10 @@ func easyjson8714318cEncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta14(o
 		out.RawString(prefix)
 		out.Bool(bool(in.ClusterScope))
 	}
-	{
+	if len(in.Namespaces) != 0 {
 		const prefix string = ",\"namespaces\":"
 		out.RawString(prefix)
-		if in.Namespaces == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v19, v20 := range in.Namespaces {
 				if v19 > 0 {

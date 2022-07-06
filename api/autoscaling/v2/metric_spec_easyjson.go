@@ -292,7 +292,15 @@ func easyjson99ef38b0DecodeGithubComKubewardenK8sObjectsApiAutoscalingV24(in *jl
 		case "averageUtilization":
 			out.AverageUtilization = int32(in.Int32())
 		case "averageValue":
-			out.AverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.AverageValue = nil
+			} else {
+				if out.AverageValue == nil {
+					out.AverageValue = new(resource.Quantity)
+				}
+				*out.AverageValue = resource.Quantity(in.String())
+			}
 		case "type":
 			if in.IsNull() {
 				in.Skip()
@@ -304,7 +312,15 @@ func easyjson99ef38b0DecodeGithubComKubewardenK8sObjectsApiAutoscalingV24(in *jl
 				*out.Type = string(in.String())
 			}
 		case "value":
-			out.Value = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(resource.Quantity)
+				}
+				*out.Value = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -325,7 +341,7 @@ func easyjson99ef38b0EncodeGithubComKubewardenK8sObjectsApiAutoscalingV24(out *j
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.AverageUtilization))
 	}
-	if in.AverageValue != "" {
+	if in.AverageValue != nil {
 		const prefix string = ",\"averageValue\":"
 		if first {
 			first = false
@@ -333,7 +349,7 @@ func easyjson99ef38b0EncodeGithubComKubewardenK8sObjectsApiAutoscalingV24(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AverageValue))
+		out.String(string(*in.AverageValue))
 	}
 	{
 		const prefix string = ",\"type\":"
@@ -349,10 +365,10 @@ func easyjson99ef38b0EncodeGithubComKubewardenK8sObjectsApiAutoscalingV24(out *j
 			out.String(string(*in.Type))
 		}
 	}
-	if in.Value != "" {
+	if in.Value != nil {
 		const prefix string = ",\"value\":"
 		out.RawString(prefix)
-		out.String(string(in.Value))
+		out.String(string(*in.Value))
 	}
 	out.RawByte('}')
 }

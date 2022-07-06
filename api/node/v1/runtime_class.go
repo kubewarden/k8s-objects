@@ -25,7 +25,7 @@ type RuntimeClass struct {
 	Kind string `json:"kind,omitempty"`
 
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. For more details, see
 	//  https://kubernetes.io/docs/concepts/scheduling-eviction/pod-overhead/
