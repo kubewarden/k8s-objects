@@ -165,12 +165,10 @@ func easyjsonCc6d646EncodeGithubComKubewardenK8sObjectsApiFlowcontrolV1beta1(out
 		out.RawString(prefix)
 		out.Bool(bool(in.ClusterScope))
 	}
-	{
+	if len(in.Namespaces) != 0 {
 		const prefix string = ",\"namespaces\":"
 		out.RawString(prefix)
-		if in.Namespaces == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.Namespaces {
 				if v7 > 0 {

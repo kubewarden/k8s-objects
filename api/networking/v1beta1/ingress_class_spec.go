@@ -18,5 +18,5 @@ type IngressClassSpec struct {
 	Controller string `json:"controller,omitempty"`
 
 	// Parameters is a link to a custom resource containing additional configuration for the controller. This is optional if the controller does not require extra parameters.
-	Parameters api_core_v1.TypedLocalObjectReference `json:"parameters,omitempty"`
+	Parameters *api_core_v1.TypedLocalObjectReference `json:"parameters,omitempty"`
 }

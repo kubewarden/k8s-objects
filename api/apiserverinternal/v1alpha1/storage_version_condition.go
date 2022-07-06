@@ -15,7 +15,7 @@ import (
 type StorageVersionCondition struct {
 
 	// Last time the condition transitioned from one status to another.
-	LastTransitionTime apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
 
 	// A human readable message indicating details about the transition.
 	Message string `json:"message,omitempty"`

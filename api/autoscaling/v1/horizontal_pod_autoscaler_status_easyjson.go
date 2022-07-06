@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -59,8 +60,16 @@ func easyjson4e8edfcfDecodeGithubComKubewardenK8sObjectsApiAutoscalingV1(in *jle
 				*out.DesiredReplicas = int32(in.Int32())
 			}
 		case "lastScaleTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastScaleTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastScaleTime = nil
+			} else {
+				if out.LastScaleTime == nil {
+					out.LastScaleTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastScaleTime).UnmarshalJSON(data))
+				}
 			}
 		case "observedGeneration":
 			out.ObservedGeneration = int64(in.Int64())
@@ -107,10 +116,10 @@ func easyjson4e8edfcfEncodeGithubComKubewardenK8sObjectsApiAutoscalingV1(out *jw
 			out.Int32(int32(*in.DesiredReplicas))
 		}
 	}
-	if true {
+	if in.LastScaleTime != nil {
 		const prefix string = ",\"lastScaleTime\":"
 		out.RawString(prefix)
-		out.Raw((in.LastScaleTime).MarshalJSON())
+		out.Raw((*in.LastScaleTime).MarshalJSON())
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"

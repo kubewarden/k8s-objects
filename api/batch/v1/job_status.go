@@ -18,16 +18,16 @@ type JobStatus struct {
 	Active int32 `json:"active,omitempty"`
 
 	// Represents time when the job was completed. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC. The completion time is only set when the job finishes successfully.
-	CompletionTime apimachinery_pkg_apis_meta_v1.Time `json:"completionTime,omitempty"`
+	CompletionTime *apimachinery_pkg_apis_meta_v1.Time `json:"completionTime,omitempty"`
 
 	// The latest available observations of an object's current state. When a job fails, one of the conditions will have type == "Failed". More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
-	Conditions []*JobCondition `json:"conditions"`
+	Conditions []*JobCondition `json:"conditions,omitempty"`
 
 	// The number of pods which reached phase Failed.
 	Failed int32 `json:"failed,omitempty"`
 
 	// Represents time when the job was acknowledged by the job controller. It is not guaranteed to be set in happens-before order across separate operations. It is represented in RFC3339 form and is in UTC.
-	StartTime apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
+	StartTime *apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
 
 	// The number of pods which reached phase Succeeded.
 	Succeeded int32 `json:"succeeded,omitempty"`

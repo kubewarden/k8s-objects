@@ -165,12 +165,11 @@ func easyjsonD6e22eadEncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.APIGroups) != 0 {
 		const prefix string = ",\"apiGroups\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.APIGroups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v6, v7 := range in.APIGroups {
 				if v6 > 0 {
@@ -181,12 +180,15 @@ func easyjsonD6e22eadEncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.NonResourceURLs) != 0 {
 		const prefix string = ",\"nonResourceURLs\":"
-		out.RawString(prefix)
-		if in.NonResourceURLs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.NonResourceURLs {
 				if v8 > 0 {
@@ -197,12 +199,15 @@ func easyjsonD6e22eadEncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.ResourceNames) != 0 {
 		const prefix string = ",\"resourceNames\":"
-		out.RawString(prefix)
-		if in.ResourceNames == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v10, v11 := range in.ResourceNames {
 				if v10 > 0 {
@@ -213,12 +218,15 @@ func easyjsonD6e22eadEncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Resources) != 0 {
 		const prefix string = ",\"resources\":"
-		out.RawString(prefix)
-		if in.Resources == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v12, v13 := range in.Resources {
 				if v12 > 0 {
@@ -231,7 +239,12 @@ func easyjsonD6e22eadEncodeGithubComKubewardenK8sObjectsApiRbacV1beta1(out *jwri
 	}
 	{
 		const prefix string = ",\"verbs\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Verbs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 			out.RawString("null")
 		} else {

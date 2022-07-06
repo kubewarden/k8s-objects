@@ -4,6 +4,7 @@ package v1alpha1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjsonC1e36854DecodeGithubComKubewardenK8sObjectsApiRbacV1alpha1(in *jlex
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "rules":
 			if in.IsNull() {
 				in.Skip()
@@ -103,7 +112,7 @@ func easyjsonC1e36854EncodeGithubComKubewardenK8sObjectsApiRbacV1alpha1(out *jwr
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -111,9 +120,9 @@ func easyjsonC1e36854EncodeGithubComKubewardenK8sObjectsApiRbacV1alpha1(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		if first {
 			first = false
@@ -121,9 +130,7 @@ func easyjsonC1e36854EncodeGithubComKubewardenK8sObjectsApiRbacV1alpha1(out *jwr
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Rules {
 				if v2 > 0 {

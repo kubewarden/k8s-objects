@@ -87,12 +87,11 @@ func easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1(out 
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Audiences) != 0 {
 		const prefix string = ",\"audiences\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Audiences == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Audiences {
 				if v2 > 0 {
@@ -105,17 +104,32 @@ func easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1(out 
 	}
 	if in.Authenticated {
 		const prefix string = ",\"authenticated\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Bool(bool(in.Authenticated))
 	}
 	if in.Error != "" {
 		const prefix string = ",\"error\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Error))
 	}
 	if in.User != nil {
 		const prefix string = ",\"user\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV11(out, *in.User)
 	}
 	out.RawByte('}')
@@ -276,7 +290,7 @@ func easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV11(out
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -284,9 +298,7 @@ func easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV11(out
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v10, v11 := range in.Groups {
 				if v10 > 0 {
@@ -299,12 +311,22 @@ func easyjson78c93ed9EncodeGithubComKubewardenK8sObjectsApiAuthenticationV11(out
 	}
 	if in.UID != "" {
 		const prefix string = ",\"uid\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.UID))
 	}
 	if in.Username != "" {
 		const prefix string = ",\"username\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Username))
 	}
 	out.RawByte('}')

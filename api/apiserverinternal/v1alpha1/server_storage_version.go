@@ -14,7 +14,7 @@ type ServerStorageVersion struct {
 	APIServerID string `json:"apiServerID,omitempty"`
 
 	// The API server can decode objects encoded in these versions. The encodingVersion must be included in the decodableVersions.
-	DecodableVersions []string `json:"decodableVersions"`
+	DecodableVersions []string `json:"decodableVersions,omitempty"`
 
 	// The API server encodes the object to this version when persisting it in the backend (e.g., etcd).
 	EncodingVersion string `json:"encodingVersion,omitempty"`

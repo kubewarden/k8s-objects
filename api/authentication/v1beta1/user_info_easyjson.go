@@ -149,7 +149,7 @@ func easyjson665c9d82EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -157,9 +157,7 @@ func easyjson665c9d82EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.Groups {
 				if v7 > 0 {
@@ -172,12 +170,22 @@ func easyjson665c9d82EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1beta1
 	}
 	if in.UID != "" {
 		const prefix string = ",\"uid\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.UID))
 	}
 	if in.Username != "" {
 		const prefix string = ",\"username\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Username))
 	}
 	out.RawByte('}')

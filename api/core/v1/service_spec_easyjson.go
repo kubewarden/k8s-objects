@@ -262,7 +262,7 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		}
 		out.String(string(in.ClusterIP))
 	}
-	{
+	if len(in.ClusterIPs) != 0 {
 		const prefix string = ",\"clusterIPs\":"
 		if first {
 			first = false
@@ -270,9 +270,7 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		if in.ClusterIPs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.ClusterIPs {
 				if v8 > 0 {
@@ -283,12 +281,15 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.ExternalIPs) != 0 {
 		const prefix string = ",\"externalIPs\":"
-		out.RawString(prefix)
-		if in.ExternalIPs == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v10, v11 := range in.ExternalIPs {
 				if v10 > 0 {
@@ -301,25 +302,43 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.ExternalName != "" {
 		const prefix string = ",\"externalName\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.ExternalName))
 	}
 	if in.ExternalTrafficPolicy != "" {
 		const prefix string = ",\"externalTrafficPolicy\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.ExternalTrafficPolicy))
 	}
 	if in.HealthCheckNodePort != 0 {
 		const prefix string = ",\"healthCheckNodePort\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.HealthCheckNodePort))
 	}
-	{
+	if len(in.IPFamilies) != 0 {
 		const prefix string = ",\"ipFamilies\":"
-		out.RawString(prefix)
-		if in.IPFamilies == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v12, v13 := range in.IPFamilies {
 				if v12 > 0 {
@@ -332,20 +351,33 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.IPFamilyPolicy != "" {
 		const prefix string = ",\"ipFamilyPolicy\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.IPFamilyPolicy))
 	}
 	if in.LoadBalancerIP != "" {
 		const prefix string = ",\"loadBalancerIP\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.LoadBalancerIP))
 	}
-	{
+	if len(in.LoadBalancerSourceRanges) != 0 {
 		const prefix string = ",\"loadBalancerSourceRanges\":"
-		out.RawString(prefix)
-		if in.LoadBalancerSourceRanges == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v14, v15 := range in.LoadBalancerSourceRanges {
 				if v14 > 0 {
@@ -356,12 +388,15 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.Ports) != 0 {
 		const prefix string = ",\"ports\":"
-		out.RawString(prefix)
-		if in.Ports == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v16, v17 := range in.Ports {
 				if v16 > 0 {
@@ -378,12 +413,22 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.PublishNotReadyAddresses {
 		const prefix string = ",\"publishNotReadyAddresses\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Bool(bool(in.PublishNotReadyAddresses))
 	}
 	if len(in.Selector) != 0 {
 		const prefix string = ",\"selector\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		{
 			out.RawByte('{')
 			v18First := true
@@ -402,20 +447,33 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.SessionAffinity != "" {
 		const prefix string = ",\"sessionAffinity\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.SessionAffinity))
 	}
 	if in.SessionAffinityConfig != nil {
 		const prefix string = ",\"sessionAffinityConfig\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV11(out, *in.SessionAffinityConfig)
 	}
-	{
+	if len(in.TopologyKeys) != 0 {
 		const prefix string = ",\"topologyKeys\":"
-		out.RawString(prefix)
-		if in.TopologyKeys == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v19, v20 := range in.TopologyKeys {
 				if v19 > 0 {
@@ -428,7 +486,12 @@ func easyjson9d06a251EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	}
 	if in.Type != "" {
 		const prefix string = ",\"type\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Type))
 	}
 	out.RawByte('}')

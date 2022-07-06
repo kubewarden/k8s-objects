@@ -42,7 +42,15 @@ func easyjsonBd1e1fe7DecodeGithubComKubewardenK8sObjectsApiAuthenticationV1(in *
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -93,7 +101,7 @@ func easyjsonBd1e1fe7EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1(out 
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -101,7 +109,7 @@ func easyjsonBd1e1fe7EncodeGithubComKubewardenK8sObjectsApiAuthenticationV1(out 
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"

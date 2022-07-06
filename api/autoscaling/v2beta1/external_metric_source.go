@@ -20,11 +20,11 @@ type ExternalMetricSource struct {
 	MetricName *string `json:"metricName"`
 
 	// metricSelector is used to identify a specific time series within a given metric.
-	MetricSelector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"metricSelector,omitempty"`
+	MetricSelector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"metricSelector,omitempty"`
 
 	// targetAverageValue is the target per-pod value of global metric (as a quantity). Mutually exclusive with TargetValue.
-	TargetAverageValue apimachinery_pkg_api_resource.Quantity `json:"targetAverageValue,omitempty"`
+	TargetAverageValue *apimachinery_pkg_api_resource.Quantity `json:"targetAverageValue,omitempty"`
 
 	// targetValue is the target value of the metric (as a quantity). Mutually exclusive with TargetAverageValue.
-	TargetValue apimachinery_pkg_api_resource.Quantity `json:"targetValue,omitempty"`
+	TargetValue *apimachinery_pkg_api_resource.Quantity `json:"targetValue,omitempty"`
 }

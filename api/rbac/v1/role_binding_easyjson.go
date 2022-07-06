@@ -4,6 +4,7 @@ package v1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjsonCff2cfa6DecodeGithubComKubewardenK8sObjectsApiRbacV1(in *jlexer.Lex
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "roleRef":
 			if in.IsNull() {
 				in.Skip()
@@ -113,7 +122,7 @@ func easyjsonCff2cfa6EncodeGithubComKubewardenK8sObjectsApiRbacV1(out *jwriter.W
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -121,7 +130,7 @@ func easyjsonCff2cfa6EncodeGithubComKubewardenK8sObjectsApiRbacV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"roleRef\":"
@@ -137,12 +146,10 @@ func easyjsonCff2cfa6EncodeGithubComKubewardenK8sObjectsApiRbacV1(out *jwriter.W
 			easyjsonCff2cfa6EncodeGithubComKubewardenK8sObjectsApiRbacV11(out, *in.RoleRef)
 		}
 	}
-	{
+	if len(in.Subjects) != 0 {
 		const prefix string = ",\"subjects\":"
 		out.RawString(prefix)
-		if in.Subjects == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Subjects {
 				if v2 > 0 {

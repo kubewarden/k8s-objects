@@ -11,5 +11,5 @@ package v1alpha1
 type PriorityLevelConfigurationStatus struct {
 
 	// `conditions` is the current state of "request-priority".
-	Conditions []*PriorityLevelConfigurationCondition `json:"conditions"`
+	Conditions []*PriorityLevelConfigurationCondition `json:"conditions,omitempty"`
 }

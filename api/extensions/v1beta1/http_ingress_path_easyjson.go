@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	intstr "github.com/kubewarden/k8s-objects/apimachinery/pkg/util/intstr"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -130,11 +131,27 @@ func easyjsonA77018b0DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(in
 		}
 		switch key {
 		case "resource":
-			(out.Resource).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Resource = nil
+			} else {
+				if out.Resource == nil {
+					out.Resource = new(_v1.TypedLocalObjectReference)
+				}
+				(*out.Resource).UnmarshalEasyJSON(in)
+			}
 		case "serviceName":
 			out.ServiceName = string(in.String())
 		case "servicePort":
-			out.ServicePort = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.ServicePort = nil
+			} else {
+				if out.ServicePort == nil {
+					out.ServicePort = new(intstr.IntOrString)
+				}
+				*out.ServicePort = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -149,11 +166,11 @@ func easyjsonA77018b0EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.Resource != nil {
 		const prefix string = ",\"resource\":"
 		first = false
 		out.RawString(prefix[1:])
-		(in.Resource).MarshalEasyJSON(out)
+		(*in.Resource).MarshalEasyJSON(out)
 	}
 	if in.ServiceName != "" {
 		const prefix string = ",\"serviceName\":"
@@ -165,7 +182,7 @@ func easyjsonA77018b0EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(ou
 		}
 		out.String(string(in.ServiceName))
 	}
-	if in.ServicePort != "" {
+	if in.ServicePort != nil {
 		const prefix string = ",\"servicePort\":"
 		if first {
 			first = false
@@ -173,7 +190,7 @@ func easyjsonA77018b0EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(ou
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.ServicePort))
+		out.String(string(*in.ServicePort))
 	}
 	out.RawByte('}')
 }

@@ -16,7 +16,7 @@ import (
 type ExternalMetricStatus struct {
 
 	// currentAverageValue is the current value of metric averaged over autoscaled pods.
-	CurrentAverageValue apimachinery_pkg_api_resource.Quantity `json:"currentAverageValue,omitempty"`
+	CurrentAverageValue *apimachinery_pkg_api_resource.Quantity `json:"currentAverageValue,omitempty"`
 
 	// currentValue is the current value of the metric (as a quantity)
 	// Required: true
@@ -27,5 +27,5 @@ type ExternalMetricStatus struct {
 	MetricName *string `json:"metricName"`
 
 	// metricSelector is used to identify a specific time series within a given metric.
-	MetricSelector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"metricSelector,omitempty"`
+	MetricSelector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"metricSelector,omitempty"`
 }

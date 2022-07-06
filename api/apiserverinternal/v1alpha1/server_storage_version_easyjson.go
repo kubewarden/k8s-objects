@@ -83,7 +83,7 @@ func easyjson91446852EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		out.RawString(prefix[1:])
 		out.String(string(in.APIServerID))
 	}
-	{
+	if len(in.DecodableVersions) != 0 {
 		const prefix string = ",\"decodableVersions\":"
 		if first {
 			first = false
@@ -91,9 +91,7 @@ func easyjson91446852EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		} else {
 			out.RawString(prefix)
 		}
-		if in.DecodableVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.DecodableVersions {
 				if v2 > 0 {
@@ -106,7 +104,12 @@ func easyjson91446852EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 	}
 	if in.EncodingVersion != "" {
 		const prefix string = ",\"encodingVersion\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.EncodingVersion))
 	}
 	out.RawByte('}')
