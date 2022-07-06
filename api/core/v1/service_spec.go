@@ -14,7 +14,7 @@ type ServiceSpec struct {
 	ClusterIP string `json:"clusterIP,omitempty"`
 
 	// externalIPs is a list of IP addresses for which nodes in the cluster will also accept traffic for this service.  These IPs are not managed by Kubernetes.  The user is responsible for ensuring that traffic arrives at a node with this IP.  A common example is external load-balancers that are not part of the Kubernetes system.
-	ExternalIPs []string `json:"externalIPs"`
+	ExternalIPs []string `json:"externalIPs,omitempty"`
 
 	// externalName is the external reference that kubedns or equivalent will return as a CNAME record for this service. No proxying will be involved. Must be a valid RFC-1123 hostname (https://tools.ietf.org/html/rfc1123) and requires Type to be ExternalName.
 	ExternalName string `json:"externalName,omitempty"`
@@ -32,10 +32,10 @@ type ServiceSpec struct {
 	LoadBalancerIP string `json:"loadBalancerIP,omitempty"`
 
 	// If specified and supported by the platform, this will restrict traffic through the cloud-provider load-balancer will be restricted to the specified client IPs. This field will be ignored if the cloud-provider does not support the feature." More info: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
-	LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges"`
+	LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges,omitempty"`
 
 	// The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-	Ports []*ServicePort `json:"ports"`
+	Ports []*ServicePort `json:"ports,omitempty"`
 
 	// publishNotReadyAddresses, when set to true, indicates that DNS implementations must publish the notReadyAddresses of subsets for the Endpoints associated with the Service. The default value is false. The primary use case for setting this field is to use a StatefulSet's Headless Service to propagate SRV records for its Pods without respect to their readiness for purpose of peer discovery.
 	PublishNotReadyAddresses bool `json:"publishNotReadyAddresses,omitempty"`

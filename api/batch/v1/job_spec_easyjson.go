@@ -4,7 +4,8 @@ package v1
 
 import (
 	json "encoding/json"
-	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -48,14 +49,22 @@ func easyjsonAfab81ddDecodeGithubComKubewardenK8sObjectsApiBatchV1(in *jlexer.Le
 		case "parallelism":
 			out.Parallelism = int32(in.Int32())
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		case "template":
 			if in.IsNull() {
 				in.Skip()
 				out.Template = nil
 			} else {
 				if out.Template == nil {
-					out.Template = new(_v1.PodTemplateSpec)
+					out.Template = new(_v11.PodTemplateSpec)
 				}
 				(*out.Template).UnmarshalEasyJSON(in)
 			}
@@ -121,7 +130,7 @@ func easyjsonAfab81ddEncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 		}
 		out.Int32(int32(in.Parallelism))
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -129,7 +138,7 @@ func easyjsonAfab81ddEncodeGithubComKubewardenK8sObjectsApiBatchV1(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"template\":"

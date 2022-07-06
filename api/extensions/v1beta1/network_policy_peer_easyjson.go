@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -47,9 +48,25 @@ func easyjson76958710DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 				(*out.IPBlock).UnmarshalEasyJSON(in)
 			}
 		case "namespaceSelector":
-			(out.NamespaceSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.NamespaceSelector = nil
+			} else {
+				if out.NamespaceSelector == nil {
+					out.NamespaceSelector = new(_v1.LabelSelector)
+				}
+				(*out.NamespaceSelector).UnmarshalEasyJSON(in)
+			}
 		case "podSelector":
-			(out.PodSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.PodSelector = nil
+			} else {
+				if out.PodSelector == nil {
+					out.PodSelector = new(_v1.LabelSelector)
+				}
+				(*out.PodSelector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -70,7 +87,7 @@ func easyjson76958710EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		out.RawString(prefix[1:])
 		(*in.IPBlock).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.NamespaceSelector != nil {
 		const prefix string = ",\"namespaceSelector\":"
 		if first {
 			first = false
@@ -78,9 +95,9 @@ func easyjson76958710EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.NamespaceSelector).MarshalEasyJSON(out)
+		(*in.NamespaceSelector).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.PodSelector != nil {
 		const prefix string = ",\"podSelector\":"
 		if first {
 			first = false
@@ -88,7 +105,7 @@ func easyjson76958710EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.PodSelector).MarshalEasyJSON(out)
+		(*in.PodSelector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -179,16 +179,24 @@ func easyjson13d54049DecodeGithubComKubewardenK8sObjectsApiNodeV1alpha11(in *jle
 				in.Delim('[')
 				if out.Tolerations == nil {
 					if !in.IsDelim(']') {
-						out.Tolerations = make([]_v1.Toleration, 0, 0)
+						out.Tolerations = make([]*_v1.Toleration, 0, 8)
 					} else {
-						out.Tolerations = []_v1.Toleration{}
+						out.Tolerations = []*_v1.Toleration{}
 					}
 				} else {
 					out.Tolerations = (out.Tolerations)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v2 _v1.Toleration
-					(v2).UnmarshalEasyJSON(in)
+					var v2 *_v1.Toleration
+					if in.IsNull() {
+						in.Skip()
+						v2 = nil
+					} else {
+						if v2 == nil {
+							v2 = new(_v1.Toleration)
+						}
+						(*v2).UnmarshalEasyJSON(in)
+					}
 					out.Tolerations = append(out.Tolerations, v2)
 					in.WantComma()
 				}
@@ -228,7 +236,7 @@ func easyjson13d54049EncodeGithubComKubewardenK8sObjectsApiNodeV1alpha11(out *jw
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Tolerations) != 0 {
 		const prefix string = ",\"tolerations\":"
 		if first {
 			first = false
@@ -236,15 +244,17 @@ func easyjson13d54049EncodeGithubComKubewardenK8sObjectsApiNodeV1alpha11(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Tolerations == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v4, v5 := range in.Tolerations {
 				if v4 > 0 {
 					out.RawByte(',')
 				}
-				(v5).MarshalEasyJSON(out)
+				if v5 == nil {
+					out.RawString("null")
+				} else {
+					(*v5).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}

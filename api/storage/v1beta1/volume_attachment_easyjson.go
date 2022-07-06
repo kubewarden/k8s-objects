@@ -4,6 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +43,15 @@ func easyjson56496878DecodeGithubComKubewardenK8sObjectsApiStorageV1beta1(in *jl
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -92,7 +102,7 @@ func easyjson56496878EncodeGithubComKubewardenK8sObjectsApiStorageV1beta1(out *j
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -100,7 +110,7 @@ func easyjson56496878EncodeGithubComKubewardenK8sObjectsApiStorageV1beta1(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"spec\":"
@@ -298,8 +308,16 @@ func easyjson56496878DecodeGithubComKubewardenK8sObjectsApiStorageV1beta13(in *j
 		case "message":
 			out.Message = string(in.String())
 		case "time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Time).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.Time = nil
+			} else {
+				if out.Time == nil {
+					out.Time = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.Time).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -321,7 +339,7 @@ func easyjson56496878EncodeGithubComKubewardenK8sObjectsApiStorageV1beta13(out *
 		out.RawString(prefix[1:])
 		out.String(string(in.Message))
 	}
-	if true {
+	if in.Time != nil {
 		const prefix string = ",\"time\":"
 		if first {
 			first = false
@@ -329,7 +347,7 @@ func easyjson56496878EncodeGithubComKubewardenK8sObjectsApiStorageV1beta13(out *
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Time).MarshalJSON())
+		out.Raw((*in.Time).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -445,7 +463,15 @@ func easyjson56496878DecodeGithubComKubewardenK8sObjectsApiStorageV1beta14(in *j
 		}
 		switch key {
 		case "inlineVolumeSpec":
-			(out.InlineVolumeSpec).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.InlineVolumeSpec = nil
+			} else {
+				if out.InlineVolumeSpec == nil {
+					out.InlineVolumeSpec = new(_v11.PersistentVolumeSpec)
+				}
+				(*out.InlineVolumeSpec).UnmarshalEasyJSON(in)
+			}
 		case "persistentVolumeName":
 			out.PersistentVolumeName = string(in.String())
 		default:
@@ -462,11 +488,11 @@ func easyjson56496878EncodeGithubComKubewardenK8sObjectsApiStorageV1beta14(out *
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.InlineVolumeSpec != nil {
 		const prefix string = ",\"inlineVolumeSpec\":"
 		first = false
 		out.RawString(prefix[1:])
-		(in.InlineVolumeSpec).MarshalEasyJSON(out)
+		(*in.InlineVolumeSpec).MarshalEasyJSON(out)
 	}
 	if in.PersistentVolumeName != "" {
 		const prefix string = ",\"persistentVolumeName\":"

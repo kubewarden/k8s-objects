@@ -137,7 +137,7 @@ func easyjson1477c5c0EncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.CollisionCount))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -145,9 +145,7 @@ func easyjson1477c5c0EncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Conditions {
 				if v2 > 0 {
@@ -164,7 +162,12 @@ func easyjson1477c5c0EncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 	}
 	{
 		const prefix string = ",\"currentNumberScheduled\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.CurrentNumberScheduled == nil {
 			out.RawString("null")
 		} else {

@@ -4,6 +4,7 @@ package v1alpha1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -72,7 +73,15 @@ func easyjson3a9ed663DecodeGithubComKubewardenK8sObjectsApiDiscoveryV1alpha1(in 
 		case "hostname":
 			out.Hostname = string(in.String())
 		case "targetRef":
-			(out.TargetRef).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.TargetRef = nil
+			} else {
+				if out.TargetRef == nil {
+					out.TargetRef = new(_v1.ObjectReference)
+				}
+				(*out.TargetRef).UnmarshalEasyJSON(in)
+			}
 		case "topology":
 			if in.IsNull() {
 				in.Skip()
@@ -133,10 +142,10 @@ func easyjson3a9ed663EncodeGithubComKubewardenK8sObjectsApiDiscoveryV1alpha1(out
 		out.RawString(prefix)
 		out.String(string(in.Hostname))
 	}
-	if true {
+	if in.TargetRef != nil {
 		const prefix string = ",\"targetRef\":"
 		out.RawString(prefix)
-		(in.TargetRef).MarshalEasyJSON(out)
+		(*in.TargetRef).MarshalEasyJSON(out)
 	}
 	if len(in.Topology) != 0 {
 		const prefix string = ",\"topology\":"

@@ -5,6 +5,7 @@ package v2alpha1
 import (
 	json "encoding/json"
 	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -45,24 +46,40 @@ func easyjson61f92a73DecodeGithubComKubewardenK8sObjectsApiBatchV2alpha1(in *jle
 				in.Delim('[')
 				if out.Active == nil {
 					if !in.IsDelim(']') {
-						out.Active = make([]_v1.ObjectReference, 0, 0)
+						out.Active = make([]*_v1.ObjectReference, 0, 8)
 					} else {
-						out.Active = []_v1.ObjectReference{}
+						out.Active = []*_v1.ObjectReference{}
 					}
 				} else {
 					out.Active = (out.Active)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 _v1.ObjectReference
-					(v1).UnmarshalEasyJSON(in)
+					var v1 *_v1.ObjectReference
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(_v1.ObjectReference)
+						}
+						(*v1).UnmarshalEasyJSON(in)
+					}
 					out.Active = append(out.Active, v1)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "lastScheduleTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastScheduleTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastScheduleTime = nil
+			} else {
+				if out.LastScheduleTime == nil {
+					out.LastScheduleTime = new(_v11.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastScheduleTime).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -78,26 +95,34 @@ func easyjson61f92a73EncodeGithubComKubewardenK8sObjectsApiBatchV2alpha1(out *jw
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Active) != 0 {
 		const prefix string = ",\"active\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Active == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Active {
 				if v2 > 0 {
 					out.RawByte(',')
 				}
-				(v3).MarshalEasyJSON(out)
+				if v3 == nil {
+					out.RawString("null")
+				} else {
+					(*v3).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}
 	}
-	if true {
+	if in.LastScheduleTime != nil {
 		const prefix string = ",\"lastScheduleTime\":"
-		out.RawString(prefix)
-		out.Raw((in.LastScheduleTime).MarshalJSON())
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((*in.LastScheduleTime).MarshalJSON())
 	}
 	out.RawByte('}')
 }

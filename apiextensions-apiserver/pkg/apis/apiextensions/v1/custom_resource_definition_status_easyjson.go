@@ -123,12 +123,10 @@ func easyjsonCe444ffEncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPkg
 			(*in.AcceptedNames).MarshalEasyJSON(out)
 		}
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		out.RawString(prefix)
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Conditions {
 				if v3 > 0 {

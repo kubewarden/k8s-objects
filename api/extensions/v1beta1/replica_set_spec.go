@@ -22,8 +22,8 @@ type ReplicaSetSpec struct {
 	Replicas int32 `json:"replicas,omitempty"`
 
 	// Selector is a label query over pods that should match the replica count. If the selector is empty, it is defaulted to the labels present on the pod template. Label keys and values that must match in order to be controlled by this replica set. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-	Selector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
+	Selector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
 
 	// Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
-	Template api_core_v1.PodTemplateSpec `json:"template,omitempty"`
+	Template *api_core_v1.PodTemplateSpec `json:"template,omitempty"`
 }

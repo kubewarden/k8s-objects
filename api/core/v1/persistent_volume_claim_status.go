@@ -15,13 +15,13 @@ import (
 type PersistentVolumeClaimStatus struct {
 
 	// AccessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-	AccessModes []string `json:"accessModes"`
+	AccessModes []string `json:"accessModes,omitempty"`
 
 	// Represents the actual resources of the underlying volume.
-	Capacity map[string]apimachinery_pkg_api_resource.Quantity `json:"capacity,omitempty"`
+	Capacity map[string]*apimachinery_pkg_api_resource.Quantity `json:"capacity,omitempty"`
 
 	// Current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'ResizeStarted'.
-	Conditions []*PersistentVolumeClaimCondition `json:"conditions"`
+	Conditions []*PersistentVolumeClaimCondition `json:"conditions,omitempty"`
 
 	// Phase represents the current phase of PersistentVolumeClaim.
 	Phase string `json:"phase,omitempty"`

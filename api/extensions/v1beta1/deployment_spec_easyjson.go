@@ -4,7 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
-	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	intstr "github.com/kubewarden/k8s-objects/apimachinery/pkg/util/intstr"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -59,7 +60,15 @@ func easyjson9460807fDecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 				easyjson9460807fDecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(in, out.RollbackTo)
 			}
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		case "strategy":
 			if in.IsNull() {
 				in.Skip()
@@ -76,7 +85,7 @@ func easyjson9460807fDecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 				out.Template = nil
 			} else {
 				if out.Template == nil {
-					out.Template = new(_v1.PodTemplateSpec)
+					out.Template = new(_v11.PodTemplateSpec)
 				}
 				(*out.Template).UnmarshalEasyJSON(in)
 			}
@@ -150,7 +159,7 @@ func easyjson9460807fEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		}
 		easyjson9460807fEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(out, *in.RollbackTo)
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -158,7 +167,7 @@ func easyjson9460807fEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	if in.Strategy != nil {
 		const prefix string = ",\"strategy\":"
@@ -293,9 +302,25 @@ func easyjson9460807fDecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta13(in
 		}
 		switch key {
 		case "maxSurge":
-			out.MaxSurge = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxSurge = nil
+			} else {
+				if out.MaxSurge == nil {
+					out.MaxSurge = new(intstr.IntOrString)
+				}
+				*out.MaxSurge = intstr.IntOrString(in.String())
+			}
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -310,13 +335,13 @@ func easyjson9460807fEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta13(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxSurge != "" {
+	if in.MaxSurge != nil {
 		const prefix string = ",\"maxSurge\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxSurge))
+		out.String(string(*in.MaxSurge))
 	}
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		if first {
 			first = false
@@ -324,7 +349,7 @@ func easyjson9460807fEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta13(ou
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	out.RawByte('}')
 }

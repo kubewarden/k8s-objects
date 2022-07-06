@@ -21,7 +21,7 @@ type CSINode struct {
 	Kind string `json:"kind,omitempty"`
 
 	// metadata.name must be the Kubernetes node name.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// spec is the specification of CSINode
 	// Required: true

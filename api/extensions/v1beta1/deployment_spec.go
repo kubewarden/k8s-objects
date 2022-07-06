@@ -34,7 +34,7 @@ type DeploymentSpec struct {
 	RollbackTo *RollbackConfig `json:"rollbackTo,omitempty"`
 
 	// Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this deployment.
-	Selector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
+	Selector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
 
 	// The deployment strategy to use to replace existing pods with new ones.
 	Strategy *DeploymentStrategy `json:"strategy,omitempty"`

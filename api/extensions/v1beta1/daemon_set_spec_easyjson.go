@@ -4,7 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
-	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	intstr "github.com/kubewarden/k8s-objects/apimachinery/pkg/util/intstr"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -43,14 +44,22 @@ func easyjson143303c7DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 		case "revisionHistoryLimit":
 			out.RevisionHistoryLimit = int32(in.Int32())
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		case "template":
 			if in.IsNull() {
 				in.Skip()
 				out.Template = nil
 			} else {
 				if out.Template == nil {
-					out.Template = new(_v1.PodTemplateSpec)
+					out.Template = new(_v11.PodTemplateSpec)
 				}
 				(*out.Template).UnmarshalEasyJSON(in)
 			}
@@ -96,7 +105,7 @@ func easyjson143303c7EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		}
 		out.Int32(int32(in.RevisionHistoryLimit))
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -104,7 +113,7 @@ func easyjson143303c7EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"template\":"
@@ -239,7 +248,15 @@ func easyjson143303c7DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta12(in
 		}
 		switch key {
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -254,11 +271,11 @@ func easyjson143303c7EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta12(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	out.RawByte('}')
 }

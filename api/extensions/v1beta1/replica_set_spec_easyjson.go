@@ -4,6 +4,8 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,9 +43,25 @@ func easyjsonE559dd25DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 		case "replicas":
 			out.Replicas = int32(in.Int32())
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		case "template":
-			(out.Template).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Template = nil
+			} else {
+				if out.Template == nil {
+					out.Template = new(_v11.PodTemplateSpec)
+				}
+				(*out.Template).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -74,7 +92,7 @@ func easyjsonE559dd25EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		}
 		out.Int32(int32(in.Replicas))
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		if first {
 			first = false
@@ -82,9 +100,9 @@ func easyjsonE559dd25EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.Template != nil {
 		const prefix string = ",\"template\":"
 		if first {
 			first = false
@@ -92,7 +110,7 @@ func easyjsonE559dd25EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Template).MarshalEasyJSON(out)
+		(*in.Template).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

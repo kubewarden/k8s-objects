@@ -92,16 +92,24 @@ func easyjsonC8b5e123DecodeGithubComKubewardenK8sObjectsApiAppsV1beta2(in *jlexe
 				in.Delim('[')
 				if out.VolumeClaimTemplates == nil {
 					if !in.IsDelim(']') {
-						out.VolumeClaimTemplates = make([]_v11.PersistentVolumeClaim, 0, 0)
+						out.VolumeClaimTemplates = make([]*_v11.PersistentVolumeClaim, 0, 8)
 					} else {
-						out.VolumeClaimTemplates = []_v11.PersistentVolumeClaim{}
+						out.VolumeClaimTemplates = []*_v11.PersistentVolumeClaim{}
 					}
 				} else {
 					out.VolumeClaimTemplates = (out.VolumeClaimTemplates)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 _v11.PersistentVolumeClaim
-					(v1).UnmarshalEasyJSON(in)
+					var v1 *_v11.PersistentVolumeClaim
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(_v11.PersistentVolumeClaim)
+						}
+						(*v1).UnmarshalEasyJSON(in)
+					}
 					out.VolumeClaimTemplates = append(out.VolumeClaimTemplates, v1)
 					in.WantComma()
 				}
@@ -184,18 +192,20 @@ func easyjsonC8b5e123EncodeGithubComKubewardenK8sObjectsApiAppsV1beta2(out *jwri
 		out.RawString(prefix)
 		easyjsonC8b5e123EncodeGithubComKubewardenK8sObjectsApiAppsV1beta21(out, *in.UpdateStrategy)
 	}
-	{
+	if len(in.VolumeClaimTemplates) != 0 {
 		const prefix string = ",\"volumeClaimTemplates\":"
 		out.RawString(prefix)
-		if in.VolumeClaimTemplates == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.VolumeClaimTemplates {
 				if v2 > 0 {
 					out.RawByte(',')
 				}
-				(v3).MarshalEasyJSON(out)
+				if v3 == nil {
+					out.RawString("null")
+				} else {
+					(*v3).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}

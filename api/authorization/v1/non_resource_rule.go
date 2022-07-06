@@ -11,7 +11,7 @@ package v1
 type NonResourceRule struct {
 
 	// NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full, final step in the path.  "*" means all.
-	NonResourceURLs []string `json:"nonResourceURLs"`
+	NonResourceURLs []string `json:"nonResourceURLs,omitempty"`
 
 	// Verb is a list of kubernetes non-resource API verbs, like: get, post, put, delete, patch, head, options.  "*" means all.
 	// Required: true

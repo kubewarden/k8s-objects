@@ -45,16 +45,24 @@ func easyjsonFf257cb3DecodeGithubComKubewardenK8sObjectsApiRbacV1(in *jlexer.Lex
 				in.Delim('[')
 				if out.ClusterRoleSelectors == nil {
 					if !in.IsDelim(']') {
-						out.ClusterRoleSelectors = make([]_v1.LabelSelector, 0, 2)
+						out.ClusterRoleSelectors = make([]*_v1.LabelSelector, 0, 8)
 					} else {
-						out.ClusterRoleSelectors = []_v1.LabelSelector{}
+						out.ClusterRoleSelectors = []*_v1.LabelSelector{}
 					}
 				} else {
 					out.ClusterRoleSelectors = (out.ClusterRoleSelectors)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 _v1.LabelSelector
-					(v1).UnmarshalEasyJSON(in)
+					var v1 *_v1.LabelSelector
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(_v1.LabelSelector)
+						}
+						(*v1).UnmarshalEasyJSON(in)
+					}
 					out.ClusterRoleSelectors = append(out.ClusterRoleSelectors, v1)
 					in.WantComma()
 				}
@@ -74,18 +82,21 @@ func easyjsonFf257cb3EncodeGithubComKubewardenK8sObjectsApiRbacV1(out *jwriter.W
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.ClusterRoleSelectors) != 0 {
 		const prefix string = ",\"clusterRoleSelectors\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.ClusterRoleSelectors == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.ClusterRoleSelectors {
 				if v2 > 0 {
 					out.RawByte(',')
 				}
-				(v3).MarshalEasyJSON(out)
+				if v3 == nil {
+					out.RawString("null")
+				} else {
+					(*v3).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}
