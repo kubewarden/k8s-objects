@@ -17,7 +17,7 @@ type DeploymentStatus struct {
 	CollisionCount int32 `json:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a deployment's current state.
-	Conditions []*DeploymentCondition `json:"conditions"`
+	Conditions []*DeploymentCondition `json:"conditions,omitempty"`
 
 	// The generation observed by the deployment controller.
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`

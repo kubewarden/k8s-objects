@@ -40,5 +40,5 @@ type CertificateSigningRequestStatus struct {
 	Certificate strfmt.Base64 `json:"certificate,omitempty"`
 
 	// conditions applied to the request. Known conditions are "Approved", "Denied", and "Failed".
-	Conditions []*CertificateSigningRequestCondition `json:"conditions"`
+	Conditions []*CertificateSigningRequestCondition `json:"conditions,omitempty"`
 }

@@ -18,8 +18,8 @@ type MetricValueStatus struct {
 	AverageUtilization int32 `json:"averageUtilization,omitempty"`
 
 	// averageValue is the current value of the average of the metric across all relevant pods (as a quantity)
-	AverageValue apimachinery_pkg_api_resource.Quantity `json:"averageValue,omitempty"`
+	AverageValue *apimachinery_pkg_api_resource.Quantity `json:"averageValue,omitempty"`
 
 	// value is the current value of the metric (as a quantity).
-	Value apimachinery_pkg_api_resource.Quantity `json:"value,omitempty"`
+	Value *apimachinery_pkg_api_resource.Quantity `json:"value,omitempty"`
 }

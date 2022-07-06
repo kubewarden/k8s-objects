@@ -83,12 +83,11 @@ func easyjsonBb83f54EncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Ranges) != 0 {
 		const prefix string = ",\"ranges\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Ranges == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Ranges {
 				if v2 > 0 {
@@ -105,7 +104,12 @@ func easyjsonBb83f54EncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jwr
 	}
 	if in.Rule != "" {
 		const prefix string = ",\"rule\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Rule))
 	}
 	out.RawByte('}')

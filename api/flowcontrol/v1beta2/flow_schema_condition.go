@@ -15,7 +15,7 @@ import (
 type FlowSchemaCondition struct {
 
 	// `lastTransitionTime` is the last time the condition transitioned from one status to another.
-	LastTransitionTime apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
+	LastTransitionTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastTransitionTime,omitempty"`
 
 	// `message` is a human-readable message indicating details about last transition.
 	Message string `json:"message,omitempty"`

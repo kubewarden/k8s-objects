@@ -15,7 +15,7 @@ import (
 type PersistentVolumeSpec struct {
 
 	// AccessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
-	AccessModes []string `json:"accessModes"`
+	AccessModes []string `json:"accessModes,omitempty"`
 
 	// AWSElasticBlockStore represents an AWS Disk resource that is attached to a kubelet's host machine and then exposed to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 	AwsElasticBlockStore *AWSElasticBlockStoreVolumeSource `json:"awsElasticBlockStore,omitempty"`
@@ -27,7 +27,7 @@ type PersistentVolumeSpec struct {
 	AzureFile *AzureFilePersistentVolumeSource `json:"azureFile,omitempty"`
 
 	// A description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
-	Capacity map[string]apimachinery_pkg_api_resource.Quantity `json:"capacity,omitempty"`
+	Capacity map[string]*apimachinery_pkg_api_resource.Quantity `json:"capacity,omitempty"`
 
 	// CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
 	Cephfs *CephFSPersistentVolumeSource `json:"cephfs,omitempty"`
@@ -66,7 +66,7 @@ type PersistentVolumeSpec struct {
 	Local *LocalVolumeSource `json:"local,omitempty"`
 
 	// A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
-	MountOptions []string `json:"mountOptions"`
+	MountOptions []string `json:"mountOptions,omitempty"`
 
 	// NFS represents an NFS mount on the host. Provisioned by an admin. More info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 	Nfs *NFSVolumeSource `json:"nfs,omitempty"`

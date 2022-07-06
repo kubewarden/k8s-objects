@@ -120,7 +120,7 @@ func easyjson847fb0b7EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		out.RawString(prefix[1:])
 		out.String(string(in.CommonEncodingVersion))
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -128,9 +128,7 @@ func easyjson847fb0b7EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Conditions {
 				if v3 > 0 {
@@ -145,12 +143,15 @@ func easyjson847fb0b7EncodeGithubComKubewardenK8sObjectsApiApiserverinternalV1al
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.StorageVersions) != 0 {
 		const prefix string = ",\"storageVersions\":"
-		out.RawString(prefix)
-		if in.StorageVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.StorageVersions {
 				if v5 > 0 {

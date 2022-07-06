@@ -5,6 +5,7 @@ package v1
 import (
 	json "encoding/json"
 	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
+	_v11 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -47,16 +48,24 @@ func easyjsonEd5e2e24DecodeGithubComKubewardenK8sObjectsApiStorageV1(in *jlexer.
 				in.Delim('[')
 				if out.AllowedTopologies == nil {
 					if !in.IsDelim(']') {
-						out.AllowedTopologies = make([]_v1.TopologySelectorTerm, 0, 2)
+						out.AllowedTopologies = make([]*_v1.TopologySelectorTerm, 0, 8)
 					} else {
-						out.AllowedTopologies = []_v1.TopologySelectorTerm{}
+						out.AllowedTopologies = []*_v1.TopologySelectorTerm{}
 					}
 				} else {
 					out.AllowedTopologies = (out.AllowedTopologies)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 _v1.TopologySelectorTerm
-					(v1).UnmarshalEasyJSON(in)
+					var v1 *_v1.TopologySelectorTerm
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(_v1.TopologySelectorTerm)
+						}
+						(*v1).UnmarshalEasyJSON(in)
+					}
 					out.AllowedTopologies = append(out.AllowedTopologies, v1)
 					in.WantComma()
 				}
@@ -67,7 +76,15 @@ func easyjsonEd5e2e24DecodeGithubComKubewardenK8sObjectsApiStorageV1(in *jlexer.
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v11.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "mountOptions":
 			if in.IsNull() {
 				in.Skip()
@@ -145,7 +162,7 @@ func easyjsonEd5e2e24EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		out.RawString(prefix[1:])
 		out.Bool(bool(in.AllowVolumeExpansion))
 	}
-	{
+	if len(in.AllowedTopologies) != 0 {
 		const prefix string = ",\"allowedTopologies\":"
 		if first {
 			first = false
@@ -153,40 +170,60 @@ func easyjsonEd5e2e24EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		} else {
 			out.RawString(prefix)
 		}
-		if in.AllowedTopologies == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v4, v5 := range in.AllowedTopologies {
 				if v4 > 0 {
 					out.RawByte(',')
 				}
-				(v5).MarshalEasyJSON(out)
+				if v5 == nil {
+					out.RawString("null")
+				} else {
+					(*v5).MarshalEasyJSON(out)
+				}
 			}
 			out.RawByte(']')
 		}
 	}
 	if in.APIVersion != "" {
 		const prefix string = ",\"apiVersion\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.APIVersion))
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
-		out.RawString(prefix)
-		(in.Metadata).MarshalEasyJSON(out)
-	}
-	{
-		const prefix string = ",\"mountOptions\":"
-		out.RawString(prefix)
-		if in.MountOptions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		(*in.Metadata).MarshalEasyJSON(out)
+	}
+	if len(in.MountOptions) != 0 {
+		const prefix string = ",\"mountOptions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v6, v7 := range in.MountOptions {
 				if v6 > 0 {
@@ -199,7 +236,12 @@ func easyjsonEd5e2e24EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 	}
 	if len(in.Parameters) != 0 {
 		const prefix string = ",\"parameters\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		{
 			out.RawByte('{')
 			v8First := true
@@ -218,7 +260,12 @@ func easyjsonEd5e2e24EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 	}
 	{
 		const prefix string = ",\"provisioner\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Provisioner == nil {
 			out.RawString("null")
 		} else {

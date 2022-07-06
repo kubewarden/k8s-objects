@@ -120,12 +120,11 @@ func easyjson57e69005EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Categories) != 0 {
 		const prefix string = ",\"categories\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Categories == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Categories {
 				if v3 > 0 {
@@ -138,7 +137,12 @@ func easyjson57e69005EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 	}
 	{
 		const prefix string = ",\"kind\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Kind == nil {
 			out.RawString("null")
 		} else {
@@ -159,12 +163,10 @@ func easyjson57e69005EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 			out.String(string(*in.Plural))
 		}
 	}
-	{
+	if len(in.ShortNames) != 0 {
 		const prefix string = ",\"shortNames\":"
 		out.RawString(prefix)
-		if in.ShortNames == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.ShortNames {
 				if v5 > 0 {

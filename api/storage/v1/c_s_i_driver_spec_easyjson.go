@@ -160,7 +160,7 @@ func easyjsonEdb00d66EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		}
 		out.Bool(bool(in.StorageCapacity))
 	}
-	{
+	if len(in.TokenRequests) != 0 {
 		const prefix string = ",\"tokenRequests\":"
 		if first {
 			first = false
@@ -168,9 +168,7 @@ func easyjsonEdb00d66EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 		} else {
 			out.RawString(prefix)
 		}
-		if in.TokenRequests == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.TokenRequests {
 				if v3 > 0 {
@@ -185,12 +183,15 @@ func easyjsonEdb00d66EncodeGithubComKubewardenK8sObjectsApiStorageV1(out *jwrite
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.VolumeLifecycleModes) != 0 {
 		const prefix string = ",\"volumeLifecycleModes\":"
-		out.RawString(prefix)
-		if in.VolumeLifecycleModes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.VolumeLifecycleModes {
 				if v5 > 0 {

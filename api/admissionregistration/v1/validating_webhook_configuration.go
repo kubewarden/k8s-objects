@@ -21,8 +21,8 @@ type ValidatingWebhookConfiguration struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Webhooks is a list of webhooks and the affected resources and operations.
-	Webhooks []*ValidatingWebhook `json:"webhooks"`
+	Webhooks []*ValidatingWebhook `json:"webhooks,omitempty"`
 }

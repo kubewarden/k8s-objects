@@ -85,12 +85,11 @@ func easyjson320b3e1EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2(out *jwr
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Policies) != 0 {
 		const prefix string = ",\"policies\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Policies == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Policies {
 				if v2 > 0 {
@@ -107,12 +106,22 @@ func easyjson320b3e1EncodeGithubComKubewardenK8sObjectsApiAutoscalingV2(out *jwr
 	}
 	if in.SelectPolicy != "" {
 		const prefix string = ",\"selectPolicy\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.SelectPolicy))
 	}
 	if in.StabilizationWindowSeconds != 0 {
 		const prefix string = ",\"stabilizationWindowSeconds\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.StabilizationWindowSeconds))
 	}
 	out.RawByte('}')

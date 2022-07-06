@@ -5,6 +5,7 @@ package v2
 import (
 	json "encoding/json"
 	resource "github.com/kubewarden/k8s-objects/apimachinery/pkg/api/resource"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -42,7 +43,15 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2(in *jle
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -93,7 +102,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2(out *jw
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -101,7 +110,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -243,8 +252,16 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV22(in *jl
 				*out.DesiredReplicas = int32(in.Int32())
 			}
 		case "lastScaleTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastScaleTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastScaleTime = nil
+			} else {
+				if out.LastScaleTime == nil {
+					out.LastScaleTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastScaleTime).UnmarshalJSON(data))
+				}
 			}
 		case "observedGeneration":
 			out.ObservedGeneration = int64(in.Int64())
@@ -262,12 +279,11 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV22(out *j
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Conditions {
 				if v3 > 0 {
@@ -282,12 +298,15 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV22(out *j
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.CurrentMetrics) != 0 {
 		const prefix string = ",\"currentMetrics\":"
-		out.RawString(prefix)
-		if in.CurrentMetrics == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.CurrentMetrics {
 				if v5 > 0 {
@@ -304,22 +323,32 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV22(out *j
 	}
 	if in.CurrentReplicas != 0 {
 		const prefix string = ",\"currentReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Int32(int32(in.CurrentReplicas))
 	}
 	{
 		const prefix string = ",\"desiredReplicas\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.DesiredReplicas == nil {
 			out.RawString("null")
 		} else {
 			out.Int32(int32(*in.DesiredReplicas))
 		}
 	}
-	if true {
+	if in.LastScaleTime != nil {
 		const prefix string = ",\"lastScaleTime\":"
 		out.RawString(prefix)
-		out.Raw((in.LastScaleTime).MarshalJSON())
+		out.Raw((*in.LastScaleTime).MarshalJSON())
 	}
 	if in.ObservedGeneration != 0 {
 		const prefix string = ",\"observedGeneration\":"
@@ -578,9 +607,25 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV28(in *jl
 		case "averageUtilization":
 			out.AverageUtilization = int32(in.Int32())
 		case "averageValue":
-			out.AverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.AverageValue = nil
+			} else {
+				if out.AverageValue == nil {
+					out.AverageValue = new(resource.Quantity)
+				}
+				*out.AverageValue = resource.Quantity(in.String())
+			}
 		case "value":
-			out.Value = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(resource.Quantity)
+				}
+				*out.Value = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -601,7 +646,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV28(out *j
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.AverageUtilization))
 	}
-	if in.AverageValue != "" {
+	if in.AverageValue != nil {
 		const prefix string = ",\"averageValue\":"
 		if first {
 			first = false
@@ -609,9 +654,9 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV28(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AverageValue))
+		out.String(string(*in.AverageValue))
 	}
-	if in.Value != "" {
+	if in.Value != nil {
 		const prefix string = ",\"value\":"
 		if first {
 			first = false
@@ -619,7 +664,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV28(out *j
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Value))
+		out.String(string(*in.Value))
 	}
 	out.RawByte('}')
 }
@@ -726,7 +771,15 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV29(in *jl
 				*out.Name = string(in.String())
 			}
 		case "selector":
-			(out.Selector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Selector = nil
+			} else {
+				if out.Selector == nil {
+					out.Selector = new(_v1.LabelSelector)
+				}
+				(*out.Selector).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -750,10 +803,10 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV29(out *j
 			out.String(string(*in.Name))
 		}
 	}
-	if true {
+	if in.Selector != nil {
 		const prefix string = ",\"selector\":"
 		out.RawString(prefix)
-		(in.Selector).MarshalEasyJSON(out)
+		(*in.Selector).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
@@ -869,8 +922,16 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV23(in *jl
 		}
 		switch key {
 		case "lastTransitionTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastTransitionTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastTransitionTime = nil
+			} else {
+				if out.LastTransitionTime == nil {
+					out.LastTransitionTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastTransitionTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -910,11 +971,11 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV23(out *j
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastTransitionTime != nil {
 		const prefix string = ",\"lastTransitionTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastTransitionTime).MarshalJSON())
+		out.Raw((*in.LastTransitionTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"
@@ -1077,12 +1138,10 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV21(out *j
 			out.Int32(int32(*in.MaxReplicas))
 		}
 	}
-	{
+	if len(in.Metrics) != 0 {
 		const prefix string = ",\"metrics\":"
 		out.RawString(prefix)
-		if in.Metrics == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.Metrics {
 				if v8 > 0 {
@@ -1363,7 +1422,15 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV215(in *j
 		case "averageUtilization":
 			out.AverageUtilization = int32(in.Int32())
 		case "averageValue":
-			out.AverageValue = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.AverageValue = nil
+			} else {
+				if out.AverageValue == nil {
+					out.AverageValue = new(resource.Quantity)
+				}
+				*out.AverageValue = resource.Quantity(in.String())
+			}
 		case "type":
 			if in.IsNull() {
 				in.Skip()
@@ -1375,7 +1442,15 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV215(in *j
 				*out.Type = string(in.String())
 			}
 		case "value":
-			out.Value = resource.Quantity(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(resource.Quantity)
+				}
+				*out.Value = resource.Quantity(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1396,7 +1471,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV215(out *
 		out.RawString(prefix[1:])
 		out.Int32(int32(in.AverageUtilization))
 	}
-	if in.AverageValue != "" {
+	if in.AverageValue != nil {
 		const prefix string = ",\"averageValue\":"
 		if first {
 			first = false
@@ -1404,7 +1479,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV215(out *
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AverageValue))
+		out.String(string(*in.AverageValue))
 	}
 	{
 		const prefix string = ",\"type\":"
@@ -1420,10 +1495,10 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV215(out *
 			out.String(string(*in.Type))
 		}
 	}
-	if in.Value != "" {
+	if in.Value != nil {
 		const prefix string = ",\"value\":"
 		out.RawString(prefix)
-		out.String(string(in.Value))
+		out.String(string(*in.Value))
 	}
 	out.RawByte('}')
 }

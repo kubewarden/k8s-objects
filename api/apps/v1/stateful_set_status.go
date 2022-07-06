@@ -18,7 +18,7 @@ type StatefulSetStatus struct {
 	CollisionCount int32 `json:"collisionCount,omitempty"`
 
 	// Represents the latest available observations of a statefulset's current state.
-	Conditions []*StatefulSetCondition `json:"conditions"`
+	Conditions []*StatefulSetCondition `json:"conditions,omitempty"`
 
 	// currentReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by currentRevision.
 	CurrentReplicas int32 `json:"currentReplicas,omitempty"`

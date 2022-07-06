@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v11 "github.com/kubewarden/k8s-objects/api/core/v1"
 	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -44,15 +45,39 @@ func easyjsonF642ad3eDecodeGithubComKubewardenK8sObjectsApiEventsV1beta1(in *jle
 		case "deprecatedCount":
 			out.DeprecatedCount = int32(in.Int32())
 		case "deprecatedFirstTimestamp":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DeprecatedFirstTimestamp).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.DeprecatedFirstTimestamp = nil
+			} else {
+				if out.DeprecatedFirstTimestamp == nil {
+					out.DeprecatedFirstTimestamp = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.DeprecatedFirstTimestamp).UnmarshalJSON(data))
+				}
 			}
 		case "deprecatedLastTimestamp":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DeprecatedLastTimestamp).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.DeprecatedLastTimestamp = nil
+			} else {
+				if out.DeprecatedLastTimestamp == nil {
+					out.DeprecatedLastTimestamp = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.DeprecatedLastTimestamp).UnmarshalJSON(data))
+				}
 			}
 		case "deprecatedSource":
-			(out.DeprecatedSource).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.DeprecatedSource = nil
+			} else {
+				if out.DeprecatedSource == nil {
+					out.DeprecatedSource = new(_v11.EventSource)
+				}
+				(*out.DeprecatedSource).UnmarshalEasyJSON(in)
+			}
 		case "eventTime":
 			if in.IsNull() {
 				in.Skip()
@@ -68,15 +93,39 @@ func easyjsonF642ad3eDecodeGithubComKubewardenK8sObjectsApiEventsV1beta1(in *jle
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "note":
 			out.Note = string(in.String())
 		case "reason":
 			out.Reason = string(in.String())
 		case "regarding":
-			(out.Regarding).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Regarding = nil
+			} else {
+				if out.Regarding == nil {
+					out.Regarding = new(_v11.ObjectReference)
+				}
+				(*out.Regarding).UnmarshalEasyJSON(in)
+			}
 		case "related":
-			(out.Related).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Related = nil
+			} else {
+				if out.Related == nil {
+					out.Related = new(_v11.ObjectReference)
+				}
+				(*out.Related).UnmarshalEasyJSON(in)
+			}
 		case "reportingController":
 			out.ReportingController = string(in.String())
 		case "reportingInstance":
@@ -133,7 +182,7 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		}
 		out.Int32(int32(in.DeprecatedCount))
 	}
-	if true {
+	if in.DeprecatedFirstTimestamp != nil {
 		const prefix string = ",\"deprecatedFirstTimestamp\":"
 		if first {
 			first = false
@@ -141,9 +190,9 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.DeprecatedFirstTimestamp).MarshalJSON())
+		out.Raw((*in.DeprecatedFirstTimestamp).MarshalJSON())
 	}
-	if true {
+	if in.DeprecatedLastTimestamp != nil {
 		const prefix string = ",\"deprecatedLastTimestamp\":"
 		if first {
 			first = false
@@ -151,9 +200,9 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.DeprecatedLastTimestamp).MarshalJSON())
+		out.Raw((*in.DeprecatedLastTimestamp).MarshalJSON())
 	}
-	if true {
+	if in.DeprecatedSource != nil {
 		const prefix string = ",\"deprecatedSource\":"
 		if first {
 			first = false
@@ -161,7 +210,7 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		(in.DeprecatedSource).MarshalEasyJSON(out)
+		(*in.DeprecatedSource).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"eventTime\":"
@@ -182,10 +231,10 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		out.RawString(prefix)
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		out.RawString(prefix)
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Note != "" {
 		const prefix string = ",\"note\":"
@@ -197,15 +246,15 @@ func easyjsonF642ad3eEncodeGithubComKubewardenK8sObjectsApiEventsV1beta1(out *jw
 		out.RawString(prefix)
 		out.String(string(in.Reason))
 	}
-	if true {
+	if in.Regarding != nil {
 		const prefix string = ",\"regarding\":"
 		out.RawString(prefix)
-		(in.Regarding).MarshalEasyJSON(out)
+		(*in.Regarding).MarshalEasyJSON(out)
 	}
-	if true {
+	if in.Related != nil {
 		const prefix string = ",\"related\":"
 		out.RawString(prefix)
-		(in.Related).MarshalEasyJSON(out)
+		(*in.Related).MarshalEasyJSON(out)
 	}
 	if in.ReportingController != "" {
 		const prefix string = ",\"reportingController\":"
