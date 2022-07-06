@@ -21,7 +21,7 @@ type StorageClass struct {
 	AllowVolumeExpansion bool `json:"allowVolumeExpansion,omitempty"`
 
 	// Restrict the node topologies where volumes can be dynamically provisioned. Each volume plugin defines its own supported topology specifications. An empty TopologySelectorTerm list means there is no topology restriction. This field is only honored by servers that enable the VolumeScheduling feature.
-	AllowedTopologies []api_core_v1.TopologySelectorTerm `json:"allowedTopologies"`
+	AllowedTopologies []*api_core_v1.TopologySelectorTerm `json:"allowedTopologies,omitempty"`
 
 	// APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources
 	APIVersion string `json:"apiVersion,omitempty"`
@@ -30,10 +30,10 @@ type StorageClass struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Dynamically provisioned PersistentVolumes of this storage class are created with these mountOptions, e.g. ["ro", "soft"]. Not validated - mount of the PVs will simply fail if one is invalid.
-	MountOptions []string `json:"mountOptions"`
+	MountOptions []string `json:"mountOptions,omitempty"`
 
 	// Parameters holds the parameters for the provisioner that should create volumes of this storage class.
 	Parameters map[string]string `json:"parameters,omitempty"`

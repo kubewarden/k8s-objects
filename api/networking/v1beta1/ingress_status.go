@@ -15,5 +15,5 @@ import (
 type IngressStatus struct {
 
 	// LoadBalancer contains the current status of the load-balancer.
-	LoadBalancer api_core_v1.LoadBalancerStatus `json:"loadBalancer,omitempty"`
+	LoadBalancer *api_core_v1.LoadBalancerStatus `json:"loadBalancer,omitempty"`
 }

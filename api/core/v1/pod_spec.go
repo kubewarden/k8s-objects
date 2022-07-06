@@ -33,7 +33,7 @@ type PodSpec struct {
 	EnableServiceLinks bool `json:"enableServiceLinks,omitempty"`
 
 	// HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified. This is only valid for non-hostNetwork pods.
-	HostAliases []*HostAlias `json:"hostAliases"`
+	HostAliases []*HostAlias `json:"hostAliases,omitempty"`
 
 	// Use the host's ipc namespace. Optional: Default to false.
 	HostIPC bool `json:"hostIPC,omitempty"`
@@ -48,10 +48,10 @@ type PodSpec struct {
 	Hostname string `json:"hostname,omitempty"`
 
 	// ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
-	ImagePullSecrets []*LocalObjectReference `json:"imagePullSecrets"`
+	ImagePullSecrets []*LocalObjectReference `json:"imagePullSecrets,omitempty"`
 
 	// List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, or Liveness probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-	InitContainers []*Container `json:"initContainers"`
+	InitContainers []*Container `json:"initContainers,omitempty"`
 
 	// NodeName is a request to schedule this pod onto a specific node. If it is non-empty, the scheduler simply schedules this pod onto that node, assuming that it fits resource requirements.
 	NodeName string `json:"nodeName,omitempty"`
@@ -66,7 +66,7 @@ type PodSpec struct {
 	PriorityClassName string `json:"priorityClassName,omitempty"`
 
 	// If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
-	ReadinessGates []*PodReadinessGate `json:"readinessGates"`
+	ReadinessGates []*PodReadinessGate `json:"readinessGates,omitempty"`
 
 	// Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 	RestartPolicy string `json:"restartPolicy,omitempty"`
@@ -96,8 +96,8 @@ type PodSpec struct {
 	TerminationGracePeriodSeconds int64 `json:"terminationGracePeriodSeconds,omitempty"`
 
 	// If specified, the pod's tolerations.
-	Tolerations []*Toleration `json:"tolerations"`
+	Tolerations []*Toleration `json:"tolerations,omitempty"`
 
 	// List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes
-	Volumes []*Volume `json:"volumes"`
+	Volumes []*Volume `json:"volumes,omitempty"`
 }

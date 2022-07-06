@@ -11,5 +11,5 @@ package v1beta1
 type APIServiceStatus struct {
 
 	// Current service state of apiService.
-	Conditions []*APIServiceCondition `json:"conditions"`
+	Conditions []*APIServiceCondition `json:"conditions,omitempty"`
 }

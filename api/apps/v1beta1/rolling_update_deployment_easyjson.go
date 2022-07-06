@@ -38,9 +38,25 @@ func easyjsonE6692ddbDecodeGithubComKubewardenK8sObjectsApiAppsV1beta1(in *jlexe
 		}
 		switch key {
 		case "maxSurge":
-			out.MaxSurge = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxSurge = nil
+			} else {
+				if out.MaxSurge == nil {
+					out.MaxSurge = new(intstr.IntOrString)
+				}
+				*out.MaxSurge = intstr.IntOrString(in.String())
+			}
 		case "maxUnavailable":
-			out.MaxUnavailable = intstr.IntOrString(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.MaxUnavailable = nil
+			} else {
+				if out.MaxUnavailable == nil {
+					out.MaxUnavailable = new(intstr.IntOrString)
+				}
+				*out.MaxUnavailable = intstr.IntOrString(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -55,13 +71,13 @@ func easyjsonE6692ddbEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.MaxSurge != "" {
+	if in.MaxSurge != nil {
 		const prefix string = ",\"maxSurge\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.MaxSurge))
+		out.String(string(*in.MaxSurge))
 	}
-	if in.MaxUnavailable != "" {
+	if in.MaxUnavailable != nil {
 		const prefix string = ",\"maxUnavailable\":"
 		if first {
 			first = false
@@ -69,7 +85,7 @@ func easyjsonE6692ddbEncodeGithubComKubewardenK8sObjectsApiAppsV1beta1(out *jwri
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MaxUnavailable))
+		out.String(string(*in.MaxUnavailable))
 	}
 	out.RawByte('}')
 }

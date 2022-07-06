@@ -25,7 +25,7 @@ type StatefulSetSpec struct {
 	RevisionHistoryLimit int32 `json:"revisionHistoryLimit,omitempty"`
 
 	// selector is a label query over pods that should match the replica count. If empty, defaulted to labels on the pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-	Selector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
+	Selector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
 
 	// serviceName is the name of the service that governs this StatefulSet. This service must exist before the StatefulSet, and is responsible for the network identity of the set. Pods get DNS/hostnames that follow the pattern: pod-specific-string.serviceName.default.svc.cluster.local where "pod-specific-string" is managed by the StatefulSet controller.
 	// Required: true
@@ -39,5 +39,5 @@ type StatefulSetSpec struct {
 	UpdateStrategy *StatefulSetUpdateStrategy `json:"updateStrategy,omitempty"`
 
 	// volumeClaimTemplates is a list of claims that pods are allowed to reference. The StatefulSet controller is responsible for mapping network identities to claims in a way that maintains the identity of a pod. Every claim in this list must have at least one matching (by name) volumeMount in one container in the template. A claim in this list takes precedence over any volumes in the template, with the same name.
-	VolumeClaimTemplates []api_core_v1.PersistentVolumeClaim `json:"volumeClaimTemplates"`
+	VolumeClaimTemplates []*api_core_v1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty"`
 }

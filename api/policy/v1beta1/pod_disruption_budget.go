@@ -21,7 +21,7 @@ type PodDisruptionBudget struct {
 	Kind string `json:"kind,omitempty"`
 
 	// metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Specification of the desired behavior of the PodDisruptionBudget.
 	Spec *PodDisruptionBudgetSpec `json:"spec,omitempty"`

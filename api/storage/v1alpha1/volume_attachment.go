@@ -23,7 +23,7 @@ type VolumeAttachment struct {
 	Kind string `json:"kind,omitempty"`
 
 	// Standard object metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
-	Metadata apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
+	Metadata *apimachinery_pkg_apis_meta_v1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Specification of the desired attach/detach volume behavior. Populated by the Kubernetes system.
 	// Required: true

@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -37,7 +38,15 @@ func easyjsonE440d6eaDecodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(in 
 		}
 		switch key {
 		case "loadBalancer":
-			(out.LoadBalancer).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.LoadBalancer = nil
+			} else {
+				if out.LoadBalancer == nil {
+					out.LoadBalancer = new(_v1.LoadBalancerStatus)
+				}
+				(*out.LoadBalancer).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -52,11 +61,11 @@ func easyjsonE440d6eaEncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LoadBalancer != nil {
 		const prefix string = ",\"loadBalancer\":"
 		first = false
 		out.RawString(prefix[1:])
-		(in.LoadBalancer).MarshalEasyJSON(out)
+		(*in.LoadBalancer).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -37,8 +38,16 @@ func easyjson372369bfDecodeGithubComKubewardenK8sObjectsApiCertificatesV1beta1(i
 		}
 		switch key {
 		case "lastUpdateTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastUpdateTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastUpdateTime = nil
+			} else {
+				if out.LastUpdateTime == nil {
+					out.LastUpdateTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastUpdateTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -68,11 +77,11 @@ func easyjson372369bfEncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta1(o
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastUpdateTime != nil {
 		const prefix string = ",\"lastUpdateTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastUpdateTime).MarshalJSON())
+		out.Raw((*in.LastUpdateTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"

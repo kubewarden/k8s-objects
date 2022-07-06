@@ -286,7 +286,7 @@ func easyjson888c126aEncodeGithubComKubewardenK8sObjectsApiCoreV11(out *jwriter.
 		out.RawString(prefix[1:])
 		out.String(string(in.Host))
 	}
-	{
+	if len(in.HTTPHeaders) != 0 {
 		const prefix string = ",\"httpHeaders\":"
 		if first {
 			first = false
@@ -294,9 +294,7 @@ func easyjson888c126aEncodeGithubComKubewardenK8sObjectsApiCoreV11(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		if in.HTTPHeaders == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.HTTPHeaders {
 				if v2 > 0 {
@@ -313,12 +311,22 @@ func easyjson888c126aEncodeGithubComKubewardenK8sObjectsApiCoreV11(out *jwriter.
 	}
 	if in.Path != "" {
 		const prefix string = ",\"path\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Path))
 	}
 	{
 		const prefix string = ",\"port\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Port == nil {
 			out.RawString("null")
 		} else {

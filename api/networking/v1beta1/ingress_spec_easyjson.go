@@ -128,7 +128,7 @@ func easyjsonCf23dc59EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		out.RawString(prefix[1:])
 		(*in.Backend).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		if first {
 			first = false
@@ -136,9 +136,7 @@ func easyjsonCf23dc59EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v3, v4 := range in.Rules {
 				if v3 > 0 {
@@ -153,12 +151,15 @@ func easyjsonCf23dc59EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.TLS) != 0 {
 		const prefix string = ",\"tls\":"
-		out.RawString(prefix)
-		if in.TLS == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.TLS {
 				if v5 > 0 {
@@ -257,12 +258,11 @@ func easyjsonCf23dc59EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta11(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Hosts) != 0 {
 		const prefix string = ",\"hosts\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Hosts == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.Hosts {
 				if v8 > 0 {
@@ -275,7 +275,12 @@ func easyjsonCf23dc59EncodeGithubComKubewardenK8sObjectsApiNetworkingV1beta11(ou
 	}
 	if in.SecretName != "" {
 		const prefix string = ",\"secretName\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.SecretName))
 	}
 	out.RawByte('}')

@@ -15,7 +15,7 @@ import (
 type CertificateSigningRequestCondition struct {
 
 	// timestamp for the last update to this condition
-	LastUpdateTime apimachinery_pkg_apis_meta_v1.Time `json:"lastUpdateTime,omitempty"`
+	LastUpdateTime *apimachinery_pkg_apis_meta_v1.Time `json:"lastUpdateTime,omitempty"`
 
 	// human readable message with details about the request state
 	Message string `json:"message,omitempty"`

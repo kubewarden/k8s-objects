@@ -5,6 +5,7 @@ package v1beta1
 import (
 	json "encoding/json"
 	strfmt "github.com/go-openapi/strfmt"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -42,7 +43,15 @@ func easyjson3fec0a99DecodeGithubComKubewardenK8sObjectsApiCertificatesV1beta1(i
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "spec":
 			if in.IsNull() {
 				in.Skip()
@@ -93,7 +102,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta1(o
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -101,7 +110,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta1(o
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
 	if in.Spec != nil {
 		const prefix string = ",\"spec\":"
@@ -226,7 +235,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta12(
 		out.RawString(prefix[1:])
 		out.Base64Bytes(in.Certificate)
 	}
-	{
+	if len(in.Conditions) != 0 {
 		const prefix string = ",\"conditions\":"
 		if first {
 			first = false
@@ -234,9 +243,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta12(
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Conditions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v5, v6 := range in.Conditions {
 				if v5 > 0 {
@@ -273,8 +280,16 @@ func easyjson3fec0a99DecodeGithubComKubewardenK8sObjectsApiCertificatesV1beta13(
 		}
 		switch key {
 		case "lastUpdateTime":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastUpdateTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+				out.LastUpdateTime = nil
+			} else {
+				if out.LastUpdateTime == nil {
+					out.LastUpdateTime = new(_v1.Time)
+				}
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.LastUpdateTime).UnmarshalJSON(data))
+				}
 			}
 		case "message":
 			out.Message = string(in.String())
@@ -304,11 +319,11 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta13(
 	out.RawByte('{')
 	first := true
 	_ = first
-	if true {
+	if in.LastUpdateTime != nil {
 		const prefix string = ",\"lastUpdateTime\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Raw((in.LastUpdateTime).MarshalJSON())
+		out.Raw((*in.LastUpdateTime).MarshalJSON())
 	}
 	if in.Message != "" {
 		const prefix string = ",\"message\":"
@@ -516,7 +531,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta11(
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -524,9 +539,7 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta11(
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v15, v16 := range in.Groups {
 				if v15 > 0 {
@@ -539,7 +552,12 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta11(
 	}
 	{
 		const prefix string = ",\"request\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Request == nil {
 			out.RawString("null")
 		} else {
@@ -551,12 +569,10 @@ func easyjson3fec0a99EncodeGithubComKubewardenK8sObjectsApiCertificatesV1beta11(
 		out.RawString(prefix)
 		out.String(string(in.UID))
 	}
-	{
+	if len(in.Usages) != 0 {
 		const prefix string = ",\"usages\":"
 		out.RawString(prefix)
-		if in.Usages == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v19, v20 := range in.Usages {
 				if v19 > 0 {

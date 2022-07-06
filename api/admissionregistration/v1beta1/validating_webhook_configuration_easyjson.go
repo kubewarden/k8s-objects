@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -41,7 +42,15 @@ func easyjson62d06692DecodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 		case "kind":
 			out.Kind = string(in.String())
 		case "metadata":
-			(out.Metadata).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(_v1.ObjectMeta)
+				}
+				(*out.Metadata).UnmarshalEasyJSON(in)
+			}
 		case "webhooks":
 			if in.IsNull() {
 				in.Skip()
@@ -103,7 +112,7 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 		}
 		out.String(string(in.Kind))
 	}
-	if true {
+	if in.Metadata != nil {
 		const prefix string = ",\"metadata\":"
 		if first {
 			first = false
@@ -111,9 +120,9 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Metadata).MarshalEasyJSON(out)
+		(*in.Metadata).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Webhooks) != 0 {
 		const prefix string = ",\"webhooks\":"
 		if first {
 			first = false
@@ -121,9 +130,7 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Webhooks == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.Webhooks {
 				if v2 > 0 {
@@ -229,7 +236,15 @@ func easyjson62d06692DecodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 				*out.Name = string(in.String())
 			}
 		case "namespaceSelector":
-			(out.NamespaceSelector).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.NamespaceSelector = nil
+			} else {
+				if out.NamespaceSelector == nil {
+					out.NamespaceSelector = new(_v1.LabelSelector)
+				}
+				(*out.NamespaceSelector).UnmarshalEasyJSON(in)
+			}
 		case "rules":
 			if in.IsNull() {
 				in.Skip()
@@ -279,12 +294,11 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.AdmissionReviewVersions) != 0 {
 		const prefix string = ",\"admissionReviewVersions\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.AdmissionReviewVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v6, v7 := range in.AdmissionReviewVersions {
 				if v6 > 0 {
@@ -297,7 +311,12 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 	}
 	{
 		const prefix string = ",\"clientConfig\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.ClientConfig == nil {
 			out.RawString("null")
 		} else {
@@ -318,17 +337,15 @@ func easyjson62d06692EncodeGithubComKubewardenK8sObjectsApiAdmissionregistration
 			out.String(string(*in.Name))
 		}
 	}
-	if true {
+	if in.NamespaceSelector != nil {
 		const prefix string = ",\"namespaceSelector\":"
 		out.RawString(prefix)
-		(in.NamespaceSelector).MarshalEasyJSON(out)
+		(*in.NamespaceSelector).MarshalEasyJSON(out)
 	}
-	{
+	if len(in.Rules) != 0 {
 		const prefix string = ",\"rules\":"
 		out.RawString(prefix)
-		if in.Rules == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v8, v9 := range in.Rules {
 				if v8 > 0 {

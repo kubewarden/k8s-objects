@@ -4,6 +4,7 @@ package v1beta1
 
 import (
 	json "encoding/json"
+	_v1 "github.com/kubewarden/k8s-objects/api/core/v1"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -405,7 +406,7 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		out.RawString(prefix[1:])
 		out.Bool(bool(in.AllowPrivilegeEscalation))
 	}
-	{
+	if len(in.AllowedCSIDrivers) != 0 {
 		const prefix string = ",\"allowedCSIDrivers\":"
 		if first {
 			first = false
@@ -413,9 +414,7 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		} else {
 			out.RawString(prefix)
 		}
-		if in.AllowedCSIDrivers == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v12, v13 := range in.AllowedCSIDrivers {
 				if v12 > 0 {
@@ -430,12 +429,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.AllowedCapabilities) != 0 {
 		const prefix string = ",\"allowedCapabilities\":"
-		out.RawString(prefix)
-		if in.AllowedCapabilities == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v14, v15 := range in.AllowedCapabilities {
 				if v14 > 0 {
@@ -446,12 +448,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.AllowedFlexVolumes) != 0 {
 		const prefix string = ",\"allowedFlexVolumes\":"
-		out.RawString(prefix)
-		if in.AllowedFlexVolumes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v16, v17 := range in.AllowedFlexVolumes {
 				if v16 > 0 {
@@ -466,12 +471,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.AllowedHostPaths) != 0 {
 		const prefix string = ",\"allowedHostPaths\":"
-		out.RawString(prefix)
-		if in.AllowedHostPaths == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v18, v19 := range in.AllowedHostPaths {
 				if v18 > 0 {
@@ -486,12 +494,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.AllowedProcMountTypes) != 0 {
 		const prefix string = ",\"allowedProcMountTypes\":"
-		out.RawString(prefix)
-		if in.AllowedProcMountTypes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v20, v21 := range in.AllowedProcMountTypes {
 				if v20 > 0 {
@@ -502,12 +513,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.AllowedUnsafeSysctls) != 0 {
 		const prefix string = ",\"allowedUnsafeSysctls\":"
-		out.RawString(prefix)
-		if in.AllowedUnsafeSysctls == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v22, v23 := range in.AllowedUnsafeSysctls {
 				if v22 > 0 {
@@ -518,12 +532,15 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.DefaultAddCapabilities) != 0 {
 		const prefix string = ",\"defaultAddCapabilities\":"
-		out.RawString(prefix)
-		if in.DefaultAddCapabilities == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v24, v25 := range in.DefaultAddCapabilities {
 				if v24 > 0 {
@@ -536,15 +553,23 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	}
 	if in.DefaultAllowPrivilegeEscalation {
 		const prefix string = ",\"defaultAllowPrivilegeEscalation\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.Bool(bool(in.DefaultAllowPrivilegeEscalation))
 	}
-	{
+	if len(in.ForbiddenSysctls) != 0 {
 		const prefix string = ",\"forbiddenSysctls\":"
-		out.RawString(prefix)
-		if in.ForbiddenSysctls == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
+		if first {
+			first = false
+			out.RawString(prefix[1:])
 		} else {
+			out.RawString(prefix)
+		}
+		{
 			out.RawByte('[')
 			for v26, v27 := range in.ForbiddenSysctls {
 				if v26 > 0 {
@@ -557,7 +582,12 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	}
 	{
 		const prefix string = ",\"fsGroup\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.FsGroup == nil {
 			out.RawString("null")
 		} else {
@@ -579,12 +609,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		out.RawString(prefix)
 		out.Bool(bool(in.HostPID))
 	}
-	{
+	if len(in.HostPorts) != 0 {
 		const prefix string = ",\"hostPorts\":"
 		out.RawString(prefix)
-		if in.HostPorts == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v28, v29 := range in.HostPorts {
 				if v28 > 0 {
@@ -609,12 +637,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 		out.RawString(prefix)
 		out.Bool(bool(in.ReadOnlyRootFilesystem))
 	}
-	{
+	if len(in.RequiredDropCapabilities) != 0 {
 		const prefix string = ",\"requiredDropCapabilities\":"
 		out.RawString(prefix)
-		if in.RequiredDropCapabilities == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v30, v31 := range in.RequiredDropCapabilities {
 				if v30 > 0 {
@@ -657,12 +683,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 			easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta14(out, *in.SupplementalGroups)
 		}
 	}
-	{
+	if len(in.Volumes) != 0 {
 		const prefix string = ",\"volumes\":"
 		out.RawString(prefix)
-		if in.Volumes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v32, v33 := range in.Volumes {
 				if v32 > 0 {
@@ -765,12 +789,11 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta14(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Ranges) != 0 {
 		const prefix string = ",\"ranges\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Ranges == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v35, v36 := range in.Ranges {
 				if v35 > 0 {
@@ -787,7 +810,12 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta14(ou
 	}
 	if in.Rule != "" {
 		const prefix string = ",\"rule\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.Rule))
 	}
 	out.RawByte('}')
@@ -822,7 +850,15 @@ func easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta13(in
 				*out.Rule = string(in.String())
 			}
 		case "seLinuxOptions":
-			(out.SeLinuxOptions).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+				out.SeLinuxOptions = nil
+			} else {
+				if out.SeLinuxOptions == nil {
+					out.SeLinuxOptions = new(_v1.SELinuxOptions)
+				}
+				(*out.SeLinuxOptions).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -846,10 +882,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta13(ou
 			out.String(string(*in.Rule))
 		}
 	}
-	if true {
+	if in.SeLinuxOptions != nil {
 		const prefix string = ",\"seLinuxOptions\":"
 		out.RawString(prefix)
-		(in.SeLinuxOptions).MarshalEasyJSON(out)
+		(*in.SeLinuxOptions).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
@@ -927,12 +963,11 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta12(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Ranges) != 0 {
 		const prefix string = ",\"ranges\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Ranges == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v38, v39 := range in.Ranges {
 				if v38 > 0 {
@@ -949,7 +984,12 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta12(ou
 	}
 	{
 		const prefix string = ",\"rule\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Rule == nil {
 			out.RawString("null")
 		} else {
@@ -1032,12 +1072,11 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(ou
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Ranges) != 0 {
 		const prefix string = ",\"ranges\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.Ranges == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v41, v42 := range in.Ranges {
 				if v41 > 0 {
@@ -1054,7 +1093,12 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta11(ou
 	}
 	{
 		const prefix string = ",\"rule\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Rule == nil {
 			out.RawString("null")
 		} else {

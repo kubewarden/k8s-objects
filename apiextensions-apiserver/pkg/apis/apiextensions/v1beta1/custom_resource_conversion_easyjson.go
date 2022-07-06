@@ -93,12 +93,11 @@ func easyjson12cf4963EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.ConversionReviewVersions) != 0 {
 		const prefix string = ",\"conversionReviewVersions\":"
+		first = false
 		out.RawString(prefix[1:])
-		if in.ConversionReviewVersions == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v2, v3 := range in.ConversionReviewVersions {
 				if v2 > 0 {
@@ -111,7 +110,12 @@ func easyjson12cf4963EncodeGithubComKubewardenK8sObjectsApiextensionsApiserverPk
 	}
 	{
 		const prefix string = ",\"strategy\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		if in.Strategy == nil {
 			out.RawString("null")
 		} else {

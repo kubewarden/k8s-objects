@@ -30,8 +30,8 @@ type PodSecurityContext struct {
 	SeLinuxOptions *SELinuxOptions `json:"seLinuxOptions,omitempty"`
 
 	// A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container.
-	SupplementalGroups []int64 `json:"supplementalGroups"`
+	SupplementalGroups []int64 `json:"supplementalGroups,omitempty"`
 
 	// Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch.
-	Sysctls []*Sysctl `json:"sysctls"`
+	Sysctls []*Sysctl `json:"sysctls,omitempty"`
 }

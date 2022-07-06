@@ -169,7 +169,7 @@ func easyjsonDb6d2716EncodeGithubComKubewardenK8sObjectsApiAuthorizationV1(out *
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Groups) != 0 {
 		const prefix string = ",\"groups\":"
 		if first {
 			first = false
@@ -177,9 +177,7 @@ func easyjsonDb6d2716EncodeGithubComKubewardenK8sObjectsApiAuthorizationV1(out *
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Groups == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v7, v8 := range in.Groups {
 				if v7 > 0 {
@@ -192,22 +190,42 @@ func easyjsonDb6d2716EncodeGithubComKubewardenK8sObjectsApiAuthorizationV1(out *
 	}
 	if in.NonResourceAttributes != nil {
 		const prefix string = ",\"nonResourceAttributes\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		(*in.NonResourceAttributes).MarshalEasyJSON(out)
 	}
 	if in.ResourceAttributes != nil {
 		const prefix string = ",\"resourceAttributes\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		(*in.ResourceAttributes).MarshalEasyJSON(out)
 	}
 	if in.UID != "" {
 		const prefix string = ",\"uid\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.UID))
 	}
 	if in.User != "" {
 		const prefix string = ",\"user\":"
-		out.RawString(prefix)
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
 		out.String(string(in.User))
 	}
 	out.RawByte('}')

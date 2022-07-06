@@ -22,7 +22,7 @@ type DaemonSetSpec struct {
 	RevisionHistoryLimit int32 `json:"revisionHistoryLimit,omitempty"`
 
 	// A label query over pods that are managed by the daemon set. Must match in order to be controlled. If empty, defaulted to labels on Pod template. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-	Selector apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
+	Selector *apimachinery_pkg_apis_meta_v1.LabelSelector `json:"selector,omitempty"`
 
 	// An object that describes the pod that will be created. The DaemonSet will create exactly one copy of this pod on every node that matches the template's node selector (or on every node if no node selector is specified). More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
 	// Required: true

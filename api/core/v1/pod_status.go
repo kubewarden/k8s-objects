@@ -15,16 +15,16 @@ import (
 type PodStatus struct {
 
 	// Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
-	Conditions []*PodCondition `json:"conditions"`
+	Conditions []*PodCondition `json:"conditions,omitempty"`
 
 	// The list has one entry per container in the manifest. Each entry is currently the output of `docker inspect`. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
-	ContainerStatuses []*ContainerStatus `json:"containerStatuses"`
+	ContainerStatuses []*ContainerStatus `json:"containerStatuses,omitempty"`
 
 	// IP address of the host to which the pod is assigned. Empty if not yet scheduled.
 	HostIP string `json:"hostIP,omitempty"`
 
 	// The list has one entry per init container in the manifest. The most recent successful init container will have ready = true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
-	InitContainerStatuses []*ContainerStatus `json:"initContainerStatuses"`
+	InitContainerStatuses []*ContainerStatus `json:"initContainerStatuses,omitempty"`
 
 	// A human readable message indicating details about why the pod is in this condition.
 	Message string `json:"message,omitempty"`
@@ -49,5 +49,5 @@ type PodStatus struct {
 	Reason string `json:"reason,omitempty"`
 
 	// RFC 3339 date and time at which the object was acknowledged by the Kubelet. This is before the Kubelet pulled the container image(s) for the pod.
-	StartTime apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
+	StartTime *apimachinery_pkg_apis_meta_v1.Time `json:"startTime,omitempty"`
 }
