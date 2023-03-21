@@ -12,7 +12,7 @@ type IPBlock struct {
 
 	// CIDR is a string representing the IP Block Valid examples are "192.168.1.1/24"
 	// Required: true
-	Cidr *string `json:"cidr"`
+	CIDR *string `json:"cidr"`
 
 	// Except is a slice of CIDRs that should not be included within an IP Block Valid examples are "192.168.1.1/24" Except values will be rejected if they are outside the CIDR range
 	Except []string `json:"except,omitempty"`
