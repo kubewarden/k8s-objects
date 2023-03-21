@@ -1701,7 +1701,7 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta210(
 				if out.ScaleDown == nil {
 					out.ScaleDown = new(HPAScalingRules)
 				}
-				(*out.ScaleDown).UnmarshalEasyJSON(in)
+				easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(in, out.ScaleDown)
 			}
 		case "scaleUp":
 			if in.IsNull() {
@@ -1711,7 +1711,7 @@ func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta210(
 				if out.ScaleUp == nil {
 					out.ScaleUp = new(HPAScalingRules)
 				}
-				(*out.ScaleUp).UnmarshalEasyJSON(in)
+				easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(in, out.ScaleUp)
 			}
 		default:
 			in.SkipRecursive()
@@ -1731,7 +1731,7 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta210(
 		const prefix string = ",\"scaleDown\":"
 		first = false
 		out.RawString(prefix[1:])
-		(*in.ScaleDown).MarshalEasyJSON(out)
+		easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(out, *in.ScaleDown)
 	}
 	if in.ScaleUp != nil {
 		const prefix string = ",\"scaleUp\":"
@@ -1741,7 +1741,208 @@ func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta210(
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.ScaleUp).MarshalEasyJSON(out)
+		easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(out, *in.ScaleUp)
+	}
+	out.RawByte('}')
+}
+func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(in *jlexer.Lexer, out *HPAScalingRules) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "policies":
+			if in.IsNull() {
+				in.Skip()
+				out.Policies = nil
+			} else {
+				in.Delim('[')
+				if out.Policies == nil {
+					if !in.IsDelim(']') {
+						out.Policies = make([]*HPAScalingPolicy, 0, 8)
+					} else {
+						out.Policies = []*HPAScalingPolicy{}
+					}
+				} else {
+					out.Policies = (out.Policies)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v10 *HPAScalingPolicy
+					if in.IsNull() {
+						in.Skip()
+						v10 = nil
+					} else {
+						if v10 == nil {
+							v10 = new(HPAScalingPolicy)
+						}
+						easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta217(in, v10)
+					}
+					out.Policies = append(out.Policies, v10)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "selectPolicy":
+			out.SelectPolicy = string(in.String())
+		case "stabilizationWindowSeconds":
+			out.StabilizationWindowSeconds = int32(in.Int32())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta216(out *jwriter.Writer, in HPAScalingRules) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if len(in.Policies) != 0 {
+		const prefix string = ",\"policies\":"
+		first = false
+		out.RawString(prefix[1:])
+		{
+			out.RawByte('[')
+			for v11, v12 := range in.Policies {
+				if v11 > 0 {
+					out.RawByte(',')
+				}
+				if v12 == nil {
+					out.RawString("null")
+				} else {
+					easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta217(out, *v12)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.SelectPolicy != "" {
+		const prefix string = ",\"selectPolicy\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.SelectPolicy))
+	}
+	if in.StabilizationWindowSeconds != 0 {
+		const prefix string = ",\"stabilizationWindowSeconds\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.StabilizationWindowSeconds))
+	}
+	out.RawByte('}')
+}
+func easyjson23e3e9dcDecodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta217(in *jlexer.Lexer, out *HPAScalingPolicy) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "periodSeconds":
+			if in.IsNull() {
+				in.Skip()
+				out.PeriodSeconds = nil
+			} else {
+				if out.PeriodSeconds == nil {
+					out.PeriodSeconds = new(int32)
+				}
+				*out.PeriodSeconds = int32(in.Int32())
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		case "value":
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(int32)
+				}
+				*out.Value = int32(in.Int32())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson23e3e9dcEncodeGithubComKubewardenK8sObjectsApiAutoscalingV2beta217(out *jwriter.Writer, in HPAScalingPolicy) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"periodSeconds\":"
+		out.RawString(prefix[1:])
+		if in.PeriodSeconds == nil {
+			out.RawString("null")
+		} else {
+			out.Int32(int32(*in.PeriodSeconds))
+		}
+	}
+	{
+		const prefix string = ",\"type\":"
+		out.RawString(prefix)
+		if in.Type == nil {
+			out.RawString("null")
+		} else {
+			out.String(string(*in.Type))
+		}
+	}
+	{
+		const prefix string = ",\"value\":"
+		out.RawString(prefix)
+		if in.Value == nil {
+			out.RawString("null")
+		} else {
+			out.Int32(int32(*in.Value))
+		}
 	}
 	out.RawByte('}')
 }
