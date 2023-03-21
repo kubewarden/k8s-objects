@@ -44,7 +44,7 @@ type NodeSystemInfo struct {
 
 	// OS Image reported by the node from /etc/os-release (e.g. Debian GNU/Linux 7 (wheezy)).
 	// Required: true
-	OsImage *string `json:"osImage"`
+	OSImage *string `json:"osImage"`
 
 	// SystemUUID reported by the node. For unique machine identification MachineID is preferred. This field is specific to Red Hat hosts https://access.redhat.com/documentation/en-US/Red_Hat_Subscription_Management/1/html/RHSM/getting-system-uuid.html
 	// Required: true

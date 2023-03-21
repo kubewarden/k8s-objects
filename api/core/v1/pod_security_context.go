@@ -15,7 +15,7 @@ type PodSecurityContext struct {
 	// 1. The owning GID will be the FSGroup 2. The setgid bit is set (new files created in the volume will be owned by FSGroup) 3. The permission bits are OR'd with rw-rw----
 	//
 	// If unset, the Kubelet will not modify the ownership and permissions of any volume.
-	FsGroup int64 `json:"fsGroup,omitempty"`
+	FSGroup int64 `json:"fsGroup,omitempty"`
 
 	// The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container.
 	RunAsGroup int64 `json:"runAsGroup,omitempty"`
@@ -27,7 +27,7 @@ type PodSecurityContext struct {
 	RunAsUser int64 `json:"runAsUser,omitempty"`
 
 	// The SELinux context to be applied to all containers. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in SecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container.
-	SeLinuxOptions *SELinuxOptions `json:"seLinuxOptions,omitempty"`
+	SELinuxOptions *SELinuxOptions `json:"seLinuxOptions,omitempty"`
 
 	// A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container.
 	SupplementalGroups []int64 `json:"supplementalGroups,omitempty"`
