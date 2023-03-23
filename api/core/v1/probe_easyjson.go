@@ -52,12 +52,12 @@ func easyjsonDe232084DecodeGithubComKubewardenK8sObjectsApiCoreV1(in *jlexer.Lex
 		case "grpc":
 			if in.IsNull() {
 				in.Skip()
-				out.GRPC = nil
+				out.Grpc = nil
 			} else {
-				if out.GRPC == nil {
-					out.GRPC = new(GRPCAction)
+				if out.Grpc == nil {
+					out.Grpc = new(GRPCAction)
 				}
-				(*out.GRPC).UnmarshalEasyJSON(in)
+				(*out.Grpc).UnmarshalEasyJSON(in)
 			}
 		case "httpGet":
 			if in.IsNull() {
@@ -119,7 +119,7 @@ func easyjsonDe232084EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		}
 		out.Int32(int32(in.FailureThreshold))
 	}
-	if in.GRPC != nil {
+	if in.Grpc != nil {
 		const prefix string = ",\"grpc\":"
 		if first {
 			first = false
@@ -127,7 +127,7 @@ func easyjsonDe232084EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.GRPC).MarshalEasyJSON(out)
+		(*in.Grpc).MarshalEasyJSON(out)
 	}
 	if in.HTTPGet != nil {
 		const prefix string = ",\"httpGet\":"
