@@ -59,7 +59,7 @@ func easyjsonC4f0b390DecodeGithubComKubewardenK8sObjectsApiCoreV1(in *jlexer.Lex
 				*out.DiskURI = string(in.String())
 			}
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "kind":
 			out.Kind = string(in.String())
 		case "readOnly":
@@ -107,10 +107,10 @@ func easyjsonC4f0b390EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 			out.String(string(*in.DiskURI))
 		}
 	}
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		out.RawString(prefix)
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	if in.Kind != "" {
 		const prefix string = ",\"kind\":"

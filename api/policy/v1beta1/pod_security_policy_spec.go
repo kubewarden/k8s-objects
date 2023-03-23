@@ -46,7 +46,7 @@ type PodSecurityPolicySpec struct {
 
 	// fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
 	// Required: true
-	FSGroup *FSGroupStrategyOptions `json:"fsGroup"`
+	FsGroup *FSGroupStrategyOptions `json:"fsGroup"`
 
 	// hostIPC determines if the policy allows the use of HostIPC in the pod spec.
 	HostIPC bool `json:"hostIPC,omitempty"`
@@ -81,7 +81,7 @@ type PodSecurityPolicySpec struct {
 
 	// seLinux is the strategy that will dictate the allowable labels that may be set.
 	// Required: true
-	SELinux *SELinuxStrategyOptions `json:"seLinux"`
+	SeLinux *SELinuxStrategyOptions `json:"seLinux"`
 
 	// supplementalGroups is the strategy that will dictate what supplemental groups are used by the SecurityContext.
 	// Required: true
