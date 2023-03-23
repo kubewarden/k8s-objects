@@ -39,12 +39,12 @@ func easyjson545ee795DecodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(in 
 		case "cidr":
 			if in.IsNull() {
 				in.Skip()
-				out.Cidr = nil
+				out.CIDR = nil
 			} else {
-				if out.Cidr == nil {
-					out.Cidr = new(string)
+				if out.CIDR == nil {
+					out.CIDR = new(string)
 				}
-				*out.Cidr = string(in.String())
+				*out.CIDR = string(in.String())
 			}
 		case "except":
 			if in.IsNull() {
@@ -86,10 +86,10 @@ func easyjson545ee795EncodeGithubComKubewardenK8sObjectsApiExtensionsV1beta1(out
 	{
 		const prefix string = ",\"cidr\":"
 		out.RawString(prefix[1:])
-		if in.Cidr == nil {
+		if in.CIDR == nil {
 			out.RawString("null")
 		} else {
-			out.String(string(*in.Cidr))
+			out.String(string(*in.CIDR))
 		}
 	}
 	if len(in.Except) != 0 {
