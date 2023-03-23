@@ -252,12 +252,12 @@ func easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(in *jle
 		case "fsGroup":
 			if in.IsNull() {
 				in.Skip()
-				out.FSGroup = nil
+				out.FsGroup = nil
 			} else {
-				if out.FSGroup == nil {
-					out.FSGroup = new(FSGroupStrategyOptions)
+				if out.FsGroup == nil {
+					out.FsGroup = new(FSGroupStrategyOptions)
 				}
-				(*out.FSGroup).UnmarshalEasyJSON(in)
+				(*out.FsGroup).UnmarshalEasyJSON(in)
 			}
 		case "hostIPC":
 			out.HostIPC = bool(in.Bool())
@@ -356,12 +356,12 @@ func easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(in *jle
 		case "seLinux":
 			if in.IsNull() {
 				in.Skip()
-				out.SELinux = nil
+				out.SeLinux = nil
 			} else {
-				if out.SELinux == nil {
-					out.SELinux = new(SELinuxStrategyOptions)
+				if out.SeLinux == nil {
+					out.SeLinux = new(SELinuxStrategyOptions)
 				}
-				easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(in, out.SELinux)
+				easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(in, out.SeLinux)
 			}
 		case "supplementalGroups":
 			if in.IsNull() {
@@ -598,10 +598,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jw
 		} else {
 			out.RawString(prefix)
 		}
-		if in.FSGroup == nil {
+		if in.FsGroup == nil {
 			out.RawString("null")
 		} else {
-			(*in.FSGroup).MarshalEasyJSON(out)
+			(*in.FsGroup).MarshalEasyJSON(out)
 		}
 	}
 	if in.HostIPC {
@@ -683,10 +683,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta1(out *jw
 	{
 		const prefix string = ",\"seLinux\":"
 		out.RawString(prefix)
-		if in.SELinux == nil {
+		if in.SeLinux == nil {
 			out.RawString("null")
 		} else {
-			easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(out, *in.SELinux)
+			easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(out, *in.SeLinux)
 		}
 	}
 	{
@@ -867,12 +867,12 @@ func easyjsonE90dabffDecodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(in *jl
 		case "seLinuxOptions":
 			if in.IsNull() {
 				in.Skip()
-				out.SELinuxOptions = nil
+				out.SeLinuxOptions = nil
 			} else {
-				if out.SELinuxOptions == nil {
-					out.SELinuxOptions = new(_v1.SELinuxOptions)
+				if out.SeLinuxOptions == nil {
+					out.SeLinuxOptions = new(_v1.SELinuxOptions)
 				}
-				(*out.SELinuxOptions).UnmarshalEasyJSON(in)
+				(*out.SeLinuxOptions).UnmarshalEasyJSON(in)
 			}
 		default:
 			in.SkipRecursive()
@@ -897,10 +897,10 @@ func easyjsonE90dabffEncodeGithubComKubewardenK8sObjectsApiPolicyV1beta14(out *j
 			out.String(string(*in.Rule))
 		}
 	}
-	if in.SELinuxOptions != nil {
+	if in.SeLinuxOptions != nil {
 		const prefix string = ",\"seLinuxOptions\":"
 		out.RawString(prefix)
-		(*in.SELinuxOptions).MarshalEasyJSON(out)
+		(*in.SeLinuxOptions).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
