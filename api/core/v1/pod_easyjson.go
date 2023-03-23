@@ -1541,12 +1541,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "awsElasticBlockStore":
 			if in.IsNull() {
 				in.Skip()
-				out.AWSElasticBlockStore = nil
+				out.AwsElasticBlockStore = nil
 			} else {
-				if out.AWSElasticBlockStore == nil {
-					out.AWSElasticBlockStore = new(AWSElasticBlockStoreVolumeSource)
+				if out.AwsElasticBlockStore == nil {
+					out.AwsElasticBlockStore = new(AWSElasticBlockStoreVolumeSource)
 				}
-				(*out.AWSElasticBlockStore).UnmarshalEasyJSON(in)
+				(*out.AwsElasticBlockStore).UnmarshalEasyJSON(in)
 			}
 		case "azureDisk":
 			if in.IsNull() {
@@ -1601,12 +1601,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "csi":
 			if in.IsNull() {
 				in.Skip()
-				out.CSI = nil
+				out.Csi = nil
 			} else {
-				if out.CSI == nil {
-					out.CSI = new(CSIVolumeSource)
+				if out.Csi == nil {
+					out.Csi = new(CSIVolumeSource)
 				}
-				(*out.CSI).UnmarshalEasyJSON(in)
+				(*out.Csi).UnmarshalEasyJSON(in)
 			}
 		case "downwardAPI":
 			if in.IsNull() {
@@ -1631,12 +1631,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "fc":
 			if in.IsNull() {
 				in.Skip()
-				out.FC = nil
+				out.Fc = nil
 			} else {
-				if out.FC == nil {
-					out.FC = new(FCVolumeSource)
+				if out.Fc == nil {
+					out.Fc = new(FCVolumeSource)
 				}
-				(*out.FC).UnmarshalEasyJSON(in)
+				(*out.Fc).UnmarshalEasyJSON(in)
 			}
 		case "flexVolume":
 			if in.IsNull() {
@@ -1661,12 +1661,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "gcePersistentDisk":
 			if in.IsNull() {
 				in.Skip()
-				out.GCEPersistentDisk = nil
+				out.GcePersistentDisk = nil
 			} else {
-				if out.GCEPersistentDisk == nil {
-					out.GCEPersistentDisk = new(GCEPersistentDiskVolumeSource)
+				if out.GcePersistentDisk == nil {
+					out.GcePersistentDisk = new(GCEPersistentDiskVolumeSource)
 				}
-				(*out.GCEPersistentDisk).UnmarshalEasyJSON(in)
+				(*out.GcePersistentDisk).UnmarshalEasyJSON(in)
 			}
 		case "gitRepo":
 			if in.IsNull() {
@@ -1701,12 +1701,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "iscsi":
 			if in.IsNull() {
 				in.Skip()
-				out.ISCSI = nil
+				out.Iscsi = nil
 			} else {
-				if out.ISCSI == nil {
-					out.ISCSI = new(ISCSIVolumeSource)
+				if out.Iscsi == nil {
+					out.Iscsi = new(ISCSIVolumeSource)
 				}
-				(*out.ISCSI).UnmarshalEasyJSON(in)
+				(*out.Iscsi).UnmarshalEasyJSON(in)
 			}
 		case "name":
 			if in.IsNull() {
@@ -1721,12 +1721,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "nfs":
 			if in.IsNull() {
 				in.Skip()
-				out.NFS = nil
+				out.Nfs = nil
 			} else {
-				if out.NFS == nil {
-					out.NFS = new(NFSVolumeSource)
+				if out.Nfs == nil {
+					out.Nfs = new(NFSVolumeSource)
 				}
-				(*out.NFS).UnmarshalEasyJSON(in)
+				(*out.Nfs).UnmarshalEasyJSON(in)
 			}
 		case "persistentVolumeClaim":
 			if in.IsNull() {
@@ -1781,12 +1781,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV110(in *jlexer.L
 		case "rbd":
 			if in.IsNull() {
 				in.Skip()
-				out.RBD = nil
+				out.Rbd = nil
 			} else {
-				if out.RBD == nil {
-					out.RBD = new(RBDVolumeSource)
+				if out.Rbd == nil {
+					out.Rbd = new(RBDVolumeSource)
 				}
-				easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV114(in, out.RBD)
+				easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV114(in, out.Rbd)
 			}
 		case "scaleIO":
 			if in.IsNull() {
@@ -1842,11 +1842,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.AWSElasticBlockStore != nil {
+	if in.AwsElasticBlockStore != nil {
 		const prefix string = ",\"awsElasticBlockStore\":"
 		first = false
 		out.RawString(prefix[1:])
-		(*in.AWSElasticBlockStore).MarshalEasyJSON(out)
+		(*in.AwsElasticBlockStore).MarshalEasyJSON(out)
 	}
 	if in.AzureDisk != nil {
 		const prefix string = ",\"azureDisk\":"
@@ -1898,7 +1898,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		}
 		(*in.ConfigMap).MarshalEasyJSON(out)
 	}
-	if in.CSI != nil {
+	if in.Csi != nil {
 		const prefix string = ",\"csi\":"
 		if first {
 			first = false
@@ -1906,7 +1906,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.CSI).MarshalEasyJSON(out)
+		(*in.Csi).MarshalEasyJSON(out)
 	}
 	if in.DownwardAPI != nil {
 		const prefix string = ",\"downwardAPI\":"
@@ -1928,7 +1928,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		}
 		(*in.EmptyDir).MarshalEasyJSON(out)
 	}
-	if in.FC != nil {
+	if in.Fc != nil {
 		const prefix string = ",\"fc\":"
 		if first {
 			first = false
@@ -1936,7 +1936,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.FC).MarshalEasyJSON(out)
+		(*in.Fc).MarshalEasyJSON(out)
 	}
 	if in.FlexVolume != nil {
 		const prefix string = ",\"flexVolume\":"
@@ -1958,7 +1958,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		}
 		(*in.Flocker).MarshalEasyJSON(out)
 	}
-	if in.GCEPersistentDisk != nil {
+	if in.GcePersistentDisk != nil {
 		const prefix string = ",\"gcePersistentDisk\":"
 		if first {
 			first = false
@@ -1966,7 +1966,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.GCEPersistentDisk).MarshalEasyJSON(out)
+		(*in.GcePersistentDisk).MarshalEasyJSON(out)
 	}
 	if in.GitRepo != nil {
 		const prefix string = ",\"gitRepo\":"
@@ -1998,7 +1998,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		}
 		(*in.HostPath).MarshalEasyJSON(out)
 	}
-	if in.ISCSI != nil {
+	if in.Iscsi != nil {
 		const prefix string = ",\"iscsi\":"
 		if first {
 			first = false
@@ -2006,7 +2006,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.ISCSI).MarshalEasyJSON(out)
+		(*in.Iscsi).MarshalEasyJSON(out)
 	}
 	{
 		const prefix string = ",\"name\":"
@@ -2022,10 +2022,10 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 			out.String(string(*in.Name))
 		}
 	}
-	if in.NFS != nil {
+	if in.Nfs != nil {
 		const prefix string = ",\"nfs\":"
 		out.RawString(prefix)
-		(*in.NFS).MarshalEasyJSON(out)
+		(*in.Nfs).MarshalEasyJSON(out)
 	}
 	if in.PersistentVolumeClaim != nil {
 		const prefix string = ",\"persistentVolumeClaim\":"
@@ -2052,10 +2052,10 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV110(out *jwriter
 		out.RawString(prefix)
 		easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV113(out, *in.Quobyte)
 	}
-	if in.RBD != nil {
+	if in.Rbd != nil {
 		const prefix string = ",\"rbd\":"
 		out.RawString(prefix)
-		easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV114(out, *in.RBD)
+		easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV114(out, *in.Rbd)
 	}
 	if in.ScaleIO != nil {
 		const prefix string = ",\"scaleIO\":"
@@ -2099,7 +2099,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV118(in *jlexer.L
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "storagePolicyID":
 			out.StoragePolicyID = string(in.String())
 		case "storagePolicyName":
@@ -2128,11 +2128,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV118(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	if in.StoragePolicyID != "" {
 		const prefix string = ",\"storagePolicyID\":"
@@ -2190,7 +2190,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV117(in *jlexer.L
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "readOnly":
 			out.ReadOnly = bool(in.Bool())
 		case "secretRef":
@@ -2221,11 +2221,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV117(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	if in.ReadOnly {
 		const prefix string = ",\"readOnly\":"
@@ -2410,7 +2410,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV115(in *jlexer.L
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "gateway":
 			if in.IsNull() {
 				in.Skip()
@@ -2467,11 +2467,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV115(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	{
 		const prefix string = ",\"gateway\":"
@@ -2557,7 +2557,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV114(in *jlexer.L
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "image":
 			if in.IsNull() {
 				in.Skip()
@@ -2623,11 +2623,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV114(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	{
 		const prefix string = ",\"image\":"
@@ -3216,7 +3216,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV111(in *jlexer.L
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "readOnly":
 			out.ReadOnly = bool(in.Bool())
 		case "volumeID":
@@ -3243,11 +3243,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV111(out *jwriter
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	if in.ReadOnly {
 		const prefix string = ",\"readOnly\":"
@@ -3499,7 +3499,7 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV17(in *jlexer.Le
 		}
 		switch key {
 		case "fsGroup":
-			out.FSGroup = int64(in.Int64())
+			out.FsGroup = int64(in.Int64())
 		case "runAsGroup":
 			out.RunAsGroup = int64(in.Int64())
 		case "runAsNonRoot":
@@ -3509,12 +3509,12 @@ func easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV17(in *jlexer.Le
 		case "seLinuxOptions":
 			if in.IsNull() {
 				in.Skip()
-				out.SELinuxOptions = nil
+				out.SeLinuxOptions = nil
 			} else {
-				if out.SELinuxOptions == nil {
-					out.SELinuxOptions = new(SELinuxOptions)
+				if out.SeLinuxOptions == nil {
+					out.SeLinuxOptions = new(SELinuxOptions)
 				}
-				easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV122(in, out.SELinuxOptions)
+				easyjsonBe091417DecodeGithubComKubewardenK8sObjectsApiCoreV122(in, out.SeLinuxOptions)
 			}
 		case "supplementalGroups":
 			if in.IsNull() {
@@ -3594,11 +3594,11 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV17(out *jwriter.
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSGroup != 0 {
+	if in.FsGroup != 0 {
 		const prefix string = ",\"fsGroup\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.Int64(int64(in.FSGroup))
+		out.Int64(int64(in.FsGroup))
 	}
 	if in.RunAsGroup != 0 {
 		const prefix string = ",\"runAsGroup\":"
@@ -3630,7 +3630,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV17(out *jwriter.
 		}
 		out.Int64(int64(in.RunAsUser))
 	}
-	if in.SELinuxOptions != nil {
+	if in.SeLinuxOptions != nil {
 		const prefix string = ",\"seLinuxOptions\":"
 		if first {
 			first = false
@@ -3638,7 +3638,7 @@ func easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV17(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV122(out, *in.SELinuxOptions)
+		easyjsonBe091417EncodeGithubComKubewardenK8sObjectsApiCoreV122(out, *in.SeLinuxOptions)
 	}
 	if len(in.SupplementalGroups) != 0 {
 		const prefix string = ",\"supplementalGroups\":"
