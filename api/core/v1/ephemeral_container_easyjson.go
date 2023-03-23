@@ -830,12 +830,12 @@ func easyjson853a9577DecodeGithubComKubewardenK8sObjectsApiCoreV14(in *jlexer.Le
 		case "seLinuxOptions":
 			if in.IsNull() {
 				in.Skip()
-				out.SeLinuxOptions = nil
+				out.SELinuxOptions = nil
 			} else {
-				if out.SeLinuxOptions == nil {
-					out.SeLinuxOptions = new(SELinuxOptions)
+				if out.SELinuxOptions == nil {
+					out.SELinuxOptions = new(SELinuxOptions)
 				}
-				easyjson853a9577DecodeGithubComKubewardenK8sObjectsApiCoreV17(in, out.SeLinuxOptions)
+				easyjson853a9577DecodeGithubComKubewardenK8sObjectsApiCoreV17(in, out.SELinuxOptions)
 			}
 		case "windowsOptions":
 			if in.IsNull() {
@@ -937,7 +937,7 @@ func easyjson853a9577EncodeGithubComKubewardenK8sObjectsApiCoreV14(out *jwriter.
 		}
 		out.Int64(int64(in.RunAsUser))
 	}
-	if in.SeLinuxOptions != nil {
+	if in.SELinuxOptions != nil {
 		const prefix string = ",\"seLinuxOptions\":"
 		if first {
 			first = false
@@ -945,7 +945,7 @@ func easyjson853a9577EncodeGithubComKubewardenK8sObjectsApiCoreV14(out *jwriter.
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson853a9577EncodeGithubComKubewardenK8sObjectsApiCoreV17(out, *in.SeLinuxOptions)
+		easyjson853a9577EncodeGithubComKubewardenK8sObjectsApiCoreV17(out, *in.SELinuxOptions)
 	}
 	if in.WindowsOptions != nil {
 		const prefix string = ",\"windowsOptions\":"
