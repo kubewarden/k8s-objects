@@ -35,7 +35,7 @@ type SecurityContext struct {
 	RunAsUser int64 `json:"runAsUser,omitempty"`
 
 	// The SELinux context to be applied to the container. If unspecified, the container runtime will allocate a random SELinux context for each container.  May also be set in PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
-	SELinuxOptions *SELinuxOptions `json:"seLinuxOptions,omitempty"`
+	SeLinuxOptions *SELinuxOptions `json:"seLinuxOptions,omitempty"`
 
 	// The Windows specific settings applied to all containers. If unspecified, the options from the PodSecurityContext will be used. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
 	WindowsOptions *WindowsSecurityContextOptions `json:"windowsOptions,omitempty"`

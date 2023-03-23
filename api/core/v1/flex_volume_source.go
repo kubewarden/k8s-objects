@@ -15,7 +15,7 @@ type FlexVolumeSource struct {
 	Driver *string `json:"driver"`
 
 	// Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
-	FSType string `json:"fsType,omitempty"`
+	FsType string `json:"fsType,omitempty"`
 
 	// Optional: Extra command options if any.
 	Options map[string]string `json:"options,omitempty"`

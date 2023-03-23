@@ -37,7 +37,7 @@ func easyjsonF03812a5DecodeGithubComKubewardenK8sObjectsApiCoreV1(in *jlexer.Lex
 		}
 		switch key {
 		case "fsType":
-			out.FSType = string(in.String())
+			out.FsType = string(in.String())
 		case "pdID":
 			if in.IsNull() {
 				in.Skip()
@@ -62,11 +62,11 @@ func easyjsonF03812a5EncodeGithubComKubewardenK8sObjectsApiCoreV1(out *jwriter.W
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.FSType != "" {
+	if in.FsType != "" {
 		const prefix string = ",\"fsType\":"
 		first = false
 		out.RawString(prefix[1:])
-		out.String(string(in.FSType))
+		out.String(string(in.FsType))
 	}
 	{
 		const prefix string = ",\"pdID\":"
