@@ -6,8 +6,9 @@ package v1alpha1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	jsonext "encoding/json"
+
 	apimachinery_pkg_apis_meta_v1 "github.com/kubewarden/k8s-objects/apimachinery/pkg/apis/meta/v1"
-	"github.com/mailru/easyjson"
 )
 
 // StorageVersion
@@ -27,7 +28,7 @@ type StorageVersion struct {
 
 	// Spec is an empty spec. It is here to comply with Kubernetes API style.
 	// Required: true
-	Spec *easyjson.RawMessage `json:"spec"`
+	Spec *jsonext.RawMessage `json:"spec"`
 
 	// API server instances report the version they can decode and the version they encode objects to when persisting objects in the backend.
 	// Required: true
