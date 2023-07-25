@@ -6,7 +6,7 @@ package v1beta1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/mailru/easyjson"
+	jsonext "encoding/json"
 )
 
 // JSONSchemaProps JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
@@ -21,10 +21,10 @@ type JSONSchemaProps struct {
 	DollarSchema string `json:"$schema,omitempty"`
 
 	// additional items
-	AdditionalItems easyjson.RawMessage `json:"additionalItems,omitempty"`
+	AdditionalItems jsonext.RawMessage `json:"additionalItems,omitempty"`
 
 	// additional properties
-	AdditionalProperties easyjson.RawMessage `json:"additionalProperties,omitempty"`
+	AdditionalProperties jsonext.RawMessage `json:"additionalProperties,omitempty"`
 
 	// all of
 	AllOf []*JSONSchemaProps `json:"allOf,omitempty"`
@@ -33,22 +33,22 @@ type JSONSchemaProps struct {
 	AnyOf []*JSONSchemaProps `json:"anyOf,omitempty"`
 
 	// default is a default value for undefined object fields. Defaulting is an alpha feature under the CustomResourceDefaulting feature gate. Defaulting requires spec.preserveUnknownFields to be false.
-	Default easyjson.RawMessage `json:"default,omitempty"`
+	Default jsonext.RawMessage `json:"default,omitempty"`
 
 	// definitions
 	Definitions map[string]*JSONSchemaProps `json:"definitions,omitempty"`
 
 	// dependencies
-	Dependencies map[string]easyjson.RawMessage `json:"dependencies,omitempty"`
+	Dependencies map[string]jsonext.RawMessage `json:"dependencies,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
 
 	// enum
-	Enum []easyjson.RawMessage `json:"enum,omitempty"`
+	Enum []jsonext.RawMessage `json:"enum,omitempty"`
 
 	// example
-	Example easyjson.RawMessage `json:"example,omitempty"`
+	Example jsonext.RawMessage `json:"example,omitempty"`
 
 	// exclusive maximum
 	ExclusiveMaximum bool `json:"exclusiveMaximum,omitempty"`
@@ -66,7 +66,7 @@ type JSONSchemaProps struct {
 	ID string `json:"id,omitempty"`
 
 	// items
-	Items easyjson.RawMessage `json:"items,omitempty"`
+	Items jsonext.RawMessage `json:"items,omitempty"`
 
 	// max items
 	MaxItems int64 `json:"maxItems,omitempty"`
