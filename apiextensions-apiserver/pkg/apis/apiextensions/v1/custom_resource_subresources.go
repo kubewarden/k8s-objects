@@ -6,7 +6,7 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/mailru/easyjson"
+	jsonext "encoding/json"
 )
 
 // CustomResourceSubresources CustomResourceSubresources defines the status and scale subresources for CustomResources.
@@ -18,5 +18,5 @@ type CustomResourceSubresources struct {
 	Scale *CustomResourceSubresourceScale `json:"scale,omitempty"`
 
 	// status indicates the custom resource should serve a `/status` subresource. When enabled: 1. requests to the custom resource primary endpoint ignore changes to the `status` stanza of the object. 2. requests to the custom resource `/status` subresource ignore changes to anything other than the `status` stanza of the object.
-	Status easyjson.RawMessage `json:"status,omitempty"`
+	Status jsonext.RawMessage `json:"status,omitempty"`
 }
