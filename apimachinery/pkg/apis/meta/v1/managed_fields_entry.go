@@ -6,7 +6,7 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/mailru/easyjson"
+	jsonext "encoding/json"
 )
 
 // ManagedFieldsEntry ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the fieldset applies to.
@@ -18,7 +18,7 @@ type ManagedFieldsEntry struct {
 	APIVersion string `json:"apiVersion,omitempty"`
 
 	// Fields identifies a set of fields.
-	Fields easyjson.RawMessage `json:"fields,omitempty"`
+	Fields jsonext.RawMessage `json:"fields,omitempty"`
 
 	// Manager is an identifier of the workflow managing these fields.
 	Manager string `json:"manager,omitempty"`
