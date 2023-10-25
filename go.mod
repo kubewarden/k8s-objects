@@ -1,6 +1,6 @@
 module github.com/kubewarden/k8s-objects
 
-go 1.17
+go 1.20
 
 replace github.com/go-openapi/strfmt => github.com/kubewarden/strfmt v0.1.3
 
