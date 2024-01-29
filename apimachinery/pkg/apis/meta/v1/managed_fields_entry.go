@@ -31,5 +31,5 @@ type ManagedFieldsEntry struct {
 
 	// Time is timestamp of when these fields were set. It should always be empty if Operation is 'Apply'
 	// Format: date-time
-	Time Time `json:"time,omitempty"`
+	Time *Time `json:"time,omitempty"`
 }
