@@ -20,7 +20,7 @@ type ObjectMeta struct {
 	//
 	// Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// Format: date-time
-	CreationTimestamp Time `json:"creationTimestamp,omitempty"`
+	CreationTimestamp *Time `json:"creationTimestamp,omitempty"`
 
 	// Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.
 	DeletionGracePeriodSeconds int64 `json:"deletionGracePeriodSeconds,omitempty"`
@@ -29,7 +29,7 @@ type ObjectMeta struct {
 	//
 	// Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// Format: date-time
-	DeletionTimestamp Time `json:"deletionTimestamp,omitempty"`
+	DeletionTimestamp *Time `json:"deletionTimestamp,omitempty"`
 
 	// Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.
 	Finalizers []string `json:"finalizers,omitempty"`
