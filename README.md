@@ -1,3 +1,5 @@
+[![Stable](https://img.shields.io/badge/status-stable-brightgreen?style=for-the-badge)](https://github.com/kubewarden/community/blob/main/REPOSITORIES.md#stable)
+
 Kubernetes Go types that can be used with [TinyGo](tinygo.org/) to build WebAssembly
 modules meant to be run outside of the browser.
 
