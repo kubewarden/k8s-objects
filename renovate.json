@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "ignoreDeps": [
     "github.com/go-openapi/strfmt"
